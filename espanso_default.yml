@@ -1,1 +1,169 @@
-/Users/philipcatterall/Library/Preferences/espanso/default.yml
+# espanso configuration file
+
+# This is the default configuration file, change it as you like it
+# You can refer to the official documentation:
+# https://espanso.org/docs/
+
+# Matches are the substitution rules, when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # dates
+  - trigger: "dts"
+    replace: "{{short_date}}"
+    vars:
+      - name: short_date
+        type: date
+        params:
+          format: "%b %-e, %Y"
+
+  - trigger: "dtS"
+    replace: "{{euro_date}}"
+    vars:
+      - name: euro_date
+        type: date
+        params:
+          format: "%e %b %Y"
+
+  - trigger: "dtl"
+    replace: "{{long_date}}"
+    vars:
+      - name: long_date
+        type: date
+        params:
+          format: "%Y-%m-%d"
+
+  - trigger: "dt/"
+    replace: "{{slash_date}}"
+    vars:
+      - name: slash_date
+        type: date
+        params:
+          format: "%m/%d/%y"
+
+  # emojis
+  - trigger: ";up"
+    replace: "☝️"
+
+  # taskpaper
+  - trigger: ";dd"
+    replace: "@done({{long_date}})"
+    vars:
+      - name: long_date
+        type: date
+        params:
+          format: "%Y-%m-%d"
+
+  - trigger: ";du"
+    replace: "@due($|$)"
+
+  - trigger: ";tom"
+    replace: "{{relative_date}}"
+    vars:
+      - name: day
+        type: echo
+        params:
+          echo: "tomorrow"
+      - name: relative_date
+        type: global
+
+  - trigger: ";sun"
+    replace: "{{relative_date}}"
+    vars:
+      - name: day
+        type: echo
+        params:
+          echo: "sun"
+      - name: relative_date
+        type: global
+
+  - trigger: ";mon"
+    replace: "{{relative_date}}"
+    vars:
+      - name: day
+        type: echo
+        params:
+          echo: "mon"
+      - name: relative_date
+        type: global
+
+  - trigger: ";tue"
+    replace: "{{relative_date}}"
+    vars:
+      - name: day
+        type: echo
+        params:
+          echo: "tue"
+      - name: relative_date
+        type: global
+  
+  - trigger: ";wed"
+    replace: "{{relative_date}}"
+    vars:
+      - name: day
+        type: echo
+        params:
+          echo: "wed"
+      - name: relative_date
+        type: global
+
+  - trigger: ";thu"
+    replace: "{{relative_date}}"
+    vars:
+      - name: day
+        type: echo
+        params:
+          echo: "thu"
+      - name: relative_date
+        type: global
+
+  - trigger: ";fri"
+    replace: "{{relative_date}}"
+    vars:
+      - name: day
+        type: echo
+        params:
+          echo: "fri"
+      - name: relative_date
+        type: global
+
+  - trigger: ";sat"
+    replace: "{{relative_date}}"
+    vars:
+      - name: day
+        type: echo
+        params:
+          echo: "sat"
+      - name: relative_date
+        type: global
+
+  # other 
+  - trigger: "@@"
+    replace: "philipcatterall@gmail.com"
+
+  - trigger: ";aiq"
+    replace: "philip@actioniq.com"
+
+  - trigger: ";c"
+    replace: "301-367-7195"
+
+global_vars:
+  - name: "clipboard"
+    type: "clipboard"
+
+  - name: relative_date
+    type: script
+    params:
+      args:
+        - python
+        - "%CONFIG%/scripts/date_converter.py"
+      debug: true
+
+
+  # Shell commands
+  # - trigger: ":shell"
+  #   replace: "{{output}}"
+  #   vars:
+  #     - name: output
+  #       type: shell
+  #       params:
+  #         cmd: "echo Hello from your shell"
