@@ -101,7 +101,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+alias todoa="vim ~/notes/aiq/00\ index/todo.taskpaper"
+alias todop="vim ~/notes/personal/00\ index/todo.taskpaper"
+alias cust="~/aiq-misc/scripts/cust.sh"
 # Load pyenv into the shell by adding
 # the following to ~/.zshrc:
 eval "$(pyenv init -)"
