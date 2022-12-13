@@ -61,8 +61,8 @@ nnoremap j gj
 nnoremap k gk
 
 " move to beginning/end of line
-nnoremap H ^
-nnoremap L $
+nnoremap B ^
+nnoremap E $
 
 " $/^ doesn't do anything
 nnoremap $ <nop>
