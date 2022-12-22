@@ -32,6 +32,14 @@ matches:
         params:
           format: "%Y-%m-%d"
 
+  - trigger: "dtt"
+    replace: "{{iso8601}}"
+    vars:
+      - name: iso8601
+        type: date
+        params:
+          format: "%Y-%m-%d %H:%M"
+
   - trigger: "dt/"
     replace: "{{slash_date}}"
     vars:
@@ -45,7 +53,7 @@ matches:
     replace: "☝️"
 
   # taskpaper
-  - trigger: ";dd"
+  - trigger: ";td"
     replace: "@done({{long_date}})"
     vars:
       - name: long_date
@@ -136,6 +144,16 @@ matches:
       - name: relative_date
         type: global
 
+  # jira templates
+  - trigger: ";jbug"
+    replace: "### Summary\n\n### Steps to reproduce\n\n### Expected result\n\n### Actual result"
+  
+  - trigger: ";jt1"
+    replace: "### Problem\n\n### Proposal\n\n### Considerations"
+
+  - trigger: ";jt2"
+    replace: "### Summary\n\n### Acceptance Criteria\n\n### Links and references"
+
   # other 
   - trigger: "@@"
     replace: "philipcatterall@gmail.com"
@@ -145,6 +163,9 @@ matches:
 
   - trigger: ";c"
     replace: "301-367-7195"
+
+  - trigger: ";nc"
+    replace: "-filename:.ics"
 
 global_vars:
   - name: "clipboard"

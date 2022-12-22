@@ -101,12 +101,13 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias todoa="vim ~/notes/aiq/00\ index/todo.taskpaper"
-alias todop="vim ~/notes/personal/00\ index/todo.taskpaper"
-alias cust="~/aiq-misc/scripts/cust.sh"
+alias cust="~/aiq-misc/scripts/customers.sh"
+alias mdpreview="~/dotfiles/scripts/md_preview.sh"
+alias gn="git add -A && git commit -m "$(date '+%Y-%m-%d %H:%M') from my mac""
+
 # Load pyenv into the shell by adding
 # the following to ~/.zshrc:
 eval "$(pyenv init -)"
 
 export AWS_PROFILE=189443971038_AWS_Athena_Access
-export EDITOR=/usr/bin/vim
+export EDITOR=/usr/local/bin/nvim

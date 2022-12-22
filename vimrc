@@ -7,15 +7,26 @@ Plug 'dkarter/bullets.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'preservim/nerdtree'
+Plug 'arcticicestudio/nord-vim'
 " Plug 'kyazdani42/nvim-web-devicons' " for file icons
 " Plug 'kyazdani42/nvim-tree.lua'
 
 call plug#end()
 
 "color theme
-let g:gruvbox_contrast_dark = 'medium'
+"let g:gruvbox_contrast_dark = 'medium'
 syntax enable
-colorscheme gruvbox
+augroup nord-theme-overrides
+  autocmd!
+  " Use 'nord7' as foreground color for Vim comment titles.
+  autocmd ColorScheme nord highlight Title cterm=bold gui=bold ctermfg=6 guifg=#88C0D0
+  autocmd ColorScheme nord highlight markdownH1 gui=bold
+augroup END
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ }
+let g:nord_italic = 1
+colorscheme nord
 set background=dark    " Setting dark mode
 set termguicolors      " Fixes the colors for gruvbox theme
 
@@ -61,8 +72,8 @@ nnoremap j gj
 nnoremap k gk
 
 " move to beginning/end of line
-nnoremap B ^
-nnoremap E $
+nnoremap H ^
+nnoremap L $
 
 " $/^ doesn't do anything
 nnoremap $ <nop>
