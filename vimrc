@@ -71,9 +71,15 @@ let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom', 'std-']
 nnoremap j gj
 nnoremap k gk
 
+vnoremap j gj
+vnoremap k gk
+
 " move to beginning/end of line
-nnoremap H ^
-nnoremap L $
+nnoremap H g0
+nnoremap L g$
+
+vnoremap H g0
+vnoremap L g$
 
 " $/^ doesn't do anything
 nnoremap $ <nop>

@@ -6,17 +6,17 @@
 # generated in Obsidian.
 
 relative_path=`pbpaste`
-full_path="/Users/philipcatterall/notes/aiq/$relative_path"
+full_path="/Users/philipcatterall/notes/$1/$relative_path"
 
-if [ $# -ne 1 ]; then
+if [ $# -ne 2 ]; then
   echo "Error: incorrect number of arguments"
   exit 1
 fi
 
 # if the argument is valid
-if [[ "$1" == "gh" ]]; then
+if [[ "$2" == "gh" ]]; then
 	css="github.css"
-elif [[ "$1" == "gd" ]]; then
+elif [[ "$2" == "gd" ]]; then
 	css="gdocs.css"
 else
 	echo "Error: argument must be gh (github) or gd (google docs)." >&2
@@ -25,7 +25,7 @@ fi
 
 # if the filepath in the clipboard is valid, run pandoc and open the html output
 if [[ -f "$full_path" ]]; then
-	pandoc -c ~/notes/.support/css/$css -f gfm -s "$full_path" -o ~/notes/.support/out.html --metadata title=""
+	pandoc -c ~/notes/.support/css/$css -f gfm -s "$full_path" -o ~/notes/.support/out.html --quiet
 	open ~/notes/.support/out.html
 else
   # If it doesn't, print an error message

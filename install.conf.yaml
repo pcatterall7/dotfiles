@@ -1,0 +1,16 @@
+- defaults:
+    link:
+        relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.vimrc:
+    ~/.vim: vim
+    ~/.zshrc:
+    ~/.zprofile:
+    ~/Library/Preferences/espanso/default.yml: espanso_default.yml
+    ~/.config/nvim: 
+        path: nvim
+        force: true
+
