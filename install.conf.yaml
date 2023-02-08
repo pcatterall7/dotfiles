@@ -9,6 +9,7 @@
     ~/.vimrc:
     ~/.vim: vim
     ~/.zshrc:
+        force: true
     ~/.zprofile:
     ~/Library/Preferences/espanso/default.yml: espanso_default.yml
     ~/.config/nvim: 
