@@ -122,11 +122,7 @@ vim.wo.signcolumn = 'yes'
 vim.cmd('set background=dark')
 vim.o.termguicolors = true
 vim.cmd [[colorscheme gruvbox]]
-<<<<<<< HEAD
 --vim.cmd [[colorscheme pencil]] 
-
-=======
->>>>>>> 936e13d277b354edcf2b035a23936fdc14b17661
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
