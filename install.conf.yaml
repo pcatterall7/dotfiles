@@ -10,7 +10,9 @@
     ~/.vim: vim
     ~/.zshrc:
     ~/.zprofile:
-    ~/Library/Preferences/espanso/default.yml: espanso_default.yml
+    ~/Library/Preferences/espanso/match/base.yml:
+        path: espanso_base.yml
+        force: true
     ~/.config/nvim: 
         path: nvim
         force: true

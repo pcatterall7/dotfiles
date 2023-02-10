@@ -119,9 +119,11 @@ vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
-vim.cmd('set background=light')
+vim.cmd('set background=dark')
 vim.o.termguicolors = true
-vim.cmd [[colorscheme pencil]]
+vim.cmd [[colorscheme gruvbox]]
+--vim.cmd [[colorscheme pencil]] 
+
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
