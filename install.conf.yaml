@@ -9,6 +9,7 @@
     ~/.vimrc:
     ~/.vim: vim
     ~/.zshrc:
+        force: true
     ~/.zprofile:
     ~/Library/Preferences/espanso/match/base.yml:
         path: espanso_base.yml
