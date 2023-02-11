@@ -17,4 +17,13 @@
     ~/.config/nvim: 
         path: nvim
         force: true
+    ~/notes/personal/.obsidian.vimrc:
+        path: obsidian.vimrc
+        force: true
+    ~/notes/aiq/.obsidian.vimrc:
+        path: obsidian.vimrc
+        force: true
+    ~/notes/journal/.obsidian.vimrc:
+        path: obsidian.vimrc
+        force: true
 
