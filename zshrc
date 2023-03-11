@@ -79,7 +79,7 @@ if [[ "$(hostname)" == "Philips-Air" ]]; then
 else
     # everything below is specific to my work macbook pro
     alias cust="~/aiq-misc/scripts/customers.sh"
-    alias mdpreview="~/dotfiles/scripts/md_preview.sh"
+    alias mdpreview="~/.dotfiles/scripts/md_preview.sh"
 
     # Load pyenv into the shell by adding
     # the following to ~/.zshrc:
