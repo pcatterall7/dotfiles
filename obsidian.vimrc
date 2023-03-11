@@ -1,7 +1,6 @@
 " .obsidian.vimrc
 " a subset of my .vimrc settings specifically for Obsidian
 
-
 set tabstop=4
 set softtabstop=4
 set expandtab

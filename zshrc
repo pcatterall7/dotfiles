@@ -70,12 +70,30 @@ ZSH_THEME="fwalch"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-    zsh-autosuggestions
-)
+if [[ "$(hostname)" == "Philips-Air" ]]; then
+    plugins=(
+        git
+    )
+    # add ruby to my path
+    export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"
+else
+    # everything below is specific to my work macbook pro
+    alias cust="~/aiq-misc/scripts/customers.sh"
+    alias mdpreview="~/dotfiles/scripts/md_preview.sh"
+
+    # Load pyenv into the shell by adding
+    # the following to ~/.zshrc:
+    eval "$(pyenv init -)"
+    export AWS_PROFILE=189443971038_AWS_Athena_Access
+    plugins=(
+        git
+        zsh-autosuggestions
+    )
+fi
 
 source $ZSH/oh-my-zsh.sh
+
+export EDITOR=/usr/local/bin/nvim
 
 # User configuration
 
@@ -102,13 +120,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias cust="~/aiq-misc/scripts/customers.sh"
-alias mdpreview="~/dotfiles/scripts/md_preview.sh"
-alias gn="git add -A && git commit -m "$(date '+%Y-%m-%d %H:%M') from my mac""
-
-# Load pyenv into the shell by adding
-# the following to ~/.zshrc:
-eval "$(pyenv init -)"
-
-export AWS_PROFILE=189443971038_AWS_Athena_Access
-export EDITOR=/usr/local/bin/nvim

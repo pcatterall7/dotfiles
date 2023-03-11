@@ -114,6 +114,9 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Use system clipboard
+vim.o.clipboard = 'unnamedplus'
+
 -- Decrease update time
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
