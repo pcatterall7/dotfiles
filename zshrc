@@ -88,7 +88,6 @@ case $localhost in
         alias mdpreview="~/.dotfiles/scripts/md_preview.sh"
         alias wj="~/notes/aiq/00-index/wj-append.bash"
         alias notes="code ~/notes/aiq"
-        ;;
         # Load pyenv into the shell by adding
         # the following to ~/.zshrc:
         eval "$(pyenv init -)"
