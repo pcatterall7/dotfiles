@@ -86,8 +86,12 @@ case $localhost in
         # everything below is specific to my work macbook pro
         alias cust="~/aiq-misc/scripts/customers.sh"
         alias mdpreview="~/.dotfiles/scripts/md_preview.sh"
-        alias wj="~/notes/aiq/00-index/wj-append.bash"
+        # alias wj="~/notes/aiq/00-index/wj-append.bash"
         alias notes="code ~/notes/aiq"
+        # add .dotfiles/scripts/ to my path
+        # TODO convert the aliases above to use this model
+        scripts_dir="$HOME/.dotfiles/scripts"
+        export PATH="$PATH:${scripts_dir}"
         # Load pyenv into the shell by adding
         # the following to ~/.zshrc:
         eval "$(pyenv init -)"

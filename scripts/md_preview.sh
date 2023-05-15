@@ -5,8 +5,10 @@
 # the file to html. Then, open the file. Useful for previewing docs
 # generated in Obsidian.
 
-relative_path=`pbpaste`
-full_path="/Users/philipcatterall/notes/$1/$relative_path"
+# relative_path=`pbpaste`
+# full_path="/Users/philipcatterall/notes/$1/$relative_path"
+
+full_path="`pbpaste`"
 
 if [ $# -ne 2 ]; then
   echo "Error: incorrect number of arguments"

@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+# Create or open my daily work note
+year=$(date +%Y)
+dt=$(date -I)
+filename="${dt}.md"
+directory="${HOME}/notes/aiq/01-daily/${year}"
+
+filepath="${directory}/${filename}"
+
+if [ -f "$filepath" ]; then
+    echo "Opening existing file: $filename"
+else
+    echo "Creating new file: $filename"
+    touch "$filepath"
+fi
+
+code "$filepath"
