@@ -12,7 +12,7 @@ if [ -f "$filepath" ]; then
     echo "Opening existing file: $filename"
 else
     echo "Creating new file: $filename"
-    touch "$filepath"
+    echo "# ${dt}\n\n" >> "$filepath"
 fi
 
 code "$filepath"

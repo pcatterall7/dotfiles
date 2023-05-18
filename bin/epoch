@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Converts an epoch millisecond timestamp to local and UTC dates
+
+seconds=$(( $1/1000 ))
+date -r $(( $seconds ))
+date -r $(( $seconds )) -u
