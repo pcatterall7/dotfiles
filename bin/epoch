@@ -1,7 +1,12 @@
 #!/bin/bash
 #
-# Converts an epoch millisecond timestamp to local and UTC dates
+# Converts an epoch millisecond timestamp to local and UTC dates.
+# If no timestamp is provided, returns the current timestamp in milliseconds
 
-seconds=$(( $1/1000 ))
-date -r $(( $seconds ))
-date -r $(( $seconds )) -u
+if [[ -n $1 ]]; then
+  seconds=$(( $1/1000 ))
+  date -r $(( $seconds ))
+  date -r $(( $seconds )) -u
+else
+  echo $(( $(date +%s) * 1000 ))
+fi

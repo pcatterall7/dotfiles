@@ -1,0 +1,78 @@
+#!/bin/zsh
+
+# Updated: 2022-12-21
+# Takes a markdown file path in the clipboard and tries to convert
+# the file to html. Then, open the file. Useful for previewing docs
+# generated in Obsidian.
+
+CSS_DIR="${HOME}/.dotfiles/css"
+
+get_css_path () {
+  case $1 in 
+    gh)
+      css_path="${CSS_DIR}/github.css" ;;
+    gd)
+      css_path="${CSS_DIR}/gdocs.css" ;;
+    "")
+      echo "No css value provided. Defaulting to github.css"
+      css_path="${CSS_DIR}/github.css"
+      ;;
+    *)
+      echo "Error: css value must be gh (github) or gd (google docs)." >&2
+	    exit 1
+      ;;
+  esac
+}
+
+OPTIND=1
+css_file=""
+# echo "[DEBUG] @: $@"
+# echo "[DEBUG] #: $#"
+
+while getopts "c:h" opt; do
+	case $opt in
+		h)
+      show_help
+      exit 0
+      ;;
+    c)
+      css_file=$OPTARG
+      ;;
+    *)
+      show_help >&2
+      exit 1
+      ;;
+  esac
+done
+
+shift "$((OPTIND - 1))" # Discard the options and sentinel --
+
+# set full_path either from the first positional argument or stdin
+if [[ $# -gt 0 ]]; then
+  full_path="$1"
+else
+  read full_path
+fi
+
+# echo "[DEBUG] running get_css_path with css_file=${css_file}"
+get_css_path "${css_file}"
+output_path="${TMPDIR}out.html"
+
+# echo "[DEBUG] full_path=$full_path"
+# echo "[DEBUG] css_path=$css_path"
+
+
+# if the filepath is valid, run pandoc and open the html output
+# TODO: write to a temp file instead of ~/notes
+# TODO: move css file to dotfiles
+if [[ -f "${full_path}" ]]; then
+	pandoc -c ${css_path} -f markdown -o "${output_path}" -s "${full_path}"  --quiet
+	open "${output_path}"
+else
+  # If it doesn't, print an error message
+  echo "Error: ${full_path} does not exist." >&2
+  exit 1
+fi
+
+# TODO: cleanup output - not sure how, since I can't delete it
+# TODO: take path as input or file itself?
