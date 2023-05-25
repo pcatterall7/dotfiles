@@ -26,6 +26,11 @@ require('packer').startup(function(use)
     },
   }
 
+  use { -- Catppuccin theme
+    'catppuccin/nvim', 
+    as = "catppuccin" 
+  }
+
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
@@ -124,7 +129,7 @@ vim.wo.signcolumn = 'yes'
 -- Set colorscheme
 vim.cmd('set background=dark')
 vim.o.termguicolors = true
-vim.cmd [[colorscheme gruvbox]]
+vim.cmd.colorscheme "catppuccin-mocha"
 --vim.cmd [[colorscheme pencil]] 
 
 -- Set completeopt to have a better completion experience
@@ -166,7 +171,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'papercolor_light',
+    -- theme = 'catppucin-mocha',
     component_separators = '|',
     section_separators = '',
   },
