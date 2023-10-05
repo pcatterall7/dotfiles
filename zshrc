@@ -42,7 +42,7 @@ case $localhost in
         export AWS_PROFILE=189443971038_AWS_Athena_Access
         plugins=(
             git
-            zsh-autosuggestions
+        #    zsh-autosuggestions
         )
         ;;
     *)

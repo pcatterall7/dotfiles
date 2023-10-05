@@ -12,9 +12,11 @@ global_vars:
         - "%CONFIG%/scripts/date_converter.py"
       debug: true
 matches:
+
 ### DATES ###
   - trigger: dts
     replace: "{{short_date}}"
+    force_clipboard: true
     vars:
       - name: short_date
         type: date
@@ -22,6 +24,7 @@ matches:
           format: "%b %-e, %Y"
   - trigger: dtS
     replace: "{{euro_date}}"
+    force_clipboard: true
     vars:
       - name: euro_date
         type: date
@@ -29,6 +32,7 @@ matches:
           format: "%e %b %Y"
   - trigger: dtl
     replace: "{{long_date}}"
+    force_clipboard: false
     vars:
       - name: long_date
         type: date
@@ -36,11 +40,20 @@ matches:
           format: "%Y-%m-%d"
   - trigger: dt/
     replace: "{{slash_date}}"
+    force_clipboard: true
     vars:
       - name: slash_date
         type: date
         params:
           format: "%m/%d/%y"
+  - trigger: dtt
+    replace: "{{datetime}}"
+    force_clipboard: false
+    vars:
+      - name: datetime
+        type: date
+        params:
+          format: "%Y-%m-%d %H:%M"
 
 #### RELATIVE DATES ####
 
@@ -170,18 +183,3 @@ matches:
 
   - trigger: ;up
     replace: ☝️
-
-  - trigger: ;opm
-    replace: "**Owner:** Product Manager"
-
-  - trigger: ;odl
-    replace: "**Owner:** Design Lead"
-
-  - trigger: ;otl
-    replace: "**Owner:** Tech Lead"
-
-  - trigger: ;otw
-    replace: "**Owner:** Technical Writer"
-
-  - trigger: ;nc
-    replace: "-filename:.ics"

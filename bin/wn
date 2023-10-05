@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Create or open my weekly work note
 year=$(date +%Y)

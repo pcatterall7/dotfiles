@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -e
 
 # pj-append.bash is a timestamped log file for you, a human.  Set up a cron job to launch it every

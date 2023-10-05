@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Updated: 2022-12-21
 # Takes a markdown file path in the clipboard and tries to convert

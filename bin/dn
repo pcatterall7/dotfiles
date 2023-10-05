@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Create or open my daily work note
 year=$(date +%Y)
@@ -12,7 +12,7 @@ if [ -f "$filepath" ]; then
     echo "Opening existing file: $filename"
 else
     echo "Creating new file: $filename"
-    echo "# ${dt}\n\n" >> "$filepath"
+    echo -e "# ${dt}\n\n" > "$filepath"
 fi
 
 code "$filepath"
