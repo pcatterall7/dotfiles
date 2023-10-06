@@ -23,6 +23,10 @@ return require('packer').startup(function(use)
 	-- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
 	}
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
 
 	use({ 'jacoborus/tender.vim' }) -- color scheme
 	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
