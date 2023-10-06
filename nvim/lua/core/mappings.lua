@@ -13,3 +13,10 @@ vim.keymap.set('v', 'L', 'g$', {noremap = true, silent = true})
 
 -- remove highlighting after search using double esc
 vim.keymap.set('n', '<esc><esc>', ':nohlsearch<CR>', {noremap = true, silent = false})
+
+-- open markdown preview in marked 2 or using my `mdp` script to generate html 
+-- than can be copied into google docs
+vim.keymap.set('n', '<leader>mm', ':!open -a Marked\\ 2 %:p<CR>', {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>mg', ':!mdp -c gd %:p<CR>', {noremap = true, silent = true})
+
+

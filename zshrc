@@ -25,24 +25,24 @@ case $localhost in
         #####################################################
         # Work macbook scripts, aliases, etc.
         #####################################################
-        alias mdpreview="~/.dotfiles/scripts/md_preview.sh"
-        # alias wj="~/notes/aiq/00-index/wj-append.bash"
-        alias notes="code ~/notes/aiq"
+        
         # add .dotfiles/bin/ to my path
-        # TODO convert the aliases above to use this model
         scripts_dir="$HOME/.dotfiles/bin"
         export PATH="$PATH:${scripts_dir}"
+        
+        # store secrets in a separate file that's outside of my dotfiles
+        source ~/.secrets
         # look up customers by name or number
         cust() {
             ~/aiq-misc/scripts/customers.sh "$1" 
         }
-        # Load pyenv into the shell by adding
-        # the following to ~/.zshrc:
-        eval "$(pyenv init -)"
         export AWS_PROFILE=189443971038_AWS_Athena_Access
+
+        # set aliases for python
+        alias python='python3.11'
+        alias pip='pip3.11'
         plugins=(
             git
-        #    zsh-autosuggestions
         )
         ;;
     *)
