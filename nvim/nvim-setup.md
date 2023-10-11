@@ -47,5 +47,5 @@ TODO
 - [x] remember the key bindings for switching buffers and such (I probably have a file for it somewhere)
 - [x] make links clickable
 - [x] build a script that opens the current file in marked2 or uses `mdp` to generate the google docs html
-- [ ] install nvim-markdown and figure out how to make it not hide syntax. I like what it does with lists, jumping headers, and inserting links
-- [ ] install an LSP
+- [ ] install https://github.com/SidOfc/mkdx
+- [ ] install an LSP: https://github.com/VonHeikemen/lsp-zero.nvim#quickstart-for-the-impatient

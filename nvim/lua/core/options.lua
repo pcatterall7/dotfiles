@@ -45,3 +45,5 @@ vim.o.expandtab = true
 
 -- when indenting, use 4 spaces
 vim.o.shiftwidth = 4
+
+
