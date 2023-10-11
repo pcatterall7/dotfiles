@@ -14,13 +14,19 @@ localhost=`scutil --get LocalHostName`
 
 case $localhost in
     "philip-macbook-air")
+        #####################################################
+        # Personal macbook scripts, aliases, etc.
+        #####################################################
         plugins=(
             git
         )
+
         # add ruby and dotile scripts to my path
         export PATH="$HOME/.dotfiles/bin:/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"
-        ;;
 
+        # store secrets in a separate file that's outside of my dotfiles
+        source ~/.secrets
+        ;;
     "ActionIQ-philipcatterall")
         #####################################################
         # Work macbook scripts, aliases, etc.
