@@ -114,6 +114,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/philipcatterall/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
+  },
+  ["zen-mode.nvim"] = {
+    loaded = true,
+    path = "/Users/philipcatterall/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
+    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 
