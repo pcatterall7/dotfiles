@@ -19,4 +19,9 @@ vim.keymap.set('n', '<esc><esc>', ':nohlsearch<CR>', {noremap = true, silent = f
 vim.keymap.set('n', '<leader>mm', ':!open -a Marked\\ 2 %:p<CR>', {noremap = true, silent = true})
 vim.keymap.set('n', '<leader>mg', ':!mdp -c gd %:p<CR>', {noremap = true, silent = true})
 
+-- remap keys used to jump between windows so that I don't have to use ctrl
+vim.keymap.set('n', '<leader>h', '<C-W>h', {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>j', '<C-W>j', {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>k', '<C-W>k', {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>l', '<C-W>l', {noremap = true, silent = true})
 

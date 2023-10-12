@@ -27,8 +27,8 @@ return require('packer').startup(function(use)
       'nvim-lualine/lualine.nvim',
       requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
-    -- use({ 'preservim/vim-markdown' }) -- syntax highlighting and better commands
     use( 'folke/zen-mode.nvim' )
+    use( 'SidOfc/mkdx')
 	use({ 'jacoborus/tender.vim' }) -- color scheme
 	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
 	use('tpope/vim-commentary') -- key binding for commenting out lines
