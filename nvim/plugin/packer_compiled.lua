@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["d2-vim"] = {
+    loaded = true,
+    path = "/Users/philipcatterall/.local/share/nvim/site/pack/packer/start/d2-vim",
+    url = "https://github.com/terrastruct/d2-vim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/philipcatterall/.local/share/nvim/site/pack/packer/start/lualine.nvim",

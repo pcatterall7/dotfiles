@@ -3,11 +3,11 @@
 --
 
 vim.opt.termguicolors = true
-require('onedark').setup {
-    style = 'darker'
-}
+-- require('onedark').setup {
+--     style = 'darker'
+-- }
 function SetColor(color)
-    color = color or "onedark" -- have a default value
+    color = color or "tender" -- have a default value
     vim.cmd.colorscheme(color)
 
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
