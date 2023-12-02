@@ -25,3 +25,5 @@ vim.keymap.set('n', '<leader>j', '<C-W>j', {noremap = true, silent = true})
 vim.keymap.set('n', '<leader>k', '<C-W>k', {noremap = true, silent = true})
 vim.keymap.set('n', '<leader>l', '<C-W>l', {noremap = true, silent = true})
 
+-- zenmode
+vim.keymap.set('n', '<leader>z', ':ZenMode<CR>', {noremap = true, silent = true})
