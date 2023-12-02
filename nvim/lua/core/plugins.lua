@@ -31,7 +31,7 @@ return require('packer').startup(function(use)
     use( 'folke/zen-mode.nvim' )
     use( 'SidOfc/mkdx')
 	use({ 'jacoborus/tender.vim' }) -- color scheme
-    use 'navarasu/onedark.nvim'
+    -- use 'navarasu/onedark.nvim'
 	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
 	use('tpope/vim-commentary') -- key binding for commenting out lines
   -- Automatically set up your configuration after cloning packer.nvim
