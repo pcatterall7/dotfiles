@@ -34,6 +34,23 @@ return require('packer').startup(function(use)
     -- use 'navarasu/onedark.nvim'
 	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
 	use('tpope/vim-commentary') -- key binding for commenting out lines
+  -- LSP stuff
+    use {
+      'VonHeikemen/lsp-zero.nvim',
+      branch = 'v3.x',
+      requires = {
+        --- Uncomment these if you want to manage LSP servers from neovim
+        -- {'williamboman/mason.nvim'},
+        -- {'williamboman/mason-lspconfig.nvim'},
+
+        -- LSP Support
+        {'neovim/nvim-lspconfig'},
+        -- Autocompletion
+        {'hrsh7th/nvim-cmp'},
+        {'hrsh7th/cmp-nvim-lsp'},
+        {'L3MON4D3/LuaSnip'},
+      }
+    }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
