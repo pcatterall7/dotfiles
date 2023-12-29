@@ -56,6 +56,6 @@ case $localhost in
 esac
 
 source $ZSH/oh-my-zsh.sh
-
 export EDITOR=nvim
 
+alias gs='git status'
