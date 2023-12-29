@@ -8,7 +8,7 @@ export ZSH="/Users/philipcatterall/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="fwalch"
+ZSH_THEME="simple" #"fwalch"
 
 localhost=`scutil --get LocalHostName`
 
