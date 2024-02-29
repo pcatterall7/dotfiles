@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/philipcatterall/.oh-my-zsh"
+export ZSH="/Users/phil/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -13,7 +13,7 @@ ZSH_THEME="simple" #"fwalch"
 localhost=`scutil --get LocalHostName`
 
 case $localhost in
-    "philip-macbook-air")
+    "phil-macbook-air")
         #####################################################
         # Personal macbook scripts, aliases, etc.
         #####################################################
@@ -57,5 +57,6 @@ esac
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR=nvim
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
 alias gs='git status'
