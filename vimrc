@@ -14,19 +14,20 @@ Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 "color theme
-"let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_contrast_dark = 'medium'
 syntax enable
-augroup nord-theme-overrides
-  autocmd!
+"augroup nord-theme-overrides
+"  autocmd!
   " Use 'nord7' as foreground color for Vim comment titles.
-  autocmd ColorScheme nord highlight Title cterm=bold gui=bold ctermfg=6 guifg=#88C0D0
-  autocmd ColorScheme nord highlight markdownH1 gui=bold
-augroup END
-let g:lightline = {
+"  autocmd ColorScheme nord highlight Title cterm=bold gui=bold ctermfg=6 guifg=#88C0D0
+"  autocmd ColorScheme nord highlight markdownH1 gui=bold
+"augroup END
+"let g:lightline = {
       \ 'colorscheme': 'nord',
       \ }
-let g:nord_italic = 1
-colorscheme nord
+"let g:nord_italic = 1
+"colorscheme nord
+colorscheme gruvbox
 set background=dark    " Setting dark mode
 set termguicolors      " Fixes the colors for gruvbox theme
 
