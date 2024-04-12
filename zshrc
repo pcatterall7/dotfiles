@@ -21,7 +21,7 @@ case $localhost in
             git
         )
 
-        # add ruby and dotile scripts to my path
+        # add ruby and dotfile scripts to my path
         export PATH="$HOME/.dotfiles/bin:/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"
 
         # store secrets in a separate file that's outside of my dotfiles
@@ -31,19 +31,19 @@ case $localhost in
         #####################################################
         # Work macbook scripts, aliases, etc.
         #####################################################
-        
-        # add .dotfiles/bin/ to my path
+
+        # add .dotfiles/bin/ and cargo executables to my path
         scripts_dir="$HOME/.dotfiles/bin"
-        export PATH="$PATH:${scripts_dir}"
-        
+        export PATH="$PATH:${scripts_dir}:$HOME/.cargo/bin"
+
         # store secrets in a separate file that's outside of my dotfiles
         source ~/.secrets
         # look up customers by name or number
         cust() {
-            ~/aiq-misc/scripts/customers.sh "$1" 
+            ~/aiq-misc/scripts/customers.sh "$1"
         }
         export AWS_PROFILE=189443971038_AWS_Athena_Access
-
+        export EDITOR=zed
         # set aliases for python
         alias python='python3.11'
         alias pip='pip3.11'
@@ -56,7 +56,6 @@ case $localhost in
 esac
 
 source $ZSH/oh-my-zsh.sh
-export EDITOR=nvim
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
 alias gs='git status'
