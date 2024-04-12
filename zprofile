@@ -3,7 +3,7 @@ localhost=`scutil --get LocalHostName`
 
 # Different things to initialize depending on which computer I'm using
 case $localhost in
-    "philip-macbook-air")
+    "phil-macbook-air")
         # Set PATH, MANPATH, etc., for Homebrew.
         eval "$(/opt/homebrew/bin/brew shellenv)"
         ;;
