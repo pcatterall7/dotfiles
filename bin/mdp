@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Updated: 2022-12-21
+# Updated: 2024-01-31
 # Takes a markdown file path in the clipboard and tries to convert
-# the file to html. Then, open the file. Useful for previewing docs
-# generated in Obsidian.
+# the file to html. Then, open the file.
 
+# directory with the github or google docs css files
 CSS_DIR="${HOME}/.dotfiles/css"
 
 get_css_path () {
@@ -26,12 +26,11 @@ get_css_path () {
 
 OPTIND=1
 css_file=""
-# echo "[DEBUG] @: $@"
-# echo "[DEBUG] #: $#"
 
 while getopts "c:h" opt; do
 	case $opt in
 		h)
+      # TODO: implement help menu
       show_help
       exit 0
       ;;
@@ -45,7 +44,7 @@ while getopts "c:h" opt; do
   esac
 done
 
-shift "$((OPTIND - 1))" # Discard the options and sentinel --
+shift "$((OPTIND - 1))"
 
 # set full_path either from the first positional argument or stdin
 if [[ $# -gt 0 ]]; then
@@ -54,17 +53,10 @@ else
   read full_path
 fi
 
-# echo "[DEBUG] running get_css_path with css_file=${css_file}"
 get_css_path "${css_file}"
 output_path="${TMPDIR}out.html"
 
-# echo "[DEBUG] full_path=$full_path"
-# echo "[DEBUG] css_path=$css_path"
-
-
 # if the filepath is valid, run pandoc and open the html output
-# TODO: write to a temp file instead of ~/notes
-# TODO: move css file to dotfiles
 if [[ -f "${full_path}" ]]; then
 	pandoc -c ${css_path} -f markdown -o "${output_path}" -s "${full_path}"  --quiet
 	open "${output_path}"
@@ -73,6 +65,3 @@ else
   echo "Error: ${full_path} does not exist." >&2
   exit 1
 fi
-
-# TODO: cleanup output - not sure how, since I can't delete it
-# TODO: take path as input or file itself?
