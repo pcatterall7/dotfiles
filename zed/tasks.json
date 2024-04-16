@@ -1,0 +1,7 @@
+[
+  {
+    "label": "markdown to html - github style",
+    "command": "mdp -c gh $ZED_FILE",
+    "use_new_terminal": true
+  }
+]
