@@ -3,5 +3,10 @@
     "label": "markdown to html - github style",
     "command": "mdp -c gh $ZED_FILE",
     "use_new_terminal": true
+  },
+  {
+    "label": "markdown to html - google docs style",
+    "command": "mdp -c gd $ZED_FILE",
+    "use_new_terminal": true
   }
 ]
