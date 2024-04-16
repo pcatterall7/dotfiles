@@ -7,8 +7,26 @@
 # directory with the github or google docs css files
 CSS_DIR="${HOME}/.dotfiles/css"
 
+show_help() {
+    echo "Usage: $0 [-c css_style] [file_path]"
+    echo
+    echo "Converts a markdown file to HTML format using a specified CSS style."
+    echo
+    echo "Options:"
+    echo "  -h          Show this help message."
+    echo "  -c css_style  Specify the css file to use. Options are 'gh' for GitHub style or 'gd' for Google Docs style."
+    echo "                If not specified, defaults to GitHub style."
+    echo
+    echo "Argument:"
+    echo "  file_path   Path to the markdown file to convert. If not specified, reads from stdin."
+    echo
+    echo "Example:"
+    echo "  $0 -c gh my_markdown_file.md"
+    echo "  This will convert 'my_markdown_file.md' to HTML using GitHub style css."
+}
+
 get_css_path () {
-  case $1 in 
+  case $1 in
     gh)
       css_path="${CSS_DIR}/github.css" ;;
     gd)
@@ -30,7 +48,6 @@ css_file=""
 while getopts "c:h" opt; do
 	case $opt in
 		h)
-      # TODO: implement help menu
       show_help
       exit 0
       ;;
