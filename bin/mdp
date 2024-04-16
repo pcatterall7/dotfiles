@@ -7,8 +7,26 @@
 
 CSS_DIR="${HOME}/.dotfiles/css"
 
+show_help() {
+    echo "Usage: $0 [-c css_style] [file_path]"
+    echo
+    echo "Converts a markdown file to HTML format using a specified CSS style."
+    echo
+    echo "Options:"
+    echo "  -h          Show this help message."
+    echo "  -c css_style  Specify the css file to use. Options are 'gh' for GitHub style or 'gd' for Google Docs style."
+    echo "                If not specified, defaults to GitHub style."
+    echo
+    echo "Argument:"
+    echo "  file_path   Path to the markdown file to convert. If not specified, reads from stdin."
+    echo
+    echo "Example:"
+    echo "  $0 -c gh my_markdown_file.md"
+    echo "  This will convert 'my_markdown_file.md' to HTML using GitHub style css."
+}
+
 get_css_path () {
-  case $1 in 
+  case $1 in
     gh)
       css_path="${CSS_DIR}/github.css" ;;
     gd)
@@ -54,17 +72,10 @@ else
   read full_path
 fi
 
-# echo "[DEBUG] running get_css_path with css_file=${css_file}"
 get_css_path "${css_file}"
 output_path="${TMPDIR}out.html"
 
-# echo "[DEBUG] full_path=$full_path"
-# echo "[DEBUG] css_path=$css_path"
-
-
 # if the filepath is valid, run pandoc and open the html output
-# TODO: write to a temp file instead of ~/notes
-# TODO: move css file to dotfiles
 if [[ -f "${full_path}" ]]; then
 	pandoc -c ${css_path} -f markdown -o "${output_path}" -s "${full_path}"  --quiet
 	open "${output_path}"
@@ -73,6 +84,4 @@ else
   echo "Error: ${full_path} does not exist." >&2
   exit 1
 fi
-
-# TODO: cleanup output - not sure how, since I can't delete it
 # TODO: take path as input or file itself?
