@@ -8,7 +8,7 @@ global_vars:
     type: script
     params:
       args:
-        - python
+        - python3
         - "%CONFIG%/scripts/date_converter.py"
       debug: true
 matches:
@@ -54,6 +54,14 @@ matches:
         type: date
         params:
           format: "%Y-%m-%d %H:%M"
+  - trigger: dtw
+    replace: "{{datetime}}"
+    force_clipboard: false
+    vars:
+      - name: datetime
+        type: date
+        params:
+          format: "%Y-W%W"
 
 #### RELATIVE DATES ####
 
@@ -123,15 +131,18 @@ matches:
 
 #### CHECKBOXES ####
 
-  - trigger: ;bc
-    replace: ✅ 
+  - trigger: ;t
+    replace: "[ ] {{dt}}: "
+    vars:
+      - name: dt
+        type: date
+        params:
+          format: "%Y-%m-%d"
 
-  - trigger: ;bb
-    replace: ⬜️ 
 
 #### JIRA TEMPLATES ####
 
-  - trigger: ;jbug
+  - trigger: ;jbug"%Y
     replace: |-
       ### Summary
       
