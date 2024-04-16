@@ -2,7 +2,6 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/phil/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -17,13 +16,14 @@ case $localhost in
         #####################################################
         # Personal macbook scripts, aliases, etc.
         #####################################################
+        export ZSH="/Users/phil/.oh-my-zsh"
+
         plugins=(
             git
         )
 
         # add ruby and dotfile scripts to my path
         export PATH="$HOME/.dotfiles/bin:/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"
-
         # store secrets in a separate file that's outside of my dotfiles
         source ~/.secrets
         ;;
@@ -31,11 +31,12 @@ case $localhost in
         #####################################################
         # Work macbook scripts, aliases, etc.
         #####################################################
-
-        # add .dotfiles/bin/ and cargo executables to my path
-        scripts_dir="$HOME/.dotfiles/bin"
-        export PATH="$PATH:${scripts_dir}:$HOME/.cargo/bin"
-
+        export ZSH="/Users/philipcatterall/.oh-my-zsh"
+        # add random dirs to my PATH
+        scripts_bin="$HOME/.dotfiles/bin"
+        docker_bin="$HOME/.docker/bin"
+        cargo_bin="$HOME/.cargo/bin"
+        export PATH="$PATH:$scripts_bin:$docker_bin:$cargo_bin"
         # store secrets in a separate file that's outside of my dotfiles
         source ~/.secrets
         # look up customers by name or number
