@@ -1,2 +1,5 @@
 .DS_Store
 /zed/.*
+/zed/conversations/*
+/zed/prompts/*
+/zed/embeddings/*

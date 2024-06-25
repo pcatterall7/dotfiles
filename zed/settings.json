@@ -7,10 +7,11 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "theme": "Atelier Forest Light",
+  "theme": "Ayu Mirage",
+  "relative_line_numbers": true,
   "ui_font_size": 14,
-  "buffer_font_size": 13,
-  "buffer_font_family": "Menlo",
+  "buffer_font_size": 12,
+  "buffer_font_family": "JetBrains Mono",
   "buffer_line_height": {
     "custom": 1.4
   },

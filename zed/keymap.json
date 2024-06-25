@@ -4,7 +4,9 @@
     "bindings": {
       // put key-bindings here if you want them to work in normal & visual mode
       "j": ["workspace::SendKeystrokes", "g j"],
-      "k": ["workspace::SendKeystrokes", "g k"]
+      "k": ["workspace::SendKeystrokes", "g k"],
+      "H": ["workspace::SendKeystrokes", "^"],
+      "L": ["workspace::SendKeystrokes", "$"]
     }
   }
 ]
