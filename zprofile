@@ -9,9 +9,10 @@ case $localhost in
         ;;
 
    "ActionIQ-philipcatterall")
-        export PYENV_ROOT="$HOME/.pyenv"
-        export PATH="$PYENV_ROOT/bin:$PATH"
-        eval "$(pyenv init --path)"
+        # 2024-07-26: pyenv broke for some reason
+        # export PYENV_ROOT="$HOME/.pyenv"
+        # export PATH="$PYENV_ROOT/bin:$PATH"
+        # eval "$(pyenv init --path)"
         ;;
 
     *)

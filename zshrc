@@ -46,8 +46,8 @@ case $localhost in
         export AWS_PROFILE=189443971038_AWS_Athena_Access
         export EDITOR=zed
         # set aliases for python
-        alias python='python3.11'
-        alias pip='pip3.11'
+        alias python='python3.12'
+        alias pip='pip3.12'
         plugins=(
             git
         )
