@@ -7,7 +7,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="simple" #"fwalch"
+ZSH_THEME="clean" #"fwalch"
 
 localhost=`scutil --get LocalHostName`
 
