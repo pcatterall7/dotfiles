@@ -21,7 +21,7 @@ matches:
       - name: short_date
         type: date
         params:
-          format: "%b %-e, %Y"
+          format: "%b %-e %Y"
   - trigger: dtS
     replace: "{{euro_date}}"
     force_clipboard: true
@@ -65,79 +65,13 @@ matches:
 
 #### RELATIVE DATES ####
 
-  - trigger: ;sun
+  - regex: ";(?P<date>mon|tue|wed|thu|fri|sat|sun|lmon|ltue|lwed|lthu|lfri|lsat|lsun)"
     replace: "{{relative_date}}"
     vars:
       - name: relative_date
-        type: script
+        type: shell
         params:
-          - lua
-          - "%CONFIG%/scripts/relative_date.lua"
-          - sun
-  - trigger: ;mon
-    replace: "{{relative_date}}"
-    vars:
-      - name: day
-        type: echo
-        params:
-          echo: mon
-      - name: relative_date
-        type: global
-  - trigger: ;tue
-    replace: "{{relative_date}}"
-    vars:
-      - name: day
-        type: echo
-        params:
-          echo: tue
-      - name: relative_date
-        type: global
-  - trigger: ;wed
-    replace: "{{relative_date}}"
-    vars:
-      - name: day
-        type: echo
-        params:
-          echo: wed
-      - name: relative_date
-        type: global
-  - trigger: ;thu
-    replace: "{{relative_date}}"
-    vars:
-      - name: day
-        type: echo
-        params:
-          echo: thu
-      - name: relative_date
-        type: global
-  - trigger: ;fri
-    replace: "{{relative_date}}"
-    vars:
-      - name: day
-        type: echo
-        params:
-          echo: fri
-      - name: relative_date
-        type: global
-  - trigger: ;sat
-    replace: "{{relative_date}}"
-    vars:
-      - name: day
-        type: echo
-        params:
-          echo: sat
-      - name: relative_date
-        type: global
-
-#### CHECKBOXES ####
-
-  - trigger: ;t
-    replace: "[ ] {{dt}}: "
-    vars:
-      - name: dt
-        type: date
-        params:
-          format: "%Y-%m-%d"
+          cmd: "lua ~/.dotfiles/espanso/scripts/relative_date.lua {{date}}" 
 
 
 #### JIRA TEMPLATES ####

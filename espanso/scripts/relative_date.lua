@@ -1,4 +1,4 @@
-function getRelativeDate(cmdString)
+function getRelativeDate(dayOfWeekStr, isLastWeek)
 	local dayMap = {
 		sun=1,
 		mon=2,
@@ -10,34 +10,27 @@ function getRelativeDate(cmdString)
 	}
 	local today = os.time()
 	local todayDayOfWeek = os.date("*t", today).wday
-	local isLastWeek = false
-
-	if string.sub(cmdString, 2, 2) == "l" then
-		isLastWeek = true
+	local isLastWeek = isLastWeek or false
+	local dayOfWeek = dayMap[dayOfWeekStr]
+	local diff = dayOfWeek - todayDayOfWeek
+	-- adjust for days in the previous or next week
+	if isLastWeek and dayOfWeek >= todayDayOfWeek then
+		diff = diff - 7
+	elseif not isLastWeek and dayOfWeek <= todayDayOfWeek then
+		diff = diff + 7
 	end
 
-	if not isLastWeek then
-		local dayOfWeekStr = string.sub(cmdString, 2, 5)
-		local dayOfWeek = dayMap[dayOfWeekStr]
-		diff = dayOfWeek - todayDayOfWeek
-		if dayOfWeek < todayDayOfWeek then
-			diff = diff + 7
-		end
-	else
-		local dayOfWeekStr = string.sub(cmdString, 3, 6) -- TODO: split this out
-		local dayOfWeek = dayMap[dayOfWeekStr]
-		diff = dayOfWeek - todayDayOfWeek
-		if dayOfWeek > todayDayOfWeek then
-			diff = diff - 7
-		end
-	end
-
-
-	
 	local targetDate = today + (60 * 60 * 24 * diff)
 	return os.date("%Y-%m-%d", targetDate)
 	
 end
 
-local arg = {...}
-print(getRelativeDate(arg[1]))
+local args = {...}
+if string.sub(args[1], 1, 1) == "l" then
+	isLastWeek = true
+	day = string.sub(args[1], 2, 4)
+else
+	isLastWeek = false
+	day = string.sub(args[1], 1, 3)
+end
+print(getRelativeDate(day, isLastWeek))
