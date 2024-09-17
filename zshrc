@@ -44,7 +44,7 @@ case $localhost in
             ~/aiq-misc/scripts/customers.sh "$1"
         }
         export AWS_PROFILE=189443971038_AWS_Athena_Access
-        export EDITOR=zed
+        export EDITOR=nvim
         # set aliases for python
         alias python='python3.12'
         alias pip='pip3.12'
