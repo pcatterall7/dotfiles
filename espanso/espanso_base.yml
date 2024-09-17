@@ -68,12 +68,12 @@ matches:
   - trigger: ;sun
     replace: "{{relative_date}}"
     vars:
-      - name: day
-        type: echo
-        params:
-          echo: sun
       - name: relative_date
-        type: global
+        type: script
+        params:
+          - lua
+          - "%CONFIG%/scripts/relative_date.lua"
+          - sun
   - trigger: ;mon
     replace: "{{relative_date}}"
     vars:

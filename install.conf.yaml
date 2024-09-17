@@ -12,7 +12,10 @@
         force: true
     ~/.zprofile:
     ~/Library/Preferences/espanso/match/base.yml:
-        path: espanso_base.yml
+        path: espanso/espanso_base.yml
+        force: true
+    ~/Library/Preferences/espanso/scripts:
+        path: espanso/scripts
         force: true
     ~/.config/nvim: 
         path: nvim
