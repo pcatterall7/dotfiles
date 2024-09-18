@@ -26,3 +26,5 @@
     ~/.config/zed:
         path: zed
         force: true
+    ~/.hammerspoon:
+        path: hammerspoon
