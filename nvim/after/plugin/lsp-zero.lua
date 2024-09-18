@@ -6,6 +6,5 @@ lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({buffer = bufnr})
 end)
 
--- here you can setup the language servers 
-require'lspconfig'.ruby_ls.setup{}
-
+-- here you can setup the language servers
+require'lspconfig'.ruby_lsp.setup{}
