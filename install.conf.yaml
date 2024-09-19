@@ -28,3 +28,4 @@
         force: true
     ~/.hammerspoon:
         path: hammerspoon
+        force: true
