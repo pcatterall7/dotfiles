@@ -62,10 +62,10 @@ if hs.host.localizedName() == 'ActionIQ-philipcatterall' then
         },
         [singleKey('n', 'nightshift')] = function() hs.execute('shortcuts run "Toggle Night Shift"') end
     }
-elseif hs.host.localizedName() == "Philip's MacBook Air" then
+elseif hs.host.localizedName() == "Philip’s MacBook Air" then
     keyMap = {
         [singleKey('f', 'finder+')] = {
-            [singleKey('a', 'applications')] = function() openDirectory('~/Applications') end,
+            [singleKey('a', 'applications')] = function() openDirectory('/Applications') end,
             [singleKey('d', 'downloads')] = function() openDirectory('~/Downloads') end,
             [singleKey('t', 'tmp')] = function() openDirectory('~/tmp') end
         },
@@ -85,6 +85,7 @@ else
     hs.alert.show('Host not recognized')
 end
 
+spoon.RecursiveBinder.helperFormat = {atScreenEdge=2, strokeColor={ white = 0, alpha = 2 }, textFont='SF Mono', textSize=14}
 hs.hotkey.bind({'option'}, 'space', spoon.RecursiveBinder.recursiveBind(keyMap))
 
 ------------------------------------
