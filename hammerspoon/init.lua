@@ -13,16 +13,66 @@ myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.dotfiles/hammerspoon/", r
 hs.alert.show("Config loaded")
 
 --------------------------------------
------------ Countdown ----------------
+------------- Countdown --------------
 --------------------------------------
 
 countDown=hs.loadSpoon("CountDown")
 countDown.defaultDuration = 25
 countDown.menuBarAlwaysShow = true
-countDown.warningFormat = "%02d minutes remaining"
+countDown.warningFormat = "%dh %dm minutes remaining"
 countDown.menuBarIconActive = "⏰"
 countDown.menuBarIconIdle = "⏲️"
+countDown.barCanvasHeight = 0
+-- countDown.barTransparency = 0.8
+-- countDown.barFillColorPassed = hs.drawing.color.osx_black
+-- countDown.barFillColorToPass = hs.drawing.color.x11.whitesmoke
 
+--------------------------------------
+-------- AIQ Customer Finder  --------
+--------------------------------------
+-- TODO: get this working
+-- local query = hs.dialog.textPrompt("Customer", "Enter an ID or Name")
+
+--------------------------------------
+-------------- Snippets --------------
+--------------------------------------
+
+-- Function to create a hotkey that pastes content and preserves clipboard
+function pasteSnippet(snippet)
+    -- save current clipboard data
+    tempClipboard = hs.pasteboard.uniquePasteboard()
+    hs.pasteboard.writeAllData(tempClipboard, hs.pasteboard.readAllData(nil))
+
+    -- load content into clipboard and paste
+    hs.pasteboard.writeObjects(snippet)
+    hs.eventtap.keyStroke({'cmd'}, 'v')
+
+    -- recall clipboard data
+    hs.pasteboard.writeAllData(nil, hs.pasteboard.readAllData(tempClipboard))
+    hs.pasteboard.deletePasteboard(tempClipboard)
+end
+
+monday = os.date("%Y-%m-%d")
+weeklyLogEntry = [[## Week of %s
+### Log
+
+Mon
+
+Tue
+
+Wed
+
+Thu
+
+Fri
+
+### Recap
+
+**What did I do last week?**
+
+**Plans for next week**
+]]
+weeklyLogEntrySnippet = string.format(weeklyLogEntry, monday)
 
 --------------------------------------
 -------- Recursive Keybindings -------
@@ -60,7 +110,8 @@ if hs.host.localizedName() == 'ActionIQ-philipcatterall' then
             [singleKey('p', 'pause/resume')] = function() countDown:pauseOrResume() end,
             [singleKey('c', 'cancel')] = function() countDown:cancel() end
         },
-        [singleKey('n', 'nightshift')] = function() hs.execute('shortcuts run "Toggle Night Shift"') end
+        [singleKey('n', 'nightshift')] = function() hs.execute('shortcuts run "Toggle Night Shift"') end,
+        [singleKey('s', 'snippettest')] = function() pasteSnippet(weeklyLogEntrySnippet) end
     }
 elseif hs.host.localizedName() == "Philip’s MacBook Air" then
     keyMap = {

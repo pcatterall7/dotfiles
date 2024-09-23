@@ -390,7 +390,7 @@ function obj:bar_create_timer()
     local interval = 2/(mainRes.w/secCount)
     barTimer = hs.timer.doEvery(interval,
       function()
-        obj:barSetProgresspercentage(obj.barProgress)
+        obj:bar_updateProgress()
       end
     )
   end
