@@ -110,8 +110,11 @@ if hs.host.localizedName() == 'ActionIQ-philipcatterall' then
             [singleKey('p', 'pause/resume')] = function() countDown:pauseOrResume() end,
             [singleKey('c', 'cancel')] = function() countDown:cancel() end
         },
-        [singleKey('n', 'nightshift')] = function() hs.execute('shortcuts run "Toggle Night Shift"') end,
-        [singleKey('s', 'snippettest')] = function() pasteSnippet(weeklyLogEntrySnippet) end
+        [singleKey('s', 'shortcuts+')] = {
+            [singleKey('n', 'nightshift')] = function() hs.execute('shortcuts run "Toggle Night Shift"') end,
+            [singleKey('r', 'make rich text')] = function() hs.execute('shortcuts run "Convert Markdown to Rich Text"') end
+        }
+        -- [singleKey('s', 'snippettest')] = function() pasteSnippet(weeklyLogEntrySnippet) end
     }
 elseif hs.host.localizedName() == "Philip’s MacBook Air" then
     keyMap = {

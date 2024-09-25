@@ -43,7 +43,7 @@ case $localhost in
         source ~/.secrets
         # look up customers by name or number
         cust() {
-            ~/aiq-misc/scripts/customers.sh "$1"
+            lua ~/.dotfiles/bin/customer_finder.lua "$1"
         }
         export AWS_PROFILE=189443971038_AWS_Athena_Access
         export EDITOR=nvim
