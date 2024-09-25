@@ -93,16 +93,17 @@ if hs.host.localizedName() == 'ActionIQ-philipcatterall' then
             [singleKey('d', 'downloads')] = function() openDirectory('~/Downloads') end,
             [singleKey('t', 'tmp')] = function() openDirectory('~/tmp') end
         },
-        [singleKey('b', 'bookmarks+')] = {
+        [singleKey('c', 'chrome+')] = {
             [singleKey('g', 'github+')] = {
                 [singleKey('a', 'aiq')] = function() hs.urlevent.openURL('https://www.github.com/ActionIQ/aiq') end,
                 [singleKey('d', 'datascience')] = function() hs.urlevent.openURL('https://github.com/ActionIQ/datascience/tree/master/databricks-analytics-pipelines') end,
                 [singleKey('s', 'sandbox')] = function() hs.urlevent.openURL('https://www.github.com/ActionIQ/sandbox/tree/master/user/phil') end
             },
             [singleKey('j', 'jira+')] = {
+                [singleKey('d', 'dashboard')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/dashboards/10188') end,
                 [singleKey('e', 'dpe')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/DP/boards/242/backlog?epics=visible') end,
-                [singleKey('d', 'design')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/PD/boards/237') end,
-                [singleKey('t', 'docs')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/DOC/boards/214') end,
+                [singleKey('m', 'design')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/PD/boards/237') end,
+                [singleKey('j', 'docs')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/DOC/boards/214') end,
             }
         },
         [singleKey('t', 'timer+')] = {
