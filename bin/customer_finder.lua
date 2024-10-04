@@ -14,7 +14,7 @@ local function print_customer_info(customer_id, customer_name)
 end
 
 local home = os.getenv("HOME")
-local file_path = home .. "/aiq-misc/scripts/customers.json"
+local file_path = home .. "/aiq-misc/customers.json"
 local content = read_file(file_path)
 if not content then
     print("Error: Unable to read the file")

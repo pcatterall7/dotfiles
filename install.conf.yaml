@@ -11,13 +11,13 @@
     ~/.zshrc:
         force: true
     ~/.zprofile:
-    ~/Library/Preferences/espanso/match/base.yml:
-        path: espanso/espanso_base.yml
+    ~/Library/Preferences/espanso:
+        path: espanso/
         force: true
-    ~/Library/Preferences/espanso/scripts:
-        path: espanso/scripts
-        force: true
-    ~/.config/nvim: 
+    # ~/Library/Preferences/espanso/scripts:
+    #     path: espanso/scripts
+    #     force: true
+    ~/.config/nvim:
         path: nvim
         force: true
     ~/.tmux.conf:

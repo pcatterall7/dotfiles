@@ -75,6 +75,28 @@ Fri
 weeklyLogEntrySnippet = string.format(weeklyLogEntry, monday)
 
 --------------------------------------
+--------- Window Management  ---------
+--------------------------------------
+
+function focusApp()
+    screen = hs.screen.mainScreen()
+    fullFrame = screen:fullFrame()
+    focusedWindow = hs.window.focusedWindow()
+
+    allWindows = hs.window.allWindows()
+
+    for _, w in ipairs(allWindows) do
+        if w:id() ~= focusedWindow:id() and w:isVisible() then
+            w:minimize()
+        end
+    end
+
+    targetUnitSize = hs.geometry(0.2, 0.1, 0.6, 0.8)
+    targetSize = targetUnitSize:fromUnitRect(fullFrame)
+    focusedWindow:move(targetSize)
+end
+
+--------------------------------------
 -------- Recursive Keybindings -------
 --------------------------------------
 hs.loadSpoon("RecursiveBinder")
@@ -86,10 +108,10 @@ function openDirectory(path)
     hs.execute(shell_command)
 end
 
-if hs.host.localizedName() == 'ActionIQ-philipcatterall' then
+if hs.host.localizedName() == 'ActionIQ-philipcatterall' or hs.host.localizedName() == 'ActionIQ-phil' then
     keyMap = {
         [singleKey('f', 'finder+')] = {
-            [singleKey('a', 'applications')] = function() openDirectory('~/Applications') end,
+            [singleKey('a', 'applications')] = function() openDirectory('/Applications') end,
             [singleKey('d', 'downloads')] = function() openDirectory('~/Downloads') end,
             [singleKey('t', 'tmp')] = function() openDirectory('~/tmp') end
         },
@@ -114,7 +136,8 @@ if hs.host.localizedName() == 'ActionIQ-philipcatterall' then
         [singleKey('s', 'shortcuts+')] = {
             [singleKey('n', 'nightshift')] = function() hs.execute('shortcuts run "Toggle Night Shift"') end,
             [singleKey('r', 'make rich text')] = function() hs.execute('shortcuts run "Convert Markdown to Rich Text"') end
-        }
+        },
+        [singleKey('w', 'window')] = function() focusApp() end 
         -- [singleKey('s', 'snippettest')] = function() pasteSnippet(weeklyLogEntrySnippet) end
     }
 elseif hs.host.localizedName() == "Philip’s MacBook Air" then
@@ -140,7 +163,7 @@ else
     hs.alert.show('Host not recognized')
 end
 
-spoon.RecursiveBinder.helperFormat = {atScreenEdge=2, strokeColor={ white = 0, alpha = 2 }, textFont='SF Mono', textSize=14}
+spoon.RecursiveBinder.helperFormat = {atScreenEdge=2, strokeColor={ white = 0, alpha = 2 }, textFont='Menlo', textSize=14}
 hs.hotkey.bind({'option'}, 'space', spoon.RecursiveBinder.recursiveBind(keyMap))
 
 ------------------------------------
