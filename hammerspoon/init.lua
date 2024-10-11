@@ -28,13 +28,13 @@ countDown.barCanvasHeight = 0
 -- countDown.barFillColorToPass = hs.drawing.color.x11.whitesmoke
 
 --------------------------------------
--------- AIQ Customer Finder  --------
+--- AIQ Customer Finder  -------------
 --------------------------------------
 -- TODO: get this working
 -- local query = hs.dialog.textPrompt("Customer", "Enter an ID or Name")
 
 --------------------------------------
--------------- Snippets --------------
+-- Snippets --------------------------
 --------------------------------------
 
 -- Function to create a hotkey that pastes content and preserves clipboard
@@ -75,7 +75,19 @@ Fri
 weeklyLogEntrySnippet = string.format(weeklyLogEntry, monday)
 
 --------------------------------------
---------- Window Management  ---------
+-- Search Confluence -----------------
+--------------------------------------
+
+function searchConfluence()
+    local base_url = 'https://actioniq.atlassian.net/wiki/search?text='
+    local button, query = hs.dialog.textPrompt("Search Confluence", "", "Enter a search term", "Search", "Cancel")
+    if button == "Search" then
+        hs.urlevent.openURL(base_url .. query)
+    end
+end
+
+--------------------------------------
+-- Window Management  ----------------
 --------------------------------------
 
 function focusApp()
@@ -115,7 +127,7 @@ if hs.host.localizedName() == 'ActionIQ-philipcatterall' or hs.host.localizedNam
             [singleKey('d', 'downloads')] = function() openDirectory('~/Downloads') end,
             [singleKey('t', 'tmp')] = function() openDirectory('~/tmp') end
         },
-        [singleKey('c', 'chrome+')] = {
+        [singleKey('b', 'bookmarks+')] = {
             [singleKey('g', 'github+')] = {
                 [singleKey('a', 'aiq')] = function() hs.urlevent.openURL('https://www.github.com/ActionIQ/aiq') end,
                 [singleKey('d', 'datascience')] = function() hs.urlevent.openURL('https://github.com/ActionIQ/datascience/tree/master/databricks-analytics-pipelines') end,
@@ -126,7 +138,8 @@ if hs.host.localizedName() == 'ActionIQ-philipcatterall' or hs.host.localizedNam
                 [singleKey('e', 'dpe')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/DP/boards/242/backlog?epics=visible') end,
                 [singleKey('m', 'design')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/PD/boards/237') end,
                 [singleKey('j', 'docs')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/DOC/boards/214') end,
-            }
+            },
+            [singleKey('c', 'search confluence')] = function() searchConfluence() end
         },
         [singleKey('t', 'timer+')] = {
             [singleKey('s', 'start')] = function() countDown:startFor(25) end,
