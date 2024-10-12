@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Set variables
+REPO_DIR="/Users/phil/Library/Mobile Documents/com~apple~CloudDocs/Journal/"
+BACKUP_SERVER="phil@raspi"
+BACKUP_DIR="/mnt/external-drive/journal"
+LOG_FILE="$REPO_DIR/backup.log"
+
+current_time() {
+	date +"%Y-%m-%d %H:%M:%S"
+}
+# Change to the repository directory
+cd "$REPO_DIR" || exit
+
+# Check if there are any changes to commit
+if [[ -n $(git status -s) ]]; then
+    # Changes exist, proceed with commit
+    git add .
+    git commit -m "Automated commit $(current_time)"
+    echo "$(current_time) Changes committed" >> "$LOG_FILE"
+else
+    # No changes to commit
+    echo "$(current_time) No files to commit" >> "$LOG_FILE"
+fi
+
+# Backup to server using rsync
+if rsync -avz --delete --no-perms --no-owner --no-group "$REPO_DIR" "$BACKUP_SERVER:$BACKUP_DIR"; then
+	echo "$(current_time) Backup completed successfully" >> "$LOG_FILE"
+else
+	echo "$(current_time) Backup failed" >> "$LOG_FILE"
+fi

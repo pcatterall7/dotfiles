@@ -1,3 +1,4 @@
+#!/bin/zsh
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -43,7 +44,7 @@ case $localhost in
         source ~/.secrets
         # look up customers by name or number
         cust() {
-            lua ~/.dotfiles/bin/customer_finder.lua "$1"
+            lua ~/.dotfiles/scripts/customer_finder.lua "$1"
         }
         export AWS_PROFILE=189443971038_AWS_Athena_Access
         export EDITOR=nvim

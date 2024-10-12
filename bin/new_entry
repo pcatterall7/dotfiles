@@ -1,0 +1,14 @@
+#!/bin/sh
+
+year=$(date "+%Y")
+date=$(date "+%Y-%m-%d %H:%M")
+
+filename="$HOME/Journal/$year/$year.txt"
+
+text=$(cat <<EOF
+$date\n\n\n---
+EOF
+)
+
+echo $text | cat - $filename > temp_file && mv temp_file $filename
+open -a "iA Writer" $filename 
