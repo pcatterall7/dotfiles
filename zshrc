@@ -23,7 +23,7 @@ case $localhost in
         )
 
         # add ruby and dotfile scripts to my path
-        export PATH="$HOME/.dotfiles/bin:/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"
+        export PATH="$HOME/.dotfiles/bin:/opt/homebrew/opt/ruby/bin:/Users/phil/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"
         # store secrets in a separate file that's outside of my dotfiles
         source ~/.secrets  
         export DENO_INSTALL="/Users/phil/.deno"

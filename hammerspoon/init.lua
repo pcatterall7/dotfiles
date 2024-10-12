@@ -22,7 +22,7 @@ countDown.menuBarAlwaysShow = true
 countDown.warningFormat = "%dh %dm minutes remaining"
 countDown.menuBarIconActive = "⏰"
 countDown.menuBarIconIdle = "⏲️"
-countDown.barCanvasHeight = 0
+-- countDown.barCanvasHeight = 4
 -- countDown.barTransparency = 0.8
 -- countDown.barFillColorPassed = hs.drawing.color.osx_black
 -- countDown.barFillColorToPass = hs.drawing.color.x11.whitesmoke
@@ -118,7 +118,8 @@ elseif hs.host.localizedName() == "Philip’s MacBook Air" then
         [singleKey('f', 'finder+')] = {
             [singleKey('a', 'applications')] = function() openDirectory('/Applications') end,
             [singleKey('d', 'downloads')] = function() openDirectory('~/Downloads') end,
-            [singleKey('t', 'tmp')] = function() openDirectory('~/tmp') end
+            [singleKey('t', 'tmp')] = function() openDirectory('~/tmp') end,
+            [singleKey('r', 'raspi')] = function() openDirectory('/Volumes/external-drive') end
         },
         [singleKey('b', 'bookmarks+')] = {
             [singleKey('g', 'gmail')] = function() hs.urlevent.openURL('https://gmail.com') end,
