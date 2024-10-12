@@ -40,7 +40,7 @@ backup_entries() {
     fi
 
     # Backup to server using rsync
-    if rsync -avz --delete --no-perms --no-owner --no-group "$REPO_DIR" "$BACKUP_SERVER:$BACKUP_DIR"; then
+    if rsync -avz --delete --no-perms --no-owner --no-group --exclude={'**/.DS_Store'} "$REPO_DIR" "$BACKUP_SERVER:$BACKUP_DIR"; then
         echo "$(current_time) Backup completed successfully" >> "$LOG_FILE"
     else
         echo "$(current_time) Backup failed" >> "$LOG_FILE"
