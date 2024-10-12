@@ -28,13 +28,13 @@ countDown.menuBarIconIdle = "⏲️"
 -- countDown.barFillColorToPass = hs.drawing.color.x11.whitesmoke
 
 --------------------------------------
--------- AIQ Customer Finder  --------
+--- AIQ Customer Finder  -------------
 --------------------------------------
 -- TODO: get this working
 -- local query = hs.dialog.textPrompt("Customer", "Enter an ID or Name")
 
 --------------------------------------
--------------- Snippets --------------
+-- Snippets --------------------------
 --------------------------------------
 
 -- Function to create a hotkey that pastes content and preserves clipboard
@@ -75,6 +75,40 @@ Fri
 weeklyLogEntrySnippet = string.format(weeklyLogEntry, monday)
 
 --------------------------------------
+-- Search Confluence -----------------
+--------------------------------------
+
+function searchConfluence()
+    local base_url = 'https://actioniq.atlassian.net/wiki/search?text='
+    local button, query = hs.dialog.textPrompt("Search Confluence", "", "Enter a search term", "Search", "Cancel")
+    if button == "Search" then
+        hs.urlevent.openURL(base_url .. query)
+    end
+end
+
+--------------------------------------
+-- Window Management  ----------------
+--------------------------------------
+
+function focusApp()
+    screen = hs.screen.mainScreen()
+    fullFrame = screen:fullFrame()
+    focusedWindow = hs.window.focusedWindow()
+
+    allWindows = hs.window.allWindows()
+
+    for _, w in ipairs(allWindows) do
+        if w:id() ~= focusedWindow:id() and w:isVisible() then
+            w:minimize()
+        end
+    end
+
+    targetUnitSize = hs.geometry(0.2, 0.1, 0.6, 0.8)
+    targetSize = targetUnitSize:fromUnitRect(fullFrame)
+    focusedWindow:move(targetSize)
+end
+
+--------------------------------------
 -------- Recursive Keybindings -------
 --------------------------------------
 hs.loadSpoon("RecursiveBinder")
@@ -86,10 +120,10 @@ function openDirectory(path)
     hs.execute(shell_command)
 end
 
-if hs.host.localizedName() == 'ActionIQ-philipcatterall' then
+if hs.host.localizedName() == 'ActionIQ-philipcatterall' or hs.host.localizedName() == 'ActionIQ-phil' then
     keyMap = {
         [singleKey('f', 'finder+')] = {
-            [singleKey('a', 'applications')] = function() openDirectory('~/Applications') end,
+            [singleKey('a', 'applications')] = function() openDirectory('/Applications') end,
             [singleKey('d', 'downloads')] = function() openDirectory('~/Downloads') end,
             [singleKey('t', 'tmp')] = function() openDirectory('~/tmp') end
         },
@@ -100,18 +134,24 @@ if hs.host.localizedName() == 'ActionIQ-philipcatterall' then
                 [singleKey('s', 'sandbox')] = function() hs.urlevent.openURL('https://www.github.com/ActionIQ/sandbox/tree/master/user/phil') end
             },
             [singleKey('j', 'jira+')] = {
+                [singleKey('d', 'dashboard')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/dashboards/10188') end,
                 [singleKey('e', 'dpe')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/DP/boards/242/backlog?epics=visible') end,
-                [singleKey('d', 'design')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/PD/boards/237') end,
-                [singleKey('t', 'docs')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/DOC/boards/214') end,
-            }
+                [singleKey('m', 'design')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/PD/boards/237') end,
+                [singleKey('j', 'docs')] = function() hs.urlevent.openURL('https://actioniq.atlassian.net/jira/software/projects/DOC/boards/214') end,
+            },
+            [singleKey('c', 'search confluence')] = function() searchConfluence() end
         },
         [singleKey('t', 'timer+')] = {
             [singleKey('s', 'start')] = function() countDown:startFor(25) end,
             [singleKey('p', 'pause/resume')] = function() countDown:pauseOrResume() end,
             [singleKey('c', 'cancel')] = function() countDown:cancel() end
         },
-        [singleKey('n', 'nightshift')] = function() hs.execute('shortcuts run "Toggle Night Shift"') end,
-        [singleKey('s', 'snippettest')] = function() pasteSnippet(weeklyLogEntrySnippet) end
+        [singleKey('s', 'shortcuts+')] = {
+            [singleKey('n', 'nightshift')] = function() hs.execute('shortcuts run "Toggle Night Shift"') end,
+            [singleKey('r', 'make rich text')] = function() hs.execute('shortcuts run "Convert Markdown to Rich Text"') end
+        },
+        [singleKey('w', 'window')] = function() focusApp() end 
+        -- [singleKey('s', 'snippettest')] = function() pasteSnippet(weeklyLogEntrySnippet) end
     }
 elseif hs.host.localizedName() == "Philip’s MacBook Air" then
     keyMap = {
@@ -137,7 +177,7 @@ else
     hs.alert.show('Host not recognized')
 end
 
-spoon.RecursiveBinder.helperFormat = {atScreenEdge=2, strokeColor={ white = 0, alpha = 2 }, textFont='SF Mono', textSize=14}
+spoon.RecursiveBinder.helperFormat = {atScreenEdge=2, strokeColor={ white = 0, alpha = 2 }, textFont='Menlo', textSize=14}
 hs.hotkey.bind({'option'}, 'space', spoon.RecursiveBinder.recursiveBind(keyMap))
 
 ------------------------------------
