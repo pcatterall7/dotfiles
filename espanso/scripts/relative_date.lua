@@ -1,12 +1,12 @@
 function getRelativeDate(dayOfWeekStr, isLastWeek)
 	local dayMap = {
-		sun=1,
-		mon=2,
-		tue=3,
-		wed=4,
-		thu=5,
-		fri=6,
-		sat=7
+		sun = 1,
+		mon = 2,
+		tue = 3,
+		wed = 4,
+		thu = 5,
+		fri = 6,
+		sat = 7,
 	}
 	local today = os.time()
 	local todayDayOfWeek = os.date("*t", today).wday
@@ -22,15 +22,18 @@ function getRelativeDate(dayOfWeekStr, isLastWeek)
 
 	local targetDate = today + (60 * 60 * 24 * diff)
 	return os.date("%Y-%m-%d", targetDate)
-	
 end
 
-local args = {...}
-if string.sub(args[1], 1, 1) == "l" then
-	isLastWeek = true
-	day = string.sub(args[1], 2, 4)
+local args = { ... }
+local input = args[1]
+if input == "yest" then
+	local yesterday = os.time() - (24 * 60 * 60)
+	print(os.date("%Y-%m-%d", yesterday))
+elseif input == "tom" then
+	local tomorrow = os.time() + (24 * 60 * 60)
+	print(os.date("%Y-%m-%d", tomorrow))
 else
-	isLastWeek = false
-	day = string.sub(args[1], 1, 3)
+	local isLastWeek = string.sub(input, 1, 1) == "l"
+	local day = string.sub(input, isLastWeek and 2 or 1, isLastWeek and 4 or 3)
+	print(getRelativeDate(day, isLastWeek))
 end
-print(getRelativeDate(day, isLastWeek))

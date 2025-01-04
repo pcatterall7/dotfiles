@@ -67,14 +67,13 @@ matches:
 
 #### RELATIVE DATES ####
 
-  - regex: ";(?P<date>mon|tue|wed|thu|fri|sat|sun|lmon|ltue|lwed|lthu|lfri|lsat|lsun)"
+  - regex: ";(?P<date>mon|tue|wed|thu|fri|sat|sun|lmon|ltue|lwed|lthu|lfri|lsat|lsun|yest|tom)"
     replace: "{{relative_date}}"
     vars:
       - name: relative_date
         type: shell
         params:
           cmd: "lua ~/.dotfiles/espanso/scripts/relative_date.lua {{date}}" 
-
 
 #### JIRA TEMPLATES ####
 
