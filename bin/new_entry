@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 year=$(date "+%Y")
 date=$(date "+%Y-%m-%d %H:%M")
