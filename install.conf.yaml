@@ -6,8 +6,6 @@
 - clean: ['~']
 
 - link:
-    ~/.vimrc:
-    ~/.vim: vim
     ~/.zshrc:
         force: true
     ~/.zprofile:
@@ -22,9 +20,6 @@
         force: true
     ~/.tmux.conf:
         path: tmux.conf
-        force: true
-    ~/.config/zed:
-        path: zed
         force: true
     ~/.hammerspoon:
         path: hammerspoon
