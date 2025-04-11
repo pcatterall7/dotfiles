@@ -17,5 +17,5 @@ cd .dotfiles
 
 ## TODO
 
-- [ ] implement .secrets file for personal computer
+- [x] implement .secrets file for personal computer
 - [ ] install onto raspi
