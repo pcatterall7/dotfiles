@@ -8,11 +8,7 @@ case $localhost in
         eval "$(/opt/homebrew/bin/brew shellenv)"
         ;;
 
-   "ActionIQ-philipcatterall" | "ActionIQ-phil")
-        # 2024-07-26: pyenv broke for some reason
-        # export PYENV_ROOT="$HOME/.pyenv"
-        # export PATH="$PYENV_ROOT/bin:$PATH"
-        # eval "$(pyenv init --path)"
+   "phils-mbp")
         ;;
 
     *)
