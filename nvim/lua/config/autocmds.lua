@@ -11,6 +11,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.shiftwidth = 4 -- Size of indent
     vim.opt_local.expandtab = false -- Use tabs, not spaces
     vim.opt_local.spell = false -- Turn off spellcheck
-    -- vim.opt_local.softtabstop = 0 -- Disable soft tabs
+    vim.opt_local.softtabstop = 0 -- Disable soft tabs
   end,
 })
