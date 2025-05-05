@@ -33,8 +33,9 @@ case $localhost in
         export DENO_INSTALL="/Users/phil/.deno"
         export PATH="$DENO_INSTALL/bin:$PATH"
         ;;
-    "phils-MBP"
+    "phils-mbp")
         export ZSH="/Users/edwardcatterall/.oh-my-zsh"
+        ;;
     *)
         echo -n "computer $localhost not recognized"
 esac
