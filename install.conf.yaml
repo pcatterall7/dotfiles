@@ -21,6 +21,6 @@
     ~/.tmux.conf:
         path: tmux.conf
         force: true
-    ~/.hammerspoon:
-        path: hammerspoon
+    ~/.oh-my-zsh/custom/themes/clean-custom.zsh-theme:
+        path: zsh/clean-custom.zsh-theme
         force: true
