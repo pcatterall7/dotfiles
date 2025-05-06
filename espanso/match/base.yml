@@ -71,9 +71,12 @@ matches:
     replace: "{{relative_date}}"
     vars:
       - name: relative_date
-        type: shell
+        type: script
         params:
-          cmd: "lua ~/.dotfiles/espanso/scripts/relative_date.lua {{date}}" 
+          args: 
+            - /opt/homebrew/bin/lua
+            - "%CONFIG%/scripts/relative_date.lua"
+            - "{{date}}"
 
 #### JIRA TEMPLATES ####
 
@@ -102,17 +105,18 @@ matches:
       ### Acceptance Criteria
       
       ### Links and references
-      
-  - trigger: ;jc
-    replace: C360-
+  
 
 #### CONTACT INFO ####
 
   - trigger: "@@"
     replace: philipcatterall@gmail.com
 
-  - trigger: ;aiq
-    replace: philip@actioniq.com
+  - trigger: ;sa
+    replace: phil.catterall@snowplowanalytics.com
+
+  - trigger: ;si
+    replace: phil.catterall@snowplow.io
 
   - trigger: ;c
     replace: 301-367-7195
