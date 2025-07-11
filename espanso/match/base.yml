@@ -31,7 +31,7 @@ matches:
       - name: euro_date
         type: date
         params:
-          format: "%e %b %Y"
+          format: "%d %b %Y"
   - trigger: dtl
     replace: "{{long_date}}"
     force_clipboard: false
@@ -136,3 +136,11 @@ matches:
 
   - trigger: ;shrug
     replace: ¯\_(ツ)_/¯
+
+  - trigger: ;ar
+    replace: →
+
+  - trigger: ;al
+    replace: ←
+  # - trigger: ;t
+  #   replace: '- [ ] '
