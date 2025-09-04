@@ -35,6 +35,7 @@ case $localhost in
         ;;
     "phils-mbp")
         export ZSH="/Users/edwardcatterall/.oh-my-zsh"
+        export GOOGLE_CLOUD_PROJECT="engineering-sandbox"
         ;;
     *)
         echo -n "computer $localhost not recognized"
