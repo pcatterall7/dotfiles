@@ -1,7 +1,11 @@
 #!/bin/zsh
+
+# ====== GENERAL ======
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+export EDITOR=nvim
 # Path to your oh-my-zsh installation.
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -12,11 +16,11 @@ ZSH_THEME="clean-custom" #"fwalch"
 
 localhost=`scutil --get LocalHostName`
 
+
+
 case $localhost in
     "phil-macbook-air")
-        #####################################################
-        # Personal macbook scripts, aliases, etc.
-        #####################################################
+        # ====== Personal macbook scripts, aliases, etc. ======
         export ZSH="/Users/phil/.oh-my-zsh"
 
         plugins=(
@@ -29,7 +33,7 @@ case $localhost in
         export PATH="$HOME/.local/bin:$PATH"
 
         # store secrets in a separate file that's outside of my dotfiles
-        source ~/.secrets  
+        source ~/.secrets
         export DENO_INSTALL="/Users/phil/.deno"
         export PATH="$DENO_INSTALL/bin:$PATH"
         ;;
@@ -42,11 +46,8 @@ case $localhost in
 esac
 
 source $ZSH/oh-my-zsh.sh
-export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
-alias gs='git status'
-export EDITOR=nvim
 
-. "$HOME/.local/bin/env"
+# ====== ALIASES ======
 
 # lf file manager stuff
 lfcd () {
@@ -55,3 +56,22 @@ lfcd () {
 }
 
 alias lf='lfcd'
+
+# make a directory, then cd into it.
+mkcd () {
+  \mkdir -p "$1"
+  cd "$1"
+}
+
+# create a temp directory and cds into it
+tempe () {
+  cd "$(mktemp -d)"
+  chmod -R 0700 .
+  if [[ $# -eq 1 ]]; then
+    \mkdir -p "$1"
+    cd "$1"
+    chmod -R 0700 .
+  fi
+}
+
+alias gs='git status'

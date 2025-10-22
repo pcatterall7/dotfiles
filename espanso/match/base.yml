@@ -14,8 +14,7 @@ global_vars:
         - "%CONFIG%/scripts/date_converter.py"
       debug: true
 matches:
-
-### DATES ###
+  ### DATES ###
   - trigger: dts
     replace: "{{short_date}}"
     force_clipboard: true
@@ -65,7 +64,7 @@ matches:
         params:
           format: "%Y-W%W"
 
-#### RELATIVE DATES ####
+  #### RELATIVE DATES ####
 
   - regex: ";(?P<date>mon|tue|wed|thu|fri|sat|sun|lmon|ltue|lwed|lthu|lfri|lsat|lsun|yest|tom)"
     replace: "{{relative_date}}"
@@ -73,41 +72,12 @@ matches:
       - name: relative_date
         type: script
         params:
-          args: 
+          args:
             - /opt/homebrew/bin/lua
             - "%CONFIG%/scripts/relative_date.lua"
             - "{{date}}"
 
-#### JIRA TEMPLATES ####
-
-  - trigger: ;jbug"%Y
-    replace: |-
-      ### Summary
-      
-      ### Steps to reproduce
-      
-      ### Expected result
-      
-      ### Actual result
-      
-  - trigger: ;jt1
-    replace: |-
-      ### Problem
-      
-      ### Proposal
-      
-      ### Considerations
-      
-  - trigger: ;jt2
-    replace: |-
-      ### Summary
-      
-      ### Acceptance Criteria
-      
-      ### Links and references
-  
-
-#### CONTACT INFO ####
+  #### CONTACT INFO ####
 
   - trigger: "@@"
     replace: philipcatterall@gmail.com
@@ -121,7 +91,7 @@ matches:
   - trigger: ;c
     replace: 301-367-7195
 
-#### MISC ####
+  #### MISC ####
 
   - trigger: ;gc
     replace: 'git commit -m "{{iso8601}} from my mac"'
