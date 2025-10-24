@@ -15,4 +15,5 @@
 # @raycast.authorURL https://github.com/pcatterall7
 
 open -na "Google Chrome" --args --new-window  "https://notepadcalculator.com/"
+sleep 0.3
 open rectangle://execute-action?name=last-third
