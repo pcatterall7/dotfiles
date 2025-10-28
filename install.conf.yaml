@@ -24,3 +24,6 @@
     ~/.oh-my-zsh/custom/themes/clean-custom.zsh-theme:
         path: zsh/clean-custom.zsh-theme
         force: true
+    ~/.aerospace.toml:
+        path: aerospace.toml
+        force: true
