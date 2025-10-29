@@ -53,10 +53,10 @@ automatically-unhide-macos-hidden-apps = false
 [gaps]
     inner.horizontal = 8
     inner.vertical =   8
-    outer.left =       4
-    outer.bottom =     4
-    outer.top =        4
-    outer.right =      4
+    outer.left =       6
+    outer.bottom =     6
+    outer.top =        6
+    outer.right =      6
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -116,12 +116,13 @@ automatically-unhide-macos-hidden-apps = false
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     alt-s = 'workspace S' # Slack
     alt-n = 'workspace N' # Notion
+    alt-b = 'workspace B'
     alt-1 = 'workspace 1'
     alt-2 = 'workspace 2'
     alt-3 = 'workspace 3'
     alt-4 = 'workspace 4'
     alt-5 = 'workspace 5'
-    alt-b = 'workspace M' # Music
+    alt-m = 'workspace M' # Music
 
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -130,6 +131,7 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
     alt-shift-5 = 'move-node-to-workspace 5'
+    alt-shift-b = 'move-node-to-workspace B'
     alt-shift-s = 'move-node-to-workspace S'
     alt-shift-m = 'move-node-to-workspace M'
     alt-shift-n = 'move-node-to-workspace N'
@@ -184,3 +186,7 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
     if.app-name-regex-substring = 'spotify'
     run = 'move-node-to-workspace M'
+
+[[on-window-detected]]
+    if.app-id = 'com.google.Chrome'
+    run = 'move-node-to-workspace B'
