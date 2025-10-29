@@ -25,5 +25,5 @@
         path: zsh/clean-custom.zsh-theme
         force: true
     ~/.aerospace.toml:
-        path: aerospace.toml
+        path: aerospace/aerospace.toml
         force: true
