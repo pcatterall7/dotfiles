@@ -28,7 +28,7 @@ case $localhost in
         )
 
         # add ruby and dotfile scripts to my path
-        export PATH="$HOME/.dotfiles/bin:/opt/homebrew/opt/ruby/bin:/Users/phil/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"
+        export PATH="/opt/homebrew/opt/ruby/bin:/Users/phil/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"
         # add pipx apps to my path
         export PATH="$HOME/.local/bin:$PATH"
 
@@ -38,7 +38,6 @@ case $localhost in
         export PATH="$DENO_INSTALL/bin:$PATH"
         ;;
     "phils-mbp")
-        export PATH="$HOME/dotfiles/bin":$PATH
         export ZSH="/Users/edwardcatterall/.oh-my-zsh"
         export GOOGLE_CLOUD_PROJECT="engineering-sandbox"
         alias docs='cd ~/code/snowplow/documentation'
