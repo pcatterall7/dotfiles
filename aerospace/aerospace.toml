@@ -114,12 +114,12 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-equal = 'resize smart -50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-    alt-s = 'workspace 3' # Slack
-    alt-n = 'workspace 2' # Notion
-    alt-b = 'workspace 1' # Browser
+    alt-1 = 'workspace 1' # Browser
+    alt-2 = 'workspace 2' # Notion
+    alt-3 = 'workspace 3' # Slack
     alt-4 = 'workspace 4' # Spotify
     alt-5 = 'workspace 5'
-    alt-m = 'workspace 6'
+    alt-6 = 'workspace 6'
 
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
