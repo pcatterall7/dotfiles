@@ -15,7 +15,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
-accordion-padding = 100
+accordion-padding = 64
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -114,14 +114,12 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-equal = 'resize smart -50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-    alt-s = 'workspace S' # Slack
-    alt-d = 'workspace D' # Notion
-    alt-a = 'workspace A' # Browser
-    alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
-    alt-3 = 'workspace 3'
-    alt-4 = 'workspace 4'
+    alt-1 = 'workspace 1' # Browser
+    alt-2 = 'workspace 2' # Notion
+    alt-3 = 'workspace 3' # Slack
+    alt-4 = 'workspace 4' # Spotify
     alt-5 = 'workspace 5'
+    alt-6 = 'workspace 6'
 
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -130,9 +128,7 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
     alt-shift-5 = 'move-node-to-workspace 5'
-    alt-shift-a = 'move-node-to-workspace A'
-    alt-shift-s = 'move-node-to-workspace S'
-    alt-shift-d = 'move-node-to-workspace D'
+    alt-shift-6 = 'move-node-to-workspace 6'
 
     # jump between workspaces
     ctrl-alt-left = 'workspace prev'
@@ -180,16 +176,16 @@ automatically-unhide-macos-hidden-apps = false
 
 [[on-window-detected]]
     if.app-id = 'notion.id'
-    run = 'move-node-to-workspace D'
+    run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
-    run = 'move-node-to-workspace S'
+    run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
     if.app-name-regex-substring = 'spotify'
-    run = 'move-node-to-workspace 5'
+    run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
     if.app-id = 'com.google.Chrome'
-    run = 'move-node-to-workspace A'
+    run = 'move-node-to-workspace 1'
