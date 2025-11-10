@@ -3,7 +3,7 @@
 # ====== GENERAL ======
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 export EDITOR=nvim
 # Path to your oh-my-zsh installation.
@@ -29,8 +29,6 @@ case $localhost in
 
         # add ruby and dotfile scripts to my path
         export PATH="/opt/homebrew/opt/ruby/bin:/Users/phil/Library/Python/3.11/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"
-        # add pipx apps to my path
-        export PATH="$HOME/.local/bin:$PATH"
 
         # store secrets in a separate file that's outside of my dotfiles
         source ~/.secrets
@@ -42,8 +40,22 @@ case $localhost in
         export GOOGLE_CLOUD_PROJECT="engineering-sandbox"
         alias docs='cd ~/code/snowplow/documentation'
         export NVM_DIR="$HOME/.nvm"
-        [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-        [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+        # Lazy load nvm - only initialize when actually needed
+        nvm() {
+            unset -f nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            nvm "$@"
+        }
+        node() {
+            unset -f node nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            node "$@"
+        }
+        npm() {
+            unset -f npm nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            npm "$@"
+        }
         ;;
     *)
         echo -n "computer $localhost not recognized"
