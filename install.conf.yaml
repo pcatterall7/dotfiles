@@ -30,3 +30,6 @@
     ~/.config/aerospace:
       path: aerospace
       force: true
+    ~/.emacs.d:
+      path: emacs
+      force: true

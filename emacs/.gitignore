@@ -1,0 +1,10 @@
+elpa/
+melpa/
+eln-cache/
+auto-save-list/
+backups/
+transient/
+url/
+*~
+*.swp
+.#*
