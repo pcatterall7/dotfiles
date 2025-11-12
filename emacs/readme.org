@@ -1,20 +1,86 @@
-# Emacs Readme
+#+OPTIONS: toc:nil num:nil
+
+* Emacs Readme
 
 Updated 2025-11-10
 
 All about my emacs setup.
 
-## Todo
+** Todo
 
-- [ ] finish lisp tutorial
-- [ ] look into evil mode
-- [ ] watch this video on org mode: https://www.youtube.com/watch?v=SzA2YODtgK4
-- [ ] add a file explorer
-- [ ] set default tab width to 4
-- [ ] remap the redo key, which is currently overriden with em and en dashes
+*** DONE watch this video on org mode: https://www.youtube.com/watch?v=SzA2YODtgK4
+*** TODO finish lisp tutorial
+[[https://www.gnu.org/software/emacs/manual/html_node/eintr/Point-and-mark.html][Current location]]
+*** TODO learn how to use dired
+*** TODO look into evil mode
+*** TODO add a file explorer
+*** TODO set default tab width to 4
+*** TODO remap the redo key, which is currently overriden with em and en dashes
+*** TODO look into the sensible defaults package
+*** TODO look into org-inlinetask library
 
-## Helpful keymaps
+** Helpful keymaps
 
-- `C-x 1` - close other windows
-- `C-x 0` - close current window
-- `C-l` - move screen so cursor is in the middle 
+*** Windows and buffers
+
+- ~C-x 1~ - close other windows
+- ~C-x 0~ - close current window
+- ~M-o~ - switch to other open window
+- ~C-x C-b~ - list buffers
+- ~C-x b~ - goto buffer
+
+*** Navigation
+
+- ~C-l~ - move screen so cursor is in the middle
+
+*** Killing and yanking
+
+** Org mode
+
+*** Navigating the outline
+
+- ~C-c C-j~ to open an outline. Press ~RET~ to jump to that heading.
+- ~C-c C-f~ - forward to next heading
+- ~C-c C-b~ - back to previous heading
+- ~C-x n s~ - narrow to subtree
+- ~C-x n w~ - widen to full file
+- ~M->~ and ~M-<~ - go to top or bottom of buffer
+  
+*** Links
+
+Supports regular links with hiding: [[https://docs.snowplow.io][Snowplow Docs]]
+and headers [[*Helpful keymaps]] as well as other files.
+
+Press ~C-c C-l~ to open the interactive link prompt
+
+*** Exporting to other formats
+
+~C-c C-e~ to open the menu of options. Supports exporting a subtree, which promotes headers to their relative hierarchy within the subtree.
+
+I can probably write a custom exporter to get the exact Gmail format I need.
+
+To remove table of contents and numbered headings from the export, use ~#+OPTIONS~:
+
+#+BEGIN_SRC
+#+OPTIONS: toc:nil num:nil 
+#+END_SRC
+
+*** Source code
+
+Source code blocks look like this:
+
+#+BEGIN_SRC emacs-lisp
+  (print org-inlinetask-min-level)
+#+END_SRC
+~C-c '~ to open the source code block in that language's major mode
+
+~C-c C-c~ to run code directly in the file. I could see this being useful for what I use notepad calculators for.
+
+**** TODO add the shortcut to add a block using ~<S<TAB>~
+
+*** Todos
+
+I probably won't use this much given I'm just trying to replicate my workflowy setup for now
+
+~C-c C-t~ - cycle todo states
+

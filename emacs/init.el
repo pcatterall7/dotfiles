@@ -9,7 +9,7 @@
      "4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d"
      "f4bef5a6d77ac9c9ab34382f380aba922dd91901d0d43886a5f99106041bb8e0"
      default))
- '(package-selected-packages '(doom-themes markdown-mode)))
+ '(package-selected-packages '(doom-themes markdown-mode org-appear)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -21,10 +21,20 @@
 (global-set-key (kbd "M-_") (lambda () (interactive) (insert "—")))
 (global-set-key (kbd "M--") (lambda () (interactive) (insert "–")))
 
+;; UI STUFF
+
 ;; default to visual line wrapping at word boundaries
 (global-visual-line-mode 1)
+
+;; ORG
+
 ;; disable having to confirm every code eval in org
 (setq org-confirm-babel-evaluate nil)
+;; hide emphasis markers
+(setq org-hide-emphasis-markers t)
+;; Show hidden emphasis markers
+(use-package org-appear
+  :hook (org-mode . org-appear-mode))
 
 ;; KEYBINDINGS
 
