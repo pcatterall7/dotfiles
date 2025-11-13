@@ -167,7 +167,7 @@ automatically-unhide-macos-hidden-apps = false
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
 
-# finder and messages should always float
+# finder, 1password, font book, and messages should always float
 [[on-window-detected]]
 	if.app-name-regex-substring = 'finder'
 	run = 'layout floating'
@@ -175,6 +175,14 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
 	if.app-name-regex-substring = 'messages'
 	run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.1password.1password'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.FontBook'
+    run = 'layout floating'
 
 [[on-window-detected]]
     if.app-id = 'notion.id'
