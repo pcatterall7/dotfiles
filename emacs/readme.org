@@ -16,6 +16,7 @@ All about my emacs setup.
 *** DONE look into evil mode
 *** DONE add a file explorer
 *** DONE set default tab width to 4
+
 ** Helpful keymaps
 
 *** Windows and buffers
@@ -32,6 +33,10 @@ All about my emacs setup.
 
 *** Killing and yanking
 
+** Inspiration
+
+- [[https://explog.in/notes/writingsetup.html][My Writing Setup]] - sensible org defaults for writing prose
+  
 ** Org mode
 
 *** Navigating the outline
@@ -73,11 +78,9 @@ Source code blocks look like this:
 
 ~C-c C-c~ to run code directly in the file. I could see this being useful for what I use notepad calculators for.
 
-**** TODO add the shortcut to add a block using ~<S<TAB>~
-
 *** Todos
 
-I probably won't use this much given I'm just trying to replicate my workflowy setup for now
+I probably won't use this much given I'm just trying to replicate my workflowy setup for now.
 
 ~C-c C-t~ - cycle todo states
 
