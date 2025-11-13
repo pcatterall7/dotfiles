@@ -320,6 +320,15 @@ Enable visual line wrapping at word boundaries for better prose editing.
 (global-visual-line-mode 1)
 #+end_src
 
+** Startup
+
+Skip the splash screen and hide the toolbar
+
+#+begin_src emacs-lisp
+  (setq inhibit-splash-screen t)
+  (tool-bar-mode -1)
+#+end_src
+
 * Org Mode Configuration
 
 ** Core Settings
@@ -335,7 +344,7 @@ Basic org-mode configuration for note-taking and writing.
 
 *** TODO Create a command to go to today
 *** TODO Install =org-inlinetask= 
-*** TODO Get rid of the launch page
+*** DONE Get rid of the launch page
 *** TODO Add any custom keybindings from nvim
 *** TODO Update keybindings in readme
 - ~gj/gk~ - next/previous heading (same level)
