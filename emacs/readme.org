@@ -8,17 +8,14 @@ All about my emacs setup.
 
 ** Todo
 
-*** DONE watch this video on org mode: https://www.youtube.com/watch?v=SzA2YODtgK4
-*** TODO finish lisp tutorial
-[[https://www.gnu.org/software/emacs/manual/html_node/eintr/Point-and-mark.html][Current location]]
+*** TODO finish lisp tutorial ([[https://www.gnu.org/software/emacs/manual/html_node/eintr/Point-and-mark.html][Current location]])
 *** TODO learn how to use dired
-*** DONE look into evil mode
-*** TODO add a file explorer
-*** TODO set default tab width to 4
-*** TODO remap the redo key, which is currently overriden with em and en dashes
 *** TODO look into the sensible defaults package
-*** TODO look into org-inlinetask library
-
+*** CANCELED remap the redo key, which is currently overriden with em and en dashes
+*** DONE watch this video on org mode: https://www.youtube.com/watch?v=SzA2YODtgK4
+*** DONE look into evil mode
+*** DONE add a file explorer
+*** DONE set default tab width to 4
 ** Helpful keymaps
 
 *** Windows and buffers

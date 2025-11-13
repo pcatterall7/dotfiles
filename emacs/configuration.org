@@ -1,0 +1,344 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Philip Catterall
+#+PROPERTY: header-args :tangle yes
+
+* Introduction
+
+This is a literate Emacs configuration optimized for note-taking and prose writing with vim keybindings. It provides:
+
+- Vim keybindings via Evil mode
+- Space leader key with command discovery
+- Modern completion interface (Vertico)
+- Org mode and Markdown support
+
+* Font Configuration
+
+Set the default font
+
+#+begin_src emacs-lisp
+(set-frame-font "Fira Mono-15" nil t)
+#+end_src
+
+* Custom Variables
+
+Emacs automatically maintains this section for custom variables set through the UI.
+
+#+begin_src emacs-lisp
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+     "4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d"
+     "f4bef5a6d77ac9c9ab34382f380aba922dd91901d0d43886a5f99106041bb8e0"
+     default))
+ '(package-selected-packages
+   '(doom-themes markdown-mode org-appear
+     evil evil-collection which-key
+     vertico orderless marginalia consult general)))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+#+end_src
+
+* Package Management
+
+** Setup Package Archives
+
+Add MELPA to package sources and initialize the package system.
+
+#+begin_src emacs-lisp
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+#+end_src
+
+** Bootstrap use-package
+
+Ensure =use-package= is installed, as we use it to manage all other packages.
+
+#+begin_src emacs-lisp
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+#+end_src
+
+* Evil Mode (Vim Keybindings)
+
+** Evil Core
+
+Evil mode brings vim's modal editing to Emacs. We configure it before loading to ensure proper integration.
+
+#+begin_src emacs-lisp
+(use-package evil
+  :ensure t
+  :init
+  ;; These settings must be set before evil loads
+  (setq evil-want-integration t)        ; Enable evil integration with other packages
+  (setq evil-want-keybinding nil)       ; Let evil-collection handle keybindings
+  (setq evil-undo-system 'undo-redo)    ; Use Emacs 28+ undo system
+  (setq evil-want-C-u-scroll t)         ; Ctrl-u scrolls up (vim behavior)
+  :config
+  (evil-mode 1))
+#+end_src
+
+** Evil Collection
+
+Evil-collection provides vim keybindings for many Emacs modes that don't come with Evil by default.
+
+#+begin_src emacs-lisp
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :config
+  (evil-collection-init))
+#+end_src
+
+* Command Discovery
+
+** Which-key
+
+Which-key shows available keybindings in a popup after you press a prefix key (like Space).
+
+#+begin_src emacs-lisp
+(use-package which-key
+  :ensure t
+  :init
+  (setq which-key-idle-delay 0.2)       ; Show popup after 0.2 seconds
+  (setq which-key-popup-type 'minibuffer) ; Show in minibuffer
+  :config
+  (which-key-mode 1))
+#+end_src
+
+* Completion System
+
+Modern completion interface using Vertico and friends. This provides the Doom-like file navigation experience.
+
+** Vertico
+
+Vertico provides a vertical completion UI in the minibuffer.
+
+#+begin_src emacs-lisp
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode 1)
+  :config
+  (setq vertico-cycle t))  ; Cycle through completion options
+#+end_src
+
+** Orderless
+
+Orderless allows flexible fuzzy matching with space-separated search terms.
+
+#+begin_src emacs-lisp
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
+#+end_src
+
+** Marginalia
+
+Marginalia adds helpful annotations to completion candidates (like file sizes, dates, etc.).
+
+#+begin_src emacs-lisp
+(use-package marginalia
+  :ensure t
+  :init
+  (marginalia-mode 1))
+#+end_src
+
+** Consult
+
+Consult provides enhanced versions of common Emacs commands with better previews and searching.
+
+#+begin_src emacs-lisp
+(use-package consult
+  :ensure t
+  :bind (
+         ("C-x b" . consult-buffer)     ; Better buffer switching
+         ("C-x 4 b" . consult-buffer-other-window)
+         ("M-y" . consult-yank-pop)))   ; Better yank (paste) history
+#+end_src
+
+* Leader Key Configuration
+
+** Custom functions
+
+Open this file
+
+#+begin_src emacs-lisp
+  (defun my/open-config ()
+    "Open configuration.org"
+    (interactive)
+    (find-file (expand-file-name "configuration.org" user-emacs-directory)))
+#+end_src
+
+Navigate to the latest week list
+#+begin_src emacs-lisp
+  (defun my/narrow-to-week-list ()
+  "Narrow to the first sub-heading under the top-level 'Week lists' heading."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (if (re-search-forward "^\\* Week Lists$" nil t)
+        (progn
+          (org-narrow-to-subtree)
+          (forward-line 1)
+          (if (re-search-forward "^\\*\\* " nil t)
+              (progn
+                (beginning-of-line)
+                (org-narrow-to-subtree))
+            (message "No sub-heading found under 'Week Lists'")))
+      (message "No 'Week Lists' heading found"))))
+#+end_src
+
+** General.el Setup
+
+General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
+
+#+begin_src emacs-lisp
+  (use-package general
+    :ensure t
+    :config
+    (general-create-definer my-leader-def
+      :states '(normal visual emacs)
+      :keymaps 'override
+      :prefix "SPC")
+
+    (my-leader-def
+      ;; File operations
+      "f" '(:ignore t :which-key "files")
+      "ff" '(find-file :which-key "find file")
+      "fr" '(consult-recent-file :which-key "recent files")
+      "fs" '(save-buffer :which-key "save file")
+      "fS" '(write-file :which-key "save as")
+      "fc" '(my/open-config :which-key "open emacs config file")
+
+      ;; Buffer operations
+      "b" '(:ignore t :which-key "buffers")
+      "bb" '(consult-buffer :which-key "switch buffer")
+      "bd" '(kill-current-buffer :which-key "kill buffer")
+      "bn" '(next-buffer :which-key "next buffer")
+      "bp" '(previous-buffer :which-key "previous buffer")
+
+      ;; Window operations
+      "w" '(:ignore t :which-key "windows")
+      "ww" '(other-window :which-key "other window")
+      "wd" '(delete-window :which-key "delete window")
+      "ws" '(split-window-below :which-key "split horizontal")
+      "wv" '(split-window-right :which-key "split vertical")
+
+      ;; Search operations
+      "s" '(:ignore t :which-key "search")
+      "ss" '(consult-line :which-key "search line")
+      "sg" '(consult-grep :which-key "grep")
+
+      ;; Org mode
+      "o" '(:ignore t :which-key "org")
+      "oo" '(consult-outline :which-key "outline")
+      "og" '(org-goto :which-key "go to")
+      "on" '(org-narrow-to-subtree :which-key "narrow to subtree")
+      "oN" '(widen :which-key "widen")
+      "ow" '(my/narrow-to-week-list :which-key "go to week list")
+
+      ;; Utility
+      "SPC" '(execute-extended-command :which-key "M-x")
+      "q" '(:ignore t :which-key "quit")
+      "qq" '(save-buffers-kill-terminal :which-key "quit emacs")
+      "h" '(:ignore t :which-key "help")
+      "hf" '(describe-function :which-key "describe function")
+      "hv" '(describe-variable :which-key "describe variable")
+      "hk" '(describe-key :which-key "describe key")))
+#+end_src
+
+* Themes
+
+** Theme Configuration
+
+Load custom themes and set up automatic theme switching based on macOS appearance.
+
+#+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
+(defun adjust-light-dark-theme ()
+  "Automatically adjust theme based on macOS appearance."
+  (let ((appearance (shell-command-to-string "defaults read -g AppleInterfaceStyle")))
+    (if (string-match-p "Dark" appearance)
+        (load-theme 'doom-tokyo-night t)
+      (load-theme 'doom-homage-white t))))
+
+(defalias 'theme-sync 'adjust-light-dark-theme)
+#+end_src
+
+** Doom Themes
+
+Doom themes provides a collection of beautiful, well-designed themes.
+
+#+begin_src emacs-lisp
+(use-package doom-themes
+  :ensure t
+  :custom
+  (doom-themes-enable-bold t)
+  (doom-themes-enable-italic t)
+  (doom-themes-treemacs-theme "doom-atom")
+  :config
+  (adjust-light-dark-theme)
+  (doom-themes-visual-bell-config)
+  (doom-themes-neotree-config)
+  (doom-themes-treemacs-config)
+  (doom-themes-org-config))
+#+end_src
+
+* Typography
+
+** Special Characters
+
+Fix the keybindings for inserting en-dashes and em-dashes back to the mac defaults.
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "M-_") (lambda () (interactive) (insert "—")))
+(global-set-key (kbd "M--") (lambda () (interactive) (insert "–")))
+#+end_src
+
+* UI Configuration
+
+** Visual Line Mode
+
+Enable visual line wrapping at word boundaries for better prose editing.
+
+#+begin_src emacs-lisp
+(global-visual-line-mode 1)
+#+end_src
+
+* Org Mode Configuration
+
+** Core Settings
+
+Basic org-mode configuration for note-taking and writing.
+
+#+begin_src emacs-lisp
+  (setq org-confirm-babel-evaluate nil)  ; Don't ask before evaluating code blocks
+  (setq org-hide-emphasis-markers t)     ; Hide markup characters like * and /
+  (use-package org-appear                ; Show hidden emphasis markers on hover
+    :hook (org-mode . org-appear-mode))
+#+end_src
+
+*** TODO Create a command to go to today
+*** TODO Install =org-inlinetask= 
+*** TODO Get rid of the launch page
+*** TODO Add any custom keybindings from nvim
+*** TODO Update keybindings in readme
+- ~gj/gk~ - next/previous heading (same level)
+- ~gh/gl~ - parent/first child heading
+- ~]]/[[~ - next/previous heading (any level)
+  
