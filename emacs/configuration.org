@@ -16,8 +16,10 @@ This is a literate Emacs configuration optimized for note-taking and prose writi
 Set the default font
 
 #+begin_src emacs-lisp
-(set-frame-font "Fira Mono-15" nil t)
+(set-frame-font "IBM Plex Mono-15" nil t)
 #+end_src
+
+#+RESULTS:
 
 * Custom Variables
 
@@ -98,6 +100,22 @@ Evil-collection provides vim keybindings for many Emacs modes that don't come wi
   :after evil
   :config
   (evil-collection-init))
+#+end_src
+
+** Key Bindings
+
+j/k should move by visual line in both normal and visual modes. H/L should move to the start and end of visual lines.
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil-collection
+    (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
+    (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
+    (define-key evil-visual-state-map (kbd "H") 'evil-beginning-of-visual-line)
+    (define-key evil-visual-state-map (kbd "L") 'evil-end-of-visual-line)
+    (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+    (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+    (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-visual-line)
+    (define-key evil-normal-state-map (kbd "L") 'evil-end-of-visual-line))
 #+end_src
 
 * Command Discovery
@@ -183,23 +201,42 @@ Open this file
     (find-file (expand-file-name "configuration.org" user-emacs-directory)))
 #+end_src
 
-Navigate to the latest week list
+Go to the latest week list
 #+begin_src emacs-lisp
   (defun my/narrow-to-week-list ()
-  "Narrow to the first sub-heading under the top-level 'Week lists' heading."
-  (interactive)
-  (save-excursion
+    "Narrow to the first sub-heading under the top-level 'Week lists' heading."
+    (interactive)
+    (widen)
     (goto-char (point-min))
     (if (re-search-forward "^\\* Week Lists$" nil t)
         (progn
-          (org-narrow-to-subtree)
-          (forward-line 1)
-          (if (re-search-forward "^\\*\\* " nil t)
+  	(org-narrow-to-subtree)
+  	(forward-line 1)
+  	(if (re-search-forward "^\\*\\* " nil t)
+  	    (progn
+  	      (beginning-of-line)
+  	      (org-narrow-to-subtree))
+  	  (message "No sub-heading found under 'Week Lists'")))
+      (message "No 'Week Lists' heading found")))
+#+end_src
+
+Go to today
+#+begin_src emacs-lisp
+(defun my/narrow-to-today-working-memory ()
+  "Narrow to the level 2 heading under 'Working Memory' that contains today's date."
+  (interactive)
+  (widen)
+  (goto-char (point-min))
+  (let ((today (format-time-string "%Y-%m-%d")))
+    (if (re-search-forward "^\\* Working Memory$" nil t)
+        (let ((subtree-end (save-excursion (org-end-of-subtree t t))))
+          (if (re-search-forward (concat "^\\*\\* .*" (regexp-quote today)) subtree-end t)
               (progn
                 (beginning-of-line)
-                (org-narrow-to-subtree))
-            (message "No sub-heading found under 'Week Lists'")))
-      (message "No 'Week Lists' heading found"))))
+                (org-narrow-to-subtree)
+                (goto-char (point-min)))
+            (message "No heading with today's date (%s) found under 'Working Memory'" today)))
+      (message "No 'Working Memory' heading found"))))
 #+end_src
 
 ** General.el Setup
@@ -235,6 +272,7 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "w" '(:ignore t :which-key "windows")
       "ww" '(other-window :which-key "other window")
       "wd" '(delete-window :which-key "delete window")
+      "wo" '(delete-other-windows :which-key "delete other windows")
       "ws" '(split-window-below :which-key "split horizontal")
       "wv" '(split-window-right :which-key "split vertical")
 
@@ -242,6 +280,8 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "s" '(:ignore t :which-key "search")
       "ss" '(consult-line :which-key "search line")
       "sg" '(consult-grep :which-key "grep")
+      "sr" '(replace-string :which-key "replace string")
+      "sR" '(replace-regexp :which-key "replace regexp")
 
       ;; Org mode
       "o" '(:ignore t :which-key "org")
@@ -250,6 +290,7 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "on" '(org-narrow-to-subtree :which-key "narrow to subtree")
       "oN" '(widen :which-key "widen")
       "ow" '(my/narrow-to-week-list :which-key "go to week list")
+      "ot" '(my/narrow-to-today-working-memory :which-key "go to today")
 
       ;; Utility
       "SPC" '(execute-extended-command :which-key "M-x")
@@ -268,16 +309,15 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
 Load custom themes and set up automatic theme switching based on macOS appearance.
 
 #+begin_src emacs-lisp
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
-(defun adjust-light-dark-theme ()
-  "Automatically adjust theme based on macOS appearance."
-  (let ((appearance (shell-command-to-string "defaults read -g AppleInterfaceStyle")))
-    (if (string-match-p "Dark" appearance)
-        (load-theme 'doom-tokyo-night t)
-      (load-theme 'doom-homage-white t))))
-
-(defalias 'theme-sync 'adjust-light-dark-theme)
+  (defun adjust-light-dark-theme ()
+    "Automatically adjust theme based on macOS appearance."
+    (interactive)
+    (let ((appearance (shell-command-to-string "defaults read -g AppleInterfaceStyle")))
+      (if (string-match-p "Dark" appearance)
+          (load-theme 'doom-tokyo-night t)
+        (load-theme 'doom-homage-white t))))
 #+end_src
 
 ** Doom Themes
@@ -312,12 +352,30 @@ Fix the keybindings for inserting en-dashes and em-dashes back to the mac defaul
 
 * UI Configuration
 
-** Visual Line Mode
+** Wrapping, line height, etc
 
 Enable visual line wrapping at word boundaries for better prose editing.
 
 #+begin_src emacs-lisp
 (global-visual-line-mode 1)
+#+end_src
+
+Adjust the line height
+#+begin_src emacs-lisp
+  (setq-default line-spacing 0.2)
+#+end_src
+
+** Olivetti
+
+Olivetti wraps and centers text on the screen past a certain body width
+
+#+begin_src emacs-lisp
+  (use-package olivetti
+    :ensure t
+    :hook ((org-mode . olivetti-mode)
+  	 (markdown-mode . olivetti-mode))
+    :config
+    (setq olivetti-body-width 100))
 #+end_src
 
 ** Startup
@@ -342,12 +400,43 @@ Basic org-mode configuration for note-taking and writing.
     :hook (org-mode . org-appear-mode))
 #+end_src
 
-*** TODO Create a command to go to today
-*** TODO Install =org-inlinetask= 
-*** DONE Get rid of the launch page
-*** TODO Add any custom keybindings from nvim
-*** TODO Update keybindings in readme
+** Heading formatting
+
+I think it looks better when only H1 and H2 headers are bold.
+
+#+begin_src emacs-lisp 
+  (custom-set-faces
+   '(org-level-1 ((t (:inherit outline-1 :weight bold))))
+   '(org-level-2 ((t (:inherit outline-2 :weight bold))))
+   '(org-level-3 ((t (:inherit outline-3 :weight normal))))
+   '(org-level-4 ((t (:inherit outline-4 :weight normal))))
+   '(org-level-5 ((t (:inherit outline-5 :weight normal))))
+   '(org-level-6 ((t (:inherit outline-6 :weight normal))))
+   '(org-level-7 ((t (:inherit outline-7 :weight normal))))
+   '(org-level-8 ((t (:inherit outline-8 :weight normal))))
+   '(link ((t (:weight normal)))))
+#+end_src
+
+* gptel
+
+*** TODO get this working
+# https://github.com/karthink/gptel?tab=readme-ov-file#manual
+# #+begin_src emacs-lisp
+#   (use-package gptel
+#     :ensure t
+#     :config
+#     (gptel-make-anthropic "Claude"          ;Any name you want
+# 	:stream t                           ;Streaming responses
+# 	:key (getenv "ANTHROPIC_API_KEY")))
+# #+end_src
+
+* To do
+** TODO Update keybindings in readme
 - ~gj/gk~ - next/previous heading (same level)
 - ~gh/gl~ - parent/first child heading
 - ~]]/[[~ - next/previous heading (any level)
-  
+- ~z c~ - collapse fold
+- ~z o~ - open fold
+** TODO on my work computer, load snowplow.org by default 
+** TODO use =org-indent-mode= by default
+** TODO figure out how do to git in here (magit)
