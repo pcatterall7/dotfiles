@@ -16,7 +16,7 @@ This is a literate Emacs configuration optimized for note-taking and prose writi
 Set the default font
 
 #+begin_src emacs-lisp
-(set-frame-font "Fira Mono-15" nil t)
+(set-frame-font "IBM Plex Mono-15" nil t)
 #+end_src
 
 * Custom Variables
