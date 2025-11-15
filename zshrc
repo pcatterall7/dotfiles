@@ -5,7 +5,7 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
-export EDITOR=nvim
+export EDITOR="emacsclient -t -a ''"
 # Path to your oh-my-zsh installation.
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -72,6 +72,10 @@ lfcd () {
 }
 
 alias lf='lfcd'
+
+# emacs
+alias e='emacsclient -t'           # Terminal emacs
+alias ec='emacsclient -c'          # GUI emacs
 
 # make a directory, then cd into it.
 mkcd () {
