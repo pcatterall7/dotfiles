@@ -409,6 +409,7 @@ Basic org-mode configuration for note-taking and writing.
   (use-package org
     :demand t
     :config
+    (require 'ox-md)
     (setq org-confirm-babel-evaluate nil)
     (setq org-hide-emphasis-markers t)
     (org-indent-mode t))
@@ -476,9 +477,10 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
 - [ ] figure out how do to git in here (magit)
 - [ ] Learn how to manage files
 - [ ] Autocomplete for links to headings
-- [ ] Clean up the bottom bar
+- [ ] Make the mode bar nicer
 - [ ] Add line numbers for non-markdown and non-org modes (and maybe fundamental?)
 - [ ] Fix olivetti and <tab> not working correctly in terminal mode
+- [ ] Add a nicer html export theme ([[https://aliquote.org/post/org-workflow/][github example]])
 
 *** Keybindings to add
 
