@@ -269,6 +269,10 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "oi" '(org-insert-structure-template :which-key "insert block")
       "ol" '(org-insert-link :which-key "insert link")
 
+      ;; GPTel
+      "a" '(:ignore t :which-key "gptel")
+      "ai" '(gptel :which-key "open gptel")
+
       ;; Utility
       "SPC" '(execute-extended-command :which-key "M-x")
       "q" '(:ignore t :which-key "quit")
@@ -450,8 +454,10 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
     (setq gptel-model 'claude-haiku-4-5-20251001
 	gptel-backend (gptel-make-anthropic "Claude"
 			:stream t
-			:key (getenv "ANTHROPIC_API_KEY"))))
+			:key (getenv "ANTHROPIC_API_KEY"))
+	gptel-default-mode 'org-mode))
 #+end_src
+
 
 * Tasks
 
