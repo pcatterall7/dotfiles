@@ -307,9 +307,17 @@ Load custom themes and set up automatic theme switching based on macOS appearanc
     (interactive)
     (let ((appearance (shell-command-to-string "defaults read -g AppleInterfaceStyle")))
       (if (string-match-p "Dark" appearance)
-          (load-theme 'doom-tokyo-night t)
-        (load-theme 'doom-homage-white t))))
+	(progn
+	  (mapc #'disable-theme custom-enabled-themes)
+	  (load-theme 'doom-tokyo-night t))
+	(progn
+	  (mapc #'disable-theme custom-enabled-themes)
+	  (load-theme 'doom-homage-white t)))))
 #+end_src
+
+#+RESULTS:
+: adjust-light-dark-theme
+
 
 *** Doom Themes
 
@@ -479,3 +487,4 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
 - ~]]/[[~ - next/previous heading (any level)
 - ~z c~ - collapse fold
 - ~z o~ - open fold
+  
