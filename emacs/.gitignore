@@ -6,6 +6,8 @@ backups/
 transient/
 url/
 configuration.el
+bookmarks
+recentf
 *~
 *.swp
 .#*
