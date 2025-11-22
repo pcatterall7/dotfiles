@@ -96,9 +96,7 @@ j/k should move by visual line in both normal and visual modes. H/L should move 
 #+end_src
 
 ** Command Discovery
-
 *** Which-key
-
 Which-key shows available keybindings in a popup after you press a prefix key (like Space).
 
 #+begin_src emacs-lisp
@@ -112,7 +110,6 @@ Which-key shows available keybindings in a popup after you press a prefix key (l
 #+end_src
 
 ** Completion System
-
 Modern completion interface using Vertico and friends. This provides the Doom-like file navigation experience.
 
 *** Vertico
@@ -165,8 +162,7 @@ Consult provides enhanced versions of common Emacs commands with better previews
 ** Leader Key Configuration
 
 *** Custom functions
-
-Open this file
+Open my config file
 
 #+begin_src emacs-lisp
   (defun my/open-config ()
@@ -175,22 +171,30 @@ Open this file
     (find-file (expand-file-name "configuration.org" user-emacs-directory)))
 #+end_src
 
+#+begin_src emacs-lisp
+  (defun my/reload-config ()
+    "Reload configuration.org file"
+    (interactive)
+    (org-babel-load-file (expand-file-name "configuration.org" user-emacs-directory)))
+#+end_src
+
 Go to the latest week list
+
 #+begin_src emacs-lisp
   (defun my/narrow-to-week-list ()
-    "Narrow to the first sub-heading under the top-level 'Week lists' heading."
+    "Narrow to the first sub-heading under the top-level 'Week Lists' heading."
     (interactive)
     (widen)
     (goto-char (point-min))
     (if (re-search-forward "^\\* Week Lists$" nil t)
-        (progn
-  	(org-narrow-to-subtree)
-  	(forward-line 1)
-  	(if (re-search-forward "^\\*\\* " nil t)
-  	    (progn
-  	      (beginning-of-line)
-  	      (org-narrow-to-subtree))
-  	  (message "No sub-heading found under 'Week Lists'")))
+        (let ((subtree-end (save-excursion (org-end-of-subtree t t))))
+          (if (re-search-forward "^\\*\\* " subtree-end t)
+              (progn
+                (beginning-of-line)
+                (org-narrow-to-subtree)
+  	      (org-show-subtree)
+                (goto-char (point-min)))
+            (message "No sub-heading found under 'Week Lists'")))
       (message "No 'Week Lists' heading found")))
 #+end_src
 
@@ -292,9 +296,7 @@ Automatically refresh buffers if there are changes to the file on disk
 #+end_src
 
 * Appearance & UI
-
 ** Themes
-
 *** Theme Configuration
 
 Load custom themes and set up automatic theme switching based on macOS appearance.
@@ -302,22 +304,25 @@ Load custom themes and set up automatic theme switching based on macOS appearanc
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
-  (defun adjust-light-dark-theme ()
+  (defun toggle-light-dark-theme ()
     "Automatically adjust theme based on macOS appearance."
     (interactive)
     (let ((appearance (shell-command-to-string "defaults read -g AppleInterfaceStyle")))
       (if (string-match-p "Dark" appearance)
 	(progn
 	  (mapc #'disable-theme custom-enabled-themes)
-	  (load-theme 'doom-tokyo-night t))
+	  (load-theme 'modus-vivendi t))
 	(progn
 	  (mapc #'disable-theme custom-enabled-themes)
 	  (load-theme 'doom-homage-white t)))))
 #+end_src
 
-#+RESULTS:
-: adjust-light-dark-theme
+# Make the fringe invisible when using modus themes
 
+#+begin_src emacs-lisp
+  (setq modus-themes-common-palette-overrides
+	'((fringe unspecified)))
+#+end_src
 
 *** Doom Themes
 
@@ -331,7 +336,7 @@ Doom themes provides a collection of beautiful, well-designed themes.
   (doom-themes-enable-italic t)
   (doom-themes-treemacs-theme "doom-atom")
   :config
-  (adjust-light-dark-theme)
+  (toggle-light-dark-theme)
   (doom-themes-visual-bell-config)
   (doom-themes-neotree-config)
   (doom-themes-treemacs-config)
@@ -339,7 +344,6 @@ Doom themes provides a collection of beautiful, well-designed themes.
 #+end_src
 
 ** Typography & Fonts
-
 *** Font Configuration
 
 Set the default font for all frames (including daemon mode)
@@ -360,7 +364,6 @@ Fix the keybindings for inserting en-dashes and em-dashes back to the mac defaul
 #+end_src
 
 ** Visual Settings
-
 *** Wrapping and Line Height
 
 Enable visual line wrapping at word boundaries for better prose editing.
@@ -372,6 +375,18 @@ Enable visual line wrapping at word boundaries for better prose editing.
 Adjust the line height
 #+begin_src emacs-lisp
   (setq-default line-spacing 0.2)
+#+end_src
+
+*** Line numbers
+Add line numbers for all modes except org, markdown, and plain text
+
+#+begin_src emacs-lisp
+  (global-display-line-numbers-mode 1)
+
+  (dolist (mode '(org-mode-hook
+		  markdown-mode-hook
+		  text-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
 
 *** Olivetti
@@ -426,7 +441,7 @@ I think it looks better when only H1 and H2 headers are bold. Also, make links r
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :weight bold))))
    '(org-level-2 ((t (:inherit outline-2 :weight bold))))
-   '(org-level-3 ((t (:inherit outline-3 :weight normal))))
+   '(org-level-3 ((t (:inherit outline-3 :weight bold))))
    '(org-level-4 ((t (:inherit outline-4 :weight normal))))
    '(org-level-5 ((t (:inherit outline-5 :weight normal))))
    '(org-level-6 ((t (:inherit outline-6 :weight normal))))
@@ -467,7 +482,6 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
 	gptel-default-mode 'org-mode))
 #+end_src
 
-
 * Tasks
 
 - [ ] Update keybindings in readme
@@ -478,7 +492,7 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
 - [ ] Learn how to manage files
 - [ ] Autocomplete for links to headings
 - [ ] Make the mode bar nicer
-- [ ] Add line numbers for non-markdown and non-org modes (and maybe fundamental?)
+- [x] Add line numbers for non-markdown and non-org modes (and maybe fundamental?)
 - [ ] Fix olivetti and <tab> not working correctly in terminal mode
 - [ ] Add a nicer html export theme ([[https://aliquote.org/post/org-workflow/][github example]])
 
