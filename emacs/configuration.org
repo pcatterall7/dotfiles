@@ -295,6 +295,16 @@ Automatically refresh buffers if there are changes to the file on disk
   (global-auto-revert-mode 1)
 #+end_src
 
+Put all backup files in a single place. Copied from [[https://www.reddit.com/r/emacs/comments/azyrsr/what_are_the_files_emacs_creates_when_i_make/][this Reddit thread]].
+#+begin_src emacs-lisp
+  (setq backup-directory-alist `(("." . "~/.saves")))
+  (setq backup-by-copying t)
+  (setq delete-old-versions t
+	kept-new-versions 6
+	kept-old-versions 2
+	version-control t) 
+#+end_src
+
 * Appearance & UI
 ** Themes
 *** Theme Configuration
@@ -317,11 +327,13 @@ Load custom themes and set up automatic theme switching based on macOS appearanc
 	  (load-theme 'doom-homage-white t)))))
 #+end_src
 
-# Make the fringe invisible when using modus themes
+Make the fringe invisible and top border place nice with [[*Mode Line][Moody]] when using modus themes:
 
 #+begin_src emacs-lisp
   (setq modus-themes-common-palette-overrides
-	'((fringe unspecified)))
+	'((fringe unspecified)
+	(border-mode-line-active unspecified)
+	(border-mode-line-inactive unspecified)))
 #+end_src
 
 *** Doom Themes
@@ -341,6 +353,27 @@ Doom themes provides a collection of beautiful, well-designed themes.
   (doom-themes-neotree-config)
   (doom-themes-treemacs-config)
   (doom-themes-org-config))
+#+end_src
+
+** Mode Line
+Use [[https://github.com/tarsius/moody][Moody]] to make the mode line prettier (EDIT: currently not using it)
+
+#+begin_src emacs-lisp
+  ;; (use-package moody
+  ;;   :config
+  ;;   (moody-replace-mode-line-front-space)
+  ;;   (moody-replace-mode-line-buffer-identification)
+  ;;   (moody-replace-vc-mode)) 
+
+#+end_src
+
+And use Minions to hide all the minor modes
+
+#+begin_src emacs-lisp
+    (use-package minions
+      :ensure t
+      :config (minions-mode 1)
+      (setq minions-mode-line-lighter "…"))
 #+end_src
 
 ** Typography & Fonts
@@ -375,6 +408,12 @@ Enable visual line wrapping at word boundaries for better prose editing.
 Adjust the line height
 #+begin_src emacs-lisp
   (setq-default line-spacing 0.2)
+#+end_src
+
+Prefer vertical splits when new windows open, if there's room
+#+begin_src emacs-lisp
+  (setq split-height-threshold nil)
+  (setq split-width-threshold 80)
 #+end_src
 
 *** Line numbers
