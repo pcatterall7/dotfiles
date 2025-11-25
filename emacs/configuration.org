@@ -84,16 +84,20 @@ Evil-collection provides vim keybindings for many Emacs modes that don't come wi
 j/k should move by visual line in both normal and visual modes. H/L should move to the start and end of visual lines.
 
 #+begin_src emacs-lisp
-  (with-eval-after-load 'evil-collection
-    (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
-    (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
-    (define-key evil-visual-state-map (kbd "H") 'evil-beginning-of-visual-line)
-    (define-key evil-visual-state-map (kbd "L") 'evil-end-of-visual-line)
-    (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-    (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-    (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-visual-line)
-    (define-key evil-normal-state-map (kbd "L") 'evil-end-of-visual-line))
+      (with-eval-after-load 'evil-collection
+        (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
+        (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
+        (define-key evil-visual-state-map (kbd "H") 'evil-beginning-of-visual-line)
+        (define-key evil-visual-state-map (kbd "L") 'evil-end-of-visual-line)
+        (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+        (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+        (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-visual-line)
+        (define-key evil-normal-state-map (kbd "L") 'evil-end-of-visual-line)
+        )
 #+end_src
+
+#+RESULTS:
+: org-outdent-item-tree
 
 ** Command Discovery
 *** Which-key
@@ -327,14 +331,34 @@ Load custom themes and set up automatic theme switching based on macOS appearanc
 	  (load-theme 'doom-homage-white t)))))
 #+end_src
 
-Make the fringe invisible and top border place nice with [[*Mode Line][Moody]] when using modus themes:
+Some custom stuff on top of Modus
 
 #+begin_src emacs-lisp
-  (setq modus-themes-common-palette-overrides
-	'((fringe unspecified)
-	(border-mode-line-active unspecified)
-	(border-mode-line-inactive unspecified)))
+      (setq modus-themes-common-palette-overrides
+            '((fringe unspecified)
+      	;; mode line borders
+              (border-mode-line-active unspecified)
+              (border-mode-line-inactive unspecified)
+      	;; make line numbers less intense
+              (fg-line-number-inactive "gray50")
+              (fg-line-number-active fg-main)
+              (bg-line-number-inactive unspecified)
+              (bg-line-number-active unspecified)))
+
+      (custom-set-faces
+       '(doom-modeline-evil-bold-state ((t (:weight bold))))
+       '(doom-modeline-evil-insert-state ((t (:weight bold))))
+       '(doom-modeline-evil-visual-state ((t (:weight bold))))
+       '(doom-modeline-evil-replace-state ((t (:weight bold))))
+       '(doom-modeline-evil-operator-state ((t (:weight bold))))
+       '(doom-modeline-evil-motion-state ((t (:weight bold))))
+       '(doom-modeline-evil-emacs-state ((t (:weight bold))))
+       '(doom-modeline-evil-normal-state ((t (:weight bold))))
+       '(doom-modeline-buffer-modified ((t (:foreground unspecified)))))
+)
 #+end_src
+
+#+RESULTS:
 
 *** Doom Themes
 
@@ -356,15 +380,26 @@ Doom themes provides a collection of beautiful, well-designed themes.
 #+end_src
 
 ** Mode Line
-Use [[https://github.com/tarsius/moody][Moody]] to make the mode line prettier (EDIT: currently not using it)
+
+[[https://github.com/seagle0128/doom-modeline?tab=readme-ov-file#customize][Config options]]
 
 #+begin_src emacs-lisp
-  ;; (use-package moody
-  ;;   :config
-  ;;   (moody-replace-mode-line-front-space)
-  ;;   (moody-replace-mode-line-buffer-identification)
-  ;;   (moody-replace-vc-mode)) 
-
+  (use-package doom-modeline
+    :ensure t
+    :init
+    (doom-modeline-mode 1)
+    :config
+    ;; Configure modeline height
+    (setq doom-modeline-height 25)
+    ;; Show evil state indicator
+    (setq doom-modeline-modal t)
+    ;; Simpler buffer name
+    (setq doom-modeline-buffer-file-name-style 'relative-from-project)
+    (setq doom-modeline-icon nil)
+    (setq doom-modeline-unicode-fallback nil)
+    (setq doom-modeline-position-column-line-format '("%l:%c"))
+    (setq doom-modeline-buffer-encoding nil)
+    (setq doom-modeline-indent-info 1))
 #+end_src
 
 And use Minions to hide all the minor modes
@@ -448,7 +483,6 @@ Skip the splash screen, hide the toolbar (gui), menu bar (term), and the scroll 
 #+begin_src emacs-lisp
   (setq inhibit-splash-screen t)
   (tool-bar-mode -1)
-  (menu-bar-mode -1)
   (scroll-bar-mode -1)
 #+End_src
 
@@ -523,14 +557,14 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
 
 * Tasks
 
-- [ ] Update keybindings in readme
+- [ ] add keybindings
 - [ ] on my work computer, load snowplow.org by default
 - [x] use =org-indent-mode= by default
 - [x] get gptel working
 - [ ] figure out how do to git in here (magit)
-- [ ] Learn how to manage files
+- [x] Learn how to manage files
 - [ ] Autocomplete for links to headings
-- [ ] Make the mode bar nicer
+- [x] Make the mode bar nicer
 - [x] Add line numbers for non-markdown and non-org modes (and maybe fundamental?)
 - [ ] Fix olivetti and <tab> not working correctly in terminal mode
 - [ ] Add a nicer html export theme ([[https://aliquote.org/post/org-workflow/][github example]])
