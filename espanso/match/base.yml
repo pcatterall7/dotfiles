@@ -39,6 +39,14 @@ matches:
         type: date
         params:
           format: "%Y-%m-%d"
+  - trigger: dtd
+    replace: "{{date_with_day}}"
+    force_clipboard: false
+    vars:
+      - name: date_with_day
+        type: date
+        params:
+          format: "%Y-%m-%d %a"
   - trigger: dt/
     replace: "{{slash_date}}"
     force_clipboard: true
