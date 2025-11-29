@@ -2,15 +2,6 @@
 #+AUTHOR: Philip Catterall
 #+PROPERTY: header-args :tangle yes
 
-* Introduction
-
-This is a literate Emacs configuration optimized for note-taking and prose writing with vim keybindings. It provides:
-
-- Vim keybindings via Evil mode
-- Space leader key with command discovery
-- Modern completion interface (Vertico)
-- Org mode and Markdown support
-
 * Core Setup
 
 ** Package Management
@@ -212,13 +203,25 @@ Go to today
   (let ((today (format-time-string "%Y-%m-%d")))
     (if (re-search-forward "^\\* Working Memory$" nil t)
         (let ((subtree-end (save-excursion (org-end-of-subtree t t))))
-          (if (re-search-forward (concat "^\\*\\* .*" (regexp-quote today)) subtree-end t)
+          (if (re-search-forward (concat "^\\*\\*\\* .*" (regexp-quote today)) subtree-end t)
               (progn
                 (beginning-of-line)
                 (org-narrow-to-subtree)
                 (goto-char (point-min)))
             (message "No heading with today's date (%s) found under 'Working Memory'" today)))
       (message "No 'Working Memory' heading found"))))
+#+end_src
+
+Zoom out one level
+#+begin_src emacs-lisp
+  (defun my/org-widen-one-level ()
+  "Widen the current org narrowing by one level up in the tree."
+  (interactive)
+  (when (buffer-narrowed-p)
+    (widen)
+    (org-back-to-heading t)
+    (when (org-up-heading-safe)
+      (org-narrow-to-subtree))))
 #+end_src
 
 *** General.el Setup
@@ -271,9 +274,10 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "oo" '(consult-outline :which-key "outline")
       "og" '(org-goto :which-key "go to")
       "on" '(org-narrow-to-subtree :which-key "narrow to subtree")
-      "oN" '(widen :which-key "widen")
-      "ow" '(my/narrow-to-week-list :which-key "go to week list")
+      "oW" '(widen :which-key "widen")
+      "ow" '(my/org-widen-one-level :which-key "widen one level")
       "ot" '(my/narrow-to-today-working-memory :which-key "go to today")
+      "oT" '(my/narrow-to-week-list :which-key "go to week list")
       "oi" '(org-insert-structure-template :which-key "insert block")
       "ol" '(org-insert-link :which-key "insert link")
 
@@ -290,6 +294,7 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "hv" '(describe-variable :which-key "describe variable")
       "hk" '(describe-key :which-key "describe key")))
 #+end_src
+
 
 ** Other Global Behavior
 
@@ -328,8 +333,9 @@ Load custom themes and set up automatic theme switching based on macOS appearanc
 	  (load-theme 'modus-vivendi t))
 	(progn
 	  (mapc #'disable-theme custom-enabled-themes)
-	  (load-theme 'doom-homage-white t)))))
+	  (load-theme 'modus-operandi t)))))
 #+end_src
+
 
 Some custom stuff on top of Modus
 
@@ -355,7 +361,6 @@ Some custom stuff on top of Modus
        '(doom-modeline-evil-emacs-state ((t (:weight bold))))
        '(doom-modeline-evil-normal-state ((t (:weight bold))))
        '(doom-modeline-buffer-modified ((t (:foreground unspecified)))))
-)
 #+end_src
 
 #+RESULTS:
@@ -418,9 +423,11 @@ Set the default font for all frames (including daemon mode)
 
 #+begin_src emacs-lisp
 ;; Set font for all frames, including emacsclient frames
-(add-to-list 'default-frame-alist '(font . "IBM Plex Mono-15"))
-(set-frame-font "IBM Plex Mono-15" nil t)
+(add-to-list 'default-frame-alist '(font . "Jetbrains Mono-15"))
+(set-frame-font "Jetbrains Mono-15" nil t)
 #+end_src
+
+#+RESULTS:
 
 *** Special Characters
 
@@ -469,11 +476,11 @@ Olivetti wraps and centers text on the screen past a certain body width
 
 #+begin_src emacs-lisp
   (use-package olivetti
-      :demand t
-      :hook ((org-mode . olivetti-mode)
-    	 (markdown-mode . olivetti-mode))
-      :config
-      (setq olivetti-body-width 100))
+    :demand t
+    :config
+    (setq olivetti-body-width 98)
+    :hook ((org-mode . olivetti-mode)
+         (markdown-mode . olivetti-mode)))
 #+end_src
 
 *** Startup Settings
@@ -487,9 +494,7 @@ Skip the splash screen, hide the toolbar (gui), menu bar (term), and the scroll 
 #+End_src
 
 * Major Modes
-
-** Org Mode Configuration
-
+** Org Mode
 *** Core Settings
 
 Basic org-mode configuration for note-taking and writing.
@@ -500,7 +505,7 @@ Basic org-mode configuration for note-taking and writing.
     (require 'ox-md)
     (setq org-confirm-babel-evaluate nil)
     (setq org-hide-emphasis-markers t)
-    (org-indent-mode t))
+    (org-indent-mode 1))
 
   (use-package org-appear               ; Show hidden emphasis markers on hover
     :hook (org-mode . org-appear-mode))
@@ -520,7 +525,8 @@ I think it looks better when only H1 and H2 headers are bold. Also, make links r
    '(org-level-6 ((t (:inherit outline-6 :weight normal))))
    '(org-level-7 ((t (:inherit outline-7 :weight normal))))
    '(org-level-8 ((t (:inherit outline-8 :weight normal))))
-   '(link ((t (:weight normal)))))
+   '(link ((t (:weight normal))))
+   '(org-list-dt ((t (:weight normal)))))
 #+end_src
 
 ** Markdown
@@ -557,17 +563,16 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
 
 * Tasks
 
-- [ ] add keybindings
-- [ ] on my work computer, load snowplow.org by default
-- [x] use =org-indent-mode= by default
-- [x] get gptel working
-- [ ] figure out how do to git in here (magit)
-- [x] Learn how to manage files
-- [ ] Autocomplete for links to headings
-- [x] Make the mode bar nicer
-- [x] Add line numbers for non-markdown and non-org modes (and maybe fundamental?)
-- [ ] Fix olivetti and <tab> not working correctly in terminal mode
+- [ ] Figure out how to use claude code within emacs
+- [ ] install evil-surround to make it easier to wrap a span with characters
 - [ ] Add a nicer html export theme ([[https://aliquote.org/post/org-workflow/][github example]])
+- [ ] Autocomplete for links to headings
+- [ ] figure out how do to git in here (magit)
+- [x] Add line numbers for non-markdown and non-org modes (and maybe fundamental?)
+- [x] Learn how to manage files
+- [x] Make the mode bar nicer
+- [x] get gptel working
+- [x] use =org-indent-mode= by default
 
 *** Keybindings to add
 
