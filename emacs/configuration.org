@@ -490,7 +490,7 @@ Skip the splash screen, hide the toolbar (gui), menu bar (term), and the scroll 
 #+begin_src emacs-lisp
   (setq inhibit-splash-screen t)
   (tool-bar-mode -1)
-  (scroll-bar-mode -1)
+  (menu-bar-mode -1)
 #+End_src
 
 * Major Modes
