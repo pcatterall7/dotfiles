@@ -424,10 +424,8 @@ Set the default font for all frames (including daemon mode)
 #+begin_src emacs-lisp
 ;; Set font for all frames, including emacsclient frames
 (add-to-list 'default-frame-alist '(font . "Jetbrains Mono-15"))
-(set-frame-font "Jetbrains Mono-15" nil t)
+(set-frame-font "Jetbrains Mono-14" nil t)
 #+end_src
-
-#+RESULTS:
 
 *** Special Characters
 
@@ -455,7 +453,7 @@ Adjust the line height
 Prefer vertical splits when new windows open, if there's room
 #+begin_src emacs-lisp
   (setq split-height-threshold nil)
-  (setq split-width-threshold 80)
+  (setq split-width-threshold 160)
 #+end_src
 
 *** Line numbers
@@ -564,6 +562,7 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
 * Tasks
 
 - [ ] Figure out how to use claude code within emacs
+- [ ] Copy config changes from pipad that make terminal mode better
 - [ ] install evil-surround to make it easier to wrap a span with characters
 - [ ] Add a nicer html export theme ([[https://aliquote.org/post/org-workflow/][github example]])
 - [ ] Autocomplete for links to headings

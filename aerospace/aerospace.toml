@@ -117,8 +117,8 @@ automatically-unhide-macos-hidden-apps = false
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     alt-1 = 'workspace 1' # Browser
-    alt-2 = 'workspace 2' # Notion
-    alt-3 = 'workspace 3' # Slack
+    alt-2 = 'workspace 2' # Slack
+    alt-3 = 'workspace 3' # Notion
     alt-4 = 'workspace 4' # Spotify
     alt-5 = 'workspace 5'
     alt-6 = 'workspace 6'
@@ -185,17 +185,18 @@ automatically-unhide-macos-hidden-apps = false
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'notion.id'
-    run = 'move-node-to-workspace 2'
+    if.app-id = 'com.google.Chrome'
+    run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
+    run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+    if.app-id = 'notion.id'
     run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
     if.app-name-regex-substring = 'spotify'
     run = 'move-node-to-workspace 4'
 
-[[on-window-detected]]
-    if.app-id = 'com.google.Chrome'
-    run = 'move-node-to-workspace 1'
