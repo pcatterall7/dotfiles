@@ -4,7 +4,6 @@
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 export EDITOR="emacsclient -t -a ''"
 # Path to your oh-my-zsh installation.
 # Set name of the theme to load --- if set to "random", it will
@@ -14,14 +13,14 @@ export EDITOR="emacsclient -t -a ''"
 #ZSH_THEME="robbyrussell"
 ZSH_THEME="clean-custom" #"fwalch"
 
-localhost=`scutil --get LocalHostName`
+# get the hostname. works on both macos and linux.
+host=$(command -v scutil &> /dev/null && scutil --get LocalHostName || hostname)
 
-
-
-case $localhost in
+case $host in
     "phil-macbook-air")
         # ====== Personal macbook scripts, aliases, etc. ======
         export ZSH="/Users/phil/.oh-my-zsh"
+	export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
         plugins=(
             git
@@ -57,8 +56,14 @@ case $localhost in
             npm "$@"
         }
         ;;
+    "raspi")
+	export ZSH="/home/phil/.oh-my-zsh"
+        plugins=(
+            git
+        )
+	;;
     *)
-        echo -n "computer $localhost not recognized"
+        echo -n "computer $host not recognized"
 esac
 
 source $ZSH/oh-my-zsh.sh
