@@ -3,3 +3,5 @@
 /zed/conversations/*
 /zed/prompts/*
 /zed/embeddings/*
+emacs/org-persist
+emacs/org-persist/*
