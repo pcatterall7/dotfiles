@@ -19,8 +19,26 @@ if [ -z "$html" ]; then
     exit 1
 fi
 
+# Pre-process HTML to remove prosemirror artifacts before pandoc
+html=$(echo "$html" | sed -E '
+    # Remove data-prosemirror-* attributes
+    s/ data-prosemirror-[^=]*="[^"]*"//g
+    # Remove prosemirror-* attributes (without data- prefix)
+    s/ prosemirror-[^=]*="[^"]*"//g
+    # Remove spellcheck attributes
+    s/ spellcheck="[^"]*"//g
+')
+
+# Convert <span class="code"> to <code> tags so pandoc renders them as backticks
+html=$(echo "$html" | sed -E 's/<span class="code"[^>]*>/<code>/g; s/<\/span>/<\/code>/g')
+
 # Convert to Markdown using pandoc
-markdown=$(echo "$html" | /opt/homebrew/bin/pandoc -f html -t markdown --wrap=none)
+markdown=$(echo "$html" | /opt/homebrew/bin/pandoc -f html -t gfm --wrap=none)
+
+# Clean up any remaining artifacts:
+# - Remove escaped single quotes (\' -> ')
+# - Remove escaped brackets (\[ and \] -> [ and ])
+markdown=$(echo "$markdown" | sed "s/\\\\'/'/g; s/\\\\\[/[/g; s/\\\\\]/]/g")
 
 # Copy result to clipboard
 echo -n "$markdown" | pbcopy
