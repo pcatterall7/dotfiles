@@ -47,16 +47,17 @@ Emacs automatically maintains this stuff for custom variables set through the UI
 Evil mode brings vim's modal editing to Emacs. We configure it before loading to ensure proper integration.
 
 #+begin_src emacs-lisp
-(use-package evil
-  :demand t
-  :init
-  ;; These settings must be set before evil loads
-  (setq evil-want-integration t)        ; Enable evil integration with other packages
-  (setq evil-want-keybinding nil)       ; Let evil-collection handle keybindings
-  (setq evil-undo-system 'undo-redo)    ; Use Emacs 28+ undo system
-  (setq evil-want-C-u-scroll t)         ; Ctrl-u scrolls up (vim behavior)
-  :config
-  (evil-mode 1))
+  (use-package evil
+    :demand t
+    :init
+    ;; These settings must be set before evil loads
+    (setq evil-want-integration t)        ; Enable evil integration with other packages
+    (setq evil-want-keybinding nil)       ; Let evil-collection handle keybindings
+    (setq evil-undo-system 'undo-redo)    ; Use Emacs 28+ undo system
+    (setq evil-want-fine-undo t)          ; Undo in several steps instead of all changes made during an insert state
+    (setq evil-want-C-u-scroll t)         ; Ctrl-u scrolls up (vim behavior)
+    :config
+    (evil-mode 1))
 #+end_src
 
 *** Evil Collection
@@ -158,7 +159,6 @@ Consult provides enhanced versions of common Emacs commands with better previews
 
 *** Custom functions
 Open my config file
-
 #+begin_src emacs-lisp
   (defun my/open-config ()
     "Open configuration.org"
@@ -166,6 +166,7 @@ Open my config file
     (find-file (expand-file-name "configuration.org" user-emacs-directory)))
 #+end_src
 
+Reload config
 #+begin_src emacs-lisp
   (defun my/reload-config ()
     "Reload configuration.org file"
@@ -174,7 +175,6 @@ Open my config file
 #+end_src
 
 Go to the latest week list
-
 #+begin_src emacs-lisp
   (defun my/narrow-to-week-list ()
     "Narrow to the first sub-heading under the top-level 'Week Lists' heading."
@@ -222,6 +222,24 @@ Zoom out one level
     (org-back-to-heading t)
     (when (org-up-heading-safe)
       (org-narrow-to-subtree))))
+#+end_src
+
+Auto-complete heading link (based on =custom_id= property)
+#+begin_src emacs-lisp
+(defun my/insert-org-custom-id-link ()
+  "Insert a link to a CUSTOM_ID using consult."
+  (interactive)
+  (let ((targets nil))
+    (org-map-entries
+     (lambda ()
+       (when-let ((custom-id (org-entry-get (point) "CUSTOM_ID")))
+         (push (cons (org-get-heading t t t t) custom-id) targets))))
+    (when targets
+      (let ((selection (consult--read (mapcar #'car targets)
+                                     :prompt "Link to CUSTOM_ID: "
+                                     :category 'org-heading
+                                     :sort nil)))
+        (insert "[[#" (cdr (assoc selection targets)) "][" selection "]]")))))
 #+end_src
 
 *** General.el Setup
@@ -280,6 +298,7 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "oT" '(my/narrow-to-week-list :which-key "go to week list")
       "oi" '(org-insert-structure-template :which-key "insert block")
       "ol" '(org-insert-link :which-key "insert link")
+      "oh" '(my/insert-org-custom-id-link :which-key "link to heading")
 
       ;; GPTel
       "a" '(:ignore t :which-key "gptel")
@@ -321,19 +340,20 @@ Put all backup files in a single place. Copied from [[https://www.reddit.com/r/e
 Load custom themes and set up automatic theme switching based on macOS appearance.
 
 #+begin_src emacs-lisp
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+    (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
-  (defun toggle-light-dark-theme ()
-    "Automatically adjust theme based on macOS appearance."
-    (interactive)
-    (let ((appearance (shell-command-to-string "defaults read -g AppleInterfaceStyle")))
-      (if (string-match-p "Dark" appearance)
-	(progn
-	  (mapc #'disable-theme custom-enabled-themes)
-	  (load-theme 'modus-vivendi t))
-	(progn
-	  (mapc #'disable-theme custom-enabled-themes)
-	  (load-theme 'modus-operandi t)))))
+    (defun toggle-light-dark-theme ()
+      "Automatically adjust theme based on macOS appearance."
+      (interactive)
+      (let ((appearance (shell-command-to-string "defaults read -g AppleInterfaceStyle")))
+        (if (string-match-p "Dark" appearance)
+  	(progn
+  	  (mapc #'disable-theme custom-enabled-themes)
+  	  (load-theme 'modus-vivendi t)
+  	  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
+  	(progn
+  	  (mapc #'disable-theme custom-enabled-themes)
+  	  (load-theme 'modus-operandi-tinted t)))))
 #+end_src
 
 
@@ -424,7 +444,7 @@ Set the default font for all frames (including daemon mode)
 #+begin_src emacs-lisp
 ;; Set font for all frames, including emacsclient frames
 (add-to-list 'default-frame-alist '(font . "Jetbrains Mono-15"))
-(set-frame-font "Jetbrains Mono-14" nil t)
+(set-frame-font "Menlo-15" nil t)
 #+end_src
 
 *** Special Characters
@@ -447,7 +467,7 @@ Enable visual line wrapping at word boundaries for better prose editing.
 
 Adjust the line height
 #+begin_src emacs-lisp
-  (setq-default line-spacing 0.2)
+  (setq-default line-spacing 0.3)
 #+end_src
 
 Prefer vertical splits when new windows open, if there's room
@@ -488,6 +508,8 @@ Skip the splash screen, hide the toolbar (gui), menu bar (term), and the scroll 
 #+begin_src emacs-lisp
   (setq inhibit-splash-screen t)
   (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (menu-bar-mode -1)
 #+End_src
 
@@ -527,6 +549,19 @@ I think it looks better when only H1 and H2 headers are bold. Also, make links r
    '(org-list-dt ((t (:weight normal)))))
 #+end_src
 
+*** Export settings
+
+Remove TOC, author, etc from markdown export
+#+begin_src emacs-lisp
+  (add-hook 'org-export-before-processing-hook
+	  (lambda (&rest args)
+	    (when (equal org-export-current-backend 'md)
+	      (progn
+		(setq org-export-with-toc nil)
+		(setq org-export-with-author nil)
+		(setq org-md-headline-style 'atx)))))
+#+end_src
+
 ** Markdown
 
 #+begin_src emacs-lisp
@@ -561,12 +596,12 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
 
 * Tasks
 
-- [ ] Figure out how to use claude code within emacs
+- [ ] Figure out how to use claude code within emacs - see [[https://github.com/stevemolitor/claude-code.el][claude-code.el]]
 - [ ] Copy config changes from pipad that make terminal mode better
 - [ ] install evil-surround to make it easier to wrap a span with characters
 - [ ] Add a nicer html export theme ([[https://aliquote.org/post/org-workflow/][github example]])
-- [ ] Autocomplete for links to headings
 - [ ] figure out how do to git in here (magit)
+- [x] Autocomplete for links to headings
 - [x] Add line numbers for non-markdown and non-org modes (and maybe fundamental?)
 - [x] Learn how to manage files
 - [x] Make the mode bar nicer
@@ -580,4 +615,5 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
 - ~]]/[[~ - next/previous heading (any level)
 - ~z c~ - collapse fold
 - ~z o~ - open fold
+  
   
