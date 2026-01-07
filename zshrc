@@ -100,3 +100,10 @@ tempe () {
 }
 
 alias gs='git status'
+
+# bun completions
+[ -s "/Users/edwardcatterall/.bun/_bun" ] && source "/Users/edwardcatterall/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

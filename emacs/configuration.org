@@ -341,6 +341,7 @@ Load custom themes and set up automatic theme switching based on macOS appearanc
 
 #+begin_src emacs-lisp
     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+    (add-to-list 'load-path "~/.emacs.d/themes/")
 
     (defun toggle-light-dark-theme ()
       "Automatically adjust theme based on macOS appearance."
