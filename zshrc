@@ -55,6 +55,8 @@ case $host in
             [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
             npm "$@"
         }
+	# initiate https://github.com/tobi/try
+	eval "$(ruby ~/.local/try.rb init ~/projects/tries)"
         ;;
     "raspi")
 	export ZSH="/home/phil/.oh-my-zsh"
