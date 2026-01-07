@@ -15,4 +15,11 @@ echo "Installing Brew Formulae..."
 brew install jq
 brew install gh
 brew install bear
-brew install aichat
+brew install mosh
+brew install pandoc
+brew install tmux
+brew install duckdb
+brew install bat
+brew install lf
+brew install emacs
+
