@@ -304,6 +304,10 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "a" '(:ignore t :which-key "gptel")
       "ai" '(gptel :which-key "open gptel")
 
+      ;; Markdown
+      "m" '(:ignore t :which-key "markdown")
+      "mp" '(my/preview-markdown-in-marked2 :which-key "preview in Marked 2")
+
       ;; Utility
       "SPC" '(execute-extended-command :which-key "M-x")
       "q" '(:ignore t :which-key "quit")
@@ -445,7 +449,7 @@ Set the default font for all frames (including daemon mode)
 #+begin_src emacs-lisp
 ;; Set font for all frames, including emacsclient frames
 (add-to-list 'default-frame-alist '(font . "Jetbrains Mono-15"))
-(set-frame-font "Menlo-15" nil t)
+(set-frame-font "SF Mono" nil t)
 #+end_src
 
 *** Special Characters
@@ -496,10 +500,10 @@ Olivetti wraps and centers text on the screen past a certain body width
 #+begin_src emacs-lisp
   (use-package olivetti
     :demand t
-    :config
-    (setq olivetti-body-width 98)
+    :custom
+    (olivetti-body-width 98)
     :hook ((org-mode . olivetti-mode)
-         (markdown-mode . olivetti-mode)))
+           (markdown-mode . olivetti-mode)))
 #+end_src
 
 *** Startup Settings
@@ -571,6 +575,19 @@ Remove TOC, author, etc from markdown export
          ("\\.markdown\\'" . markdown-mode))
   :init
   (setq markdown-command "multimarkdown"))
+#+end_src
+
+*** Preview in Marked 2
+
+Open the current markdown file in Marked 2 for live preview.
+
+#+begin_src emacs-lisp
+(defun my/preview-markdown-in-marked2 ()
+  "Open the current markdown file in Marked 2."
+  (interactive)
+  (if buffer-file-name
+      (shell-command (concat "open -a \"Marked 2\" " (shell-quote-argument buffer-file-name)))
+    (message "Buffer is not visiting a file")))
 #+end_src
 
 ** gptel
