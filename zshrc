@@ -34,7 +34,6 @@ case $host in
         export DENO_INSTALL="/Users/phil/.deno"
         export PATH="$DENO_INSTALL/bin:$PATH"
 	# initiate https://github.com/tobi/try
-
 	eval "$(ruby ~/.local/try.rb init ~/projects/tries)"
         ;;
     "phils-mbp")
@@ -60,6 +59,12 @@ case $host in
         }
 	# initiate https://github.com/tobi/try
 	eval "$(ruby ~/.local/try.rb init ~/code/tries)"
+	# bun completions
+	[ -s "/Users/edwardcatterall/.bun/_bun" ] && source "/Users/edwardcatterall/.bun/_bun"
+
+	# bun
+	export BUN_INSTALL="$HOME/.bun"
+	export PATH="$BUN_INSTALL/bin:$PATH"
         ;;
     "raspi")
 	export ZSH="/home/phil/.oh-my-zsh"
@@ -106,9 +111,3 @@ tempe () {
 
 alias gs='git status'
 
-# bun completions
-[ -s "/Users/edwardcatterall/.bun/_bun" ] && source "/Users/edwardcatterall/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
