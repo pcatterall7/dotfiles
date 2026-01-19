@@ -445,7 +445,7 @@ Set the default font for all frames (including daemon mode)
 #+begin_src emacs-lisp
 ;; Set font for all frames, including emacsclient frames
 (add-to-list 'default-frame-alist '(font . "Jetbrains Mono-15"))
-(set-frame-font "Menlo-15" nil t)
+(set-frame-font "SF Mono-14" nil t)
 #+end_src
 
 *** Special Characters

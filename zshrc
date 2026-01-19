@@ -33,6 +33,9 @@ case $host in
         source ~/.secrets
         export DENO_INSTALL="/Users/phil/.deno"
         export PATH="$DENO_INSTALL/bin:$PATH"
+	# initiate https://github.com/tobi/try
+
+	eval "$(ruby ~/.local/try.rb init ~/projects/tries)"
         ;;
     "phils-mbp")
         export ZSH="/Users/edwardcatterall/.oh-my-zsh"
@@ -56,7 +59,7 @@ case $host in
             npm "$@"
         }
 	# initiate https://github.com/tobi/try
-	eval "$(ruby ~/.local/try.rb init ~/projects/tries)"
+	eval "$(ruby ~/.local/try.rb init ~/code/tries)"
         ;;
     "raspi")
 	export ZSH="/home/phil/.oh-my-zsh"
