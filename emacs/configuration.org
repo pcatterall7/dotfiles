@@ -358,7 +358,7 @@ Load custom themes and set up automatic theme switching based on macOS appearanc
   	  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
   	(progn
   	  (mapc #'disable-theme custom-enabled-themes)
-  	  (load-theme 'modus-operandi-tinted t)))))
+  	  (load-theme 'modus-operandi t)))))
 #+end_src
 
 
@@ -449,7 +449,7 @@ Set the default font for all frames (including daemon mode)
 #+begin_src emacs-lisp
 ;; Set font for all frames, including emacsclient frames
 (add-to-list 'default-frame-alist '(font . "Jetbrains Mono-15"))
-(set-frame-font "SF Mono" nil t)
+(set-frame-font "SF Mono-15" nil t)
 #+end_src
 
 *** Special Characters
@@ -484,14 +484,15 @@ Prefer vertical splits when new windows open, if there's room
 *** Line numbers
 Add line numbers for all modes except org, markdown, and plain text
 
-#+begin_src emacs-lisp
-  (global-display-line-numbers-mode 1)
+# TODO 2026-01-14: wasn't working as expected, need to revisit
+# #+begin_src emacs-lisp
+#   (global-display-line-numbers-mode 1)
 
-  (dolist (mode '(org-mode-hook
-		  markdown-mode-hook
-		  text-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
-#+end_src
+#   (dolist (mode '(org-mode-hook
+# 		  markdown-mode-hook
+# 		  text-mode-hook))
+#     (add-hook mode (lambda () (display-line-numbers-mode 0))))
+# #+end_src
 
 *** Olivetti
 
@@ -501,7 +502,7 @@ Olivetti wraps and centers text on the screen past a certain body width
   (use-package olivetti
     :demand t
     :custom
-    (olivetti-body-width 98)
+    (olivetti-body-width 90)
     :hook ((org-mode . olivetti-mode)
            (markdown-mode . olivetti-mode)))
 #+end_src
@@ -574,7 +575,8 @@ Remove TOC, author, etc from markdown export
   :mode (("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init
-  (setq markdown-command "multimarkdown"))
+  (setq markdown-command "multimarkdown")
+  (setq markdown-hide-urls t))
 #+end_src
 
 *** Preview in Marked 2
