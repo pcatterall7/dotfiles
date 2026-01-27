@@ -449,7 +449,7 @@ Set the default font for all frames (including daemon mode)
 #+begin_src emacs-lisp
 ;; Set font for all frames, including emacsclient frames
 (add-to-list 'default-frame-alist '(font . "Jetbrains Mono-15"))
-(set-frame-font "SF Mono-15" nil t)
+(set-frame-font "SF Mono-14" nil t)
 #+end_src
 
 *** Special Characters
@@ -535,6 +535,10 @@ Basic org-mode configuration for note-taking and writing.
 
   (use-package org-appear               ; Show hidden emphasis markers on hover
     :hook (org-mode . org-appear-mode))
+
+  (add-hook 'org-mode-hook
+    (lambda ()
+      (setq-local evil-shift-width 2)))  ; Match org-mode's 2-space indentation
 #+end_src
 
 *** Heading formatting
