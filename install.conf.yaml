@@ -7,27 +7,29 @@
 
 - link:
     ~/.zshrc:
+      path: zsh/zshrc
       force: true
     ~/.zprofile:
+      path: zsh/zprofile
     ~/bin:
       path: bin
       force: true
     ~/Library/Preferences/espanso:
+      if: '[ `uname` = Darwin ]'
       path: espanso/
       force: true
-    # ~/Library/Preferences/espanso/scripts:
-    #     path: espanso/scripts
-    #     force: true
     ~/.config/nvim:
+      if: '[ `uname` = Darwin ]'
       path: nvim
       force: true
     ~/.tmux.conf:
-      path: tmux.conf
+      path: tmux/tmux.conf
       force: true
     ~/.oh-my-zsh/custom/themes/clean-custom.zsh-theme:
       path: zsh/clean-custom.zsh-theme
       force: true
     ~/.config/aerospace:
+      if: '[ `uname` = Darwin ]'
       path: aerospace
       force: true
     ~/.emacs.d:

@@ -514,7 +514,7 @@ Skip the splash screen, hide the toolbar (gui), menu bar (term), and the scroll 
 #+begin_src emacs-lisp
   (setq inhibit-splash-screen t)
   (tool-bar-mode -1)
-  (scroll-bar-mode -1)
+;  (scroll-bar-mode -1)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (menu-bar-mode -1)
 #+End_src
@@ -620,8 +620,10 @@ https://github.com/karthink/gptel?tab=readme-ov-file#manual
 
 * Tasks
 
+- [ ] implement raspi-specific config:
+  - always dark theme
+  - no reference to scroll-bar-mode
 - [ ] Figure out how to use claude code within emacs - see [[https://github.com/stevemolitor/claude-code.el][claude-code.el]]
-- [ ] Copy config changes from pipad that make terminal mode better
 - [ ] install evil-surround to make it easier to wrap a span with characters
 - [ ] Add a nicer html export theme ([[https://aliquote.org/post/org-workflow/][github example]])
 - [ ] figure out how do to git in here (magit)
