@@ -1,0 +1,1 @@
+Transcribe the following hand-written note to text. Transcribe it verbatim. For any writing that's unclear, put in brackets with the word "unclear". Any underlined text should be formatted as markdown bold text.

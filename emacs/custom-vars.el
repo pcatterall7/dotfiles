@@ -43,4 +43,5 @@
  '(org-level-5 ((t (:inherit outline-5 :weight normal))))
  '(org-level-6 ((t (:inherit outline-6 :weight normal))))
  '(org-level-7 ((t (:inherit outline-7 :weight normal))))
- '(org-level-8 ((t (:inherit outline-8 :weight normal)))))
+ '(org-level-8 ((t (:inherit outline-8 :weight normal))))
+ '(org-list-dt ((t (:weight normal)))))
