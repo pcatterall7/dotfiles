@@ -22,7 +22,7 @@
       path: nvim
       force: true
     ~/.tmux.conf:
-      path: tmux.conf
+      path: tmux/tmux.conf
       force: true
     ~/.oh-my-zsh/custom/themes/clean-custom.zsh-theme:
       path: zsh/clean-custom.zsh-theme

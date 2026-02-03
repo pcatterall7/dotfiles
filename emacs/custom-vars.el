@@ -4,7 +4,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
+   '("e4a702e262c3e3501dfe25091621fe12cd63c7845221687e36a79e17cf3a67e0"
+     "f1e8339b04aef8f145dd4782d03499d9d716fdc0361319411ac2efc603249326"
+     "0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
      "b5fd9c7429d52190235f2383e47d340d7ff769f141cd8f9e7a4629a81abc6b19"
      "6963de2ec3f8313bb95505f96bf0cf2025e7b07cefdb93e3d2e348720d401425"
      "2f8af2a3a2fae6b6ea254e7aab6f3a8b5c936428b67869cef647c5f8e7985877"
@@ -24,6 +26,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(doom-modeline-buffer-modified ((t (:foreground unspecified))))
+ '(doom-modeline-evil-bold-state ((t (:weight bold))))
+ '(doom-modeline-evil-emacs-state ((t (:weight bold))))
+ '(doom-modeline-evil-insert-state ((t (:weight bold))))
+ '(doom-modeline-evil-motion-state ((t (:weight bold))))
+ '(doom-modeline-evil-normal-state ((t (:weight bold))))
+ '(doom-modeline-evil-operator-state ((t (:weight bold))))
+ '(doom-modeline-evil-replace-state ((t (:weight bold))))
+ '(doom-modeline-evil-visual-state ((t (:weight bold))))
  '(link ((t (:weight normal))))
  '(org-level-1 ((t (:inherit outline-1 :weight bold))))
  '(org-level-2 ((t (:inherit outline-2 :weight bold))))

@@ -58,6 +58,9 @@ case $host in
         ;;
     "raspi")
 	export ZSH="/home/phil/.oh-my-zsh"
+        export DENO_INSTALL="/Users/phil/.deno"
+        export PATH="$DENO_INSTALL/bin:$PATH"
+	export PATH="$PATH:$HOME/go/bin"
         plugins=(
             git
         )
@@ -100,3 +103,4 @@ tempe () {
 }
 
 alias gs='git status'
+. "/home/phil/.deno/env"
