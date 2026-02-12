@@ -34,7 +34,7 @@ case $host in
         export DENO_INSTALL="/Users/phil/.deno"
         export PATH="$DENO_INSTALL/bin:$PATH"
 	# initiate https://github.com/tobi/try
-	eval "$(ruby ~/.local/try.rb init ~/projects/tries)"
+	eval "$(ruby ~/.local/try.rb init ~/tries)"
         ;;
     "phils-mbp")
         export ZSH="/Users/edwardcatterall/.oh-my-zsh"
@@ -113,3 +113,11 @@ tempe () {
 }
 
 alias gs='git status'
+
+# pnpm
+export PNPM_HOME="/Users/phil/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
