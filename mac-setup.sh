@@ -38,7 +38,7 @@ done
 
 ## Casks
 echo "\n==> Installing Homebrew Casks..."
-casks=(bettermouse raycast spotify espanso iterm2)
+casks=(bettermouse raycast spotify espanso iterm2 rectangle)
 for cask in "${casks[@]}"; do
     echo "    → Installing $cask..."
     if brew install --cask "$cask" 2>&1 | grep -q "already installed"; then
