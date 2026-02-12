@@ -321,6 +321,17 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
 
 ** Other Global Behavior
 
+*** Tabs and Indentation
+
+Use real tabs with a width of 4 by default.
+
+#+begin_src emacs-lisp
+  (setq-default tab-width 4)
+  (setq-default indent-tabs-mode t)
+#+end_src
+
+*** Auto-revert
+
 Automatically refresh buffers if there are changes to the file on disk
 
 #+begin_src emacs-lisp
@@ -456,7 +467,7 @@ Set the default font for all frames (including daemon mode)
 #+begin_src emacs-lisp
 ;; Set font for all frames, including emacsclient frames
 (add-to-list 'default-frame-alist '(font . "Jetbrains Mono-15"))
-(set-frame-font "Noto Sans Mono-15" nil t)
+(set-frame-font "SF Mono-15" nil t)
 #+end_src
 
 *** Special Characters
@@ -466,6 +477,12 @@ Fix the keybindings for inserting en-dashes and em-dashes back to the mac defaul
 #+begin_src emacs-lisp
 (global-set-key (kbd "M-_") (lambda () (interactive) (insert "—")))
 (global-set-key (kbd "M--") (lambda () (interactive) (insert "–")))
+#+end_src
+
+Cmd-backspace deletes to the beginning of the line (macOS default behavior).
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "s-<backspace>") (lambda () (interactive) (kill-line 0)))
 #+end_src
 
 ** Visual Settings
@@ -545,7 +562,9 @@ Basic org-mode configuration for note-taking and writing.
 
   (add-hook 'org-mode-hook
     (lambda ()
-      (setq-local evil-shift-width 2)))  ; Match org-mode's 2-space indentation
+      (setq-local indent-tabs-mode nil)  ; Org uses spaces, not tabs
+      (setq-local tab-width 8)           ; org-indent-mode requires tab-width 8
+      (setq-local evil-shift-width 2)))
 #+end_src
 
 *** Heading formatting
