@@ -2,15 +2,13 @@
 
 # ====== GENERAL ======
 
-# If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-export EDITOR="emacsclient -t -a ''"
-# Path to your oh-my-zsh installation.
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
+# some apps try to pass the entire $EDITOR string to env as a single argument.
+# this wrapper function works around that issue.
+function emacsclient-term() {
+    emacsclient -t "$@"
+}
+export EDITOR="emacsclient-term"
 ZSH_THEME="clean-custom" #"fwalch"
 
 # get the hostname. works on both macos and linux.
