@@ -5,9 +5,6 @@
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 # some apps try to pass the entire $EDITOR string to env as a single argument.
 # this wrapper function works around that issue.
-function emacsclient-term() {
-    emacsclient -t "$@"
-}
 export EDITOR="emacsclient-term"
 ZSH_THEME="clean-custom" #"fwalch"
 
