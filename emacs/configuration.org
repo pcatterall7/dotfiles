@@ -323,11 +323,16 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
 
 *** Tabs and Indentation
 
-Use real tabs with a width of 4 by default.
+Use real tabs with a width of 4 by default. Override text-mode's =indent-relative= which tries to align with the previous line and produces inconsistent indentation.
 
 #+begin_src emacs-lisp
   (setq-default tab-width 4)
   (setq-default indent-tabs-mode t)
+  (add-hook 'text-mode-hook
+    (lambda ()
+      (electric-indent-local-mode -1)
+      (unless (derived-mode-p 'org-mode 'markdown-mode)
+        (setq-local indent-line-function 'tab-to-tab-stop))))
 #+end_src
 
 *** Auto-revert
@@ -462,12 +467,12 @@ And use Minions to hide all the minor modes
 ** Typography & Fonts
 *** Font Configuration
 
-Set the default font for all frames (including daemon mode)
+Set the default font for all frames (including daemon mode) j
 
 #+begin_src emacs-lisp
 ;; Set font for all frames, including emacsclient frames
 (add-to-list 'default-frame-alist '(font . "Jetbrains Mono-15"))
-(set-frame-font "SF Mono-15" nil t)
+(set-frame-font "CommitMono-15" nil t)
 #+end_src
 
 *** Special Characters
