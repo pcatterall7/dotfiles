@@ -119,7 +119,8 @@ echo "\n==> Configuring macOS defaults..."
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock tilesize -int 33
-echo "    ✓ Dock: auto-hide enabled, recent apps hidden, icon size 33"
+defaults write com.apple.Dock showhidden -bool YES
+echo "    ✓ Dock: auto-hide enabled, recent apps hidden, icon size 33, fade hidden apps"
 
 # Finder
 defaults write com.apple.finder ShowPathbar -bool true
@@ -131,6 +132,7 @@ echo "    ✓ Finder: path bar enabled, list view default, show all extensions"
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 25
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write -g ApplePressAndHoldEnabled -bool false
 echo "    ✓ Keyboard: fast key repeat, auto-correct disabled"
 
 # Menu bar clock
