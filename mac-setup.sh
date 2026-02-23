@@ -26,7 +26,7 @@ brew analytics off
 
 ## Formulae
 echo "\n==> Installing Homebrew Formulae..."
-formulae=(jq gh bear mosh pandoc tmux duckdb bat lf emacs tlrc thaw mas nvm ruby)
+formulae=(jq gh mosh pandoc tmux duckdb bat lf emacs tlrc thaw mas nvm ruby)
 for formula in "${formulae[@]}"; do
     echo "    → Installing $formula..."
     if brew install "$formula" 2>&1 | grep -q "already installed"; then
@@ -38,7 +38,7 @@ done
 
 ## Casks
 echo "\n==> Installing Homebrew Casks..."
-casks=(bettermouse raycast spotify espanso iterm2 rectangle)
+casks=(bettermouse betterdisplay raycast spotify espanso iterm2 rectangle obsidian)
 for cask in "${casks[@]}"; do
     echo "    → Installing $cask..."
     if brew install --cask "$cask" 2>&1 | grep -q "already installed"; then
