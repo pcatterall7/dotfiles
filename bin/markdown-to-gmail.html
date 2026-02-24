@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown → Gmail</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+  }
+  .panels {
+    display: flex;
+    gap: 16px;
+  }
+  .panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    min-height: 32px;
+  }
+  .panel-label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666;
+  }
+  textarea {
+    width: 100%;
+    flex: 1;
+    min-height: 500px;
+    padding: 16px;
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    resize: none;
+    outline: none;
+  }
+  textarea:focus { border-color: #1a73e8; }
+  .preview {
+    width: 100%;
+    flex: 1;
+    min-height: 500px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    overflow-y: auto;
+  }
+  button {
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  button:hover { background: #f0f0f0; }
+  button.copied {
+    background: #e6f4ea;
+    border-color: #34a853;
+    color: #1e7e34;
+  }
+</style>
+</head>
+<body>
+
+<h1>Markdown → Gmail</h1>
+
+<div class="panels">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-label">Markdown</span>
+    </div>
+    <textarea id="input" placeholder="Paste your markdown here..." spellcheck="false"></textarea>
+  </div>
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-label">Preview</span>
+      <button id="copy-btn" onclick="copyToClipboard()">Copy for Gmail</button>
+    </div>
+    <div class="preview" id="preview"></div>
+  </div>
+</div>
+
+<script>
+const GMAIL_STYLES = {
+  'p':          'font-family:Arial,Helvetica,sans-serif;font-size:small;color:#222222;margin:0 0 12px 0;',
+  'h1':         'font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:bold;color:#222222;margin:0 0 12px 0;',
+  'h2':         'font-family:Arial,Helvetica,sans-serif;font-size:18px;font-weight:bold;color:#222222;margin:0 0 12px 0;',
+  'h3':         'font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;color:#222222;margin:0 0 10px 0;',
+  'h4':         'font-family:Arial,Helvetica,sans-serif;font-size:small;font-weight:bold;color:#222222;margin:0 0 8px 0;',
+  'h5':         'font-family:Arial,Helvetica,sans-serif;font-size:small;font-weight:bold;color:#222222;margin:0 0 8px 0;',
+  'h6':         'font-family:Arial,Helvetica,sans-serif;font-size:small;font-weight:bold;color:#888888;margin:0 0 8px 0;',
+  'a':          'color:#1155cc;',
+  'ul':         'font-family:Arial,Helvetica,sans-serif;font-size:small;color:#222222;margin:0 0 12px 0;padding-left:28px;',
+  'ol':         'font-family:Arial,Helvetica,sans-serif;font-size:small;color:#222222;margin:0 0 12px 0;padding-left:28px;',
+  'li':         'margin:0 0 4px 0;',
+  'blockquote': 'margin:0 0 12px 0;padding:0 0 0 12px;border-left:3px solid #ccc;color:#666666;font-family:Arial,Helvetica,sans-serif;font-size:small;',
+  'code':       'font-family:monospace;font-size:small;background-color:#f6f8fa;padding:1px 4px;border-radius:3px;',
+  'pre':        'font-family:monospace;font-size:small;background-color:#f6f8fa;padding:12px;border-radius:6px;margin:0 0 12px 0;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word;',
+  'pre code':   'font-family:monospace;font-size:small;background-color:transparent;padding:0;border-radius:0;',
+  'hr':         'border:none;border-top:1px solid #ddd;margin:16px 0;',
+  'table':      'border-collapse:collapse;margin:0 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:small;',
+  'th':         'border:1px solid #ddd;padding:6px 12px;background-color:#f6f8fa;font-weight:bold;text-align:left;',
+  'td':         'border:1px solid #ddd;padding:6px 12px;',
+  'img':        'max-width:100%;height:auto;',
+  'strong':     'font-weight:bold;',
+  'em':         'font-style:italic;',
+};
+
+function applyGmailStyles(html) {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+
+  // Handle pre > code first (specific selector)
+  div.querySelectorAll('pre code').forEach(el => {
+    el.setAttribute('style', GMAIL_STYLES['pre code']);
+  });
+
+  for (const [tag, style] of Object.entries(GMAIL_STYLES)) {
+    if (tag.includes(' ')) continue; // skip compound selectors handled above
+    div.querySelectorAll(tag).forEach(el => {
+      // Don't overwrite pre>code styles
+      if (tag === 'code' && el.parentElement && el.parentElement.tagName === 'PRE') return;
+      el.setAttribute('style', style);
+    });
+  }
+
+  return div.innerHTML;
+}
+
+function render() {
+  const md = document.getElementById('input').value;
+  const raw = marked.parse(md);
+  const styled = applyGmailStyles(raw);
+  document.getElementById('preview').innerHTML = styled;
+}
+
+async function copyToClipboard() {
+  const preview = document.getElementById('preview');
+  const html = preview.innerHTML;
+  const btn = document.getElementById('copy-btn');
+
+  try {
+    await navigator.clipboard.write([
+      new ClipboardItem({
+        'text/html': new Blob([html], { type: 'text/html' }),
+        'text/plain': new Blob([document.getElementById('input').value], { type: 'text/plain' }),
+      })
+    ]);
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy for Gmail';
+      btn.classList.remove('copied');
+    }, 2000);
+  } catch (err) {
+    // Fallback: select the preview content so user can Cmd+C
+    const range = document.createRange();
+    range.selectNodeContents(preview);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    btn.textContent = 'Selected — press Cmd+C';
+    setTimeout(() => { btn.textContent = 'Copy for Gmail'; }, 3000);
+  }
+}
+
+marked.setOptions({ breaks: true, gfm: true });
+document.getElementById('input').addEventListener('input', render);
+</script>
+
+</body>
+</html>
