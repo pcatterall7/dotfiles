@@ -26,7 +26,7 @@ brew analytics off
 
 ## Formulae
 echo "\n==> Installing Homebrew Formulae..."
-formulae=(jq gh mosh pandoc tmux duckdb bat lf emacs tlrc thaw mas nvm ruby)
+formulae=(jq gh mosh pandoc tmux duckdb bat lf emacs tlrc thaw mas nvm ruby lazygit)
 for formula in "${formulae[@]}"; do
     echo "    → Installing $formula..."
     if brew install "$formula" 2>&1 | grep -q "already installed"; then
