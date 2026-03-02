@@ -35,3 +35,7 @@
     ~/.emacs.d:
       path: emacs
       force: true
+    ~/.config/zed:
+      if: '[ `uname` = Darwin ]'
+      path: zed
+      force: true
