@@ -18,20 +18,22 @@
       if: '[ `uname` = Darwin ]'
       path: espanso/
       force: true
-    ~/.config/nvim:
-      if: '[ `uname` = Darwin ]'
-      path: nvim
-      force: true
+    ## NOT CURRENTLY USED
+    # ~/.config/nvim:
+    #   if: '[ `uname` = Darwin ]'
+    #   path: nvim
+    #   force: true
     ~/.tmux.conf:
       path: tmux/tmux.conf
       force: true
     ~/.oh-my-zsh/custom/themes/clean-custom.zsh-theme:
       path: zsh/clean-custom.zsh-theme
       force: true
-    ~/.config/aerospace:
-      if: '[ `uname` = Darwin ]'
-      path: aerospace
-      force: true
+    ## NOT CURRENTLY USED
+    # ~/.config/aerospace:
+    #   if: '[ `uname` = Darwin ]'
+    #   path: aerospace
+    #   force: true
     ~/.emacs.d:
       path: emacs
       force: true
@@ -39,3 +41,7 @@
       if: '[ `uname` = Darwin ]'
       path: zed
       force: true
+    ~/.config/claude/skills/:
+      glob: true
+      path: skills/*
+      create: true
