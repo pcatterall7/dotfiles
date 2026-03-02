@@ -30,7 +30,7 @@ matches:
       - name: euro_date
         type: date
         params:
-          format: "%d %b %Y"
+          format: "%-e %b %Y"
   - trigger: dtl
     replace: "{{long_date}}"
     force_clipboard: false
@@ -101,14 +101,6 @@ matches:
 
   #### MISC ####
 
-  - trigger: ;gc
-    replace: 'git commit -m "{{iso8601}} from my mac"'
-    vars:
-      - name: iso8601
-        type: date
-        params:
-          format: "%Y-%m-%d %H:%M"
-
   - trigger: ;up
     replace: ☝️
 
@@ -120,5 +112,6 @@ matches:
 
   - trigger: ;al
     replace: ←
-  # - trigger: ;t
-  #   replace: '- [ ] '
+
+  - trigger: ;todo
+    replace: "<!-- TODO: $|$ -->"
