@@ -38,7 +38,7 @@ done
 
 ## Casks
 echo "\n==> Installing Homebrew Casks..."
-casks=(bettermouse betterdisplay raycast spotify espanso iterm2 rectangle obsidian)
+casks=(bettermouse betterdisplay raycast spotify espanso iterm2 rectangle obsidian sublime-text)
 for cask in "${casks[@]}"; do
     echo "    → Installing $cask..."
     if brew install --cask "$cask" 2>&1 | grep -q "already installed"; then
@@ -97,6 +97,7 @@ else
 fi
 
 # Fonts
+# TODO 2026-03-05: use homebrew instead? https://formulae.brew.sh/cask-font/
 echo "\n==> Installing custom fonts..."
 if [ -d "$DOTFILES_DIR/fonts" ]; then
     echo "    → Copying fonts to ~/Library/Fonts..."
