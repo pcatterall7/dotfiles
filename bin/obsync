@@ -1,0 +1,55 @@
+#!/bin/bash
+
+FILES=("app.json" "appearance.json" "hotkeys.json")
+DIRS=("snippets")
+PLUGINS=("obsidian-style-settings" "obsidian-minimal-settings")
+DOTFILES=~/dotfiles/obsidian
+VAULTS=(
+  "$HOME/Documents/journal"
+  "$HOME/Documents/work-notes/snowplow"
+  "$HOME/Documents/work-notes/databricks"
+)
+
+pull() {
+  src="$1/.obsidian"
+  echo "Pulling from $1..."
+  for f in "${FILES[@]}"; do
+    cp "$src/$f" "$DOTFILES/$f"
+  done
+  for d in "${DIRS[@]}"; do
+    rsync -a --delete "$src/$d/" "$DOTFILES/$d/"
+  done
+  for p in "${PLUGINS[@]}"; do
+    rsync -a --delete "$src/plugins/$p/" "$DOTFILES/plugins/$p/"
+  done
+  echo "Done."
+}
+
+push() {
+  echo "Pushing to all vaults..."
+  for vault in "${VAULTS[@]}"; do
+    echo "Pushing to $vault"
+    dst="$vault/.obsidian"
+    for f in "${FILES[@]}"; do
+      cp "$DOTFILES/$f" "$dst/$f"
+    done
+    for d in "${DIRS[@]}"; do
+      rsync -a --delete "$DOTFILES/$d/" "$dst/$d/"
+    done
+    for p in "${PLUGINS[@]}"; do
+      mkdir -p "$dst/plugins/$p"
+      rsync -a --delete "$DOTFILES/plugins/$p/" "$dst/plugins/$p/"
+    done
+  done
+  echo "Done."
+}
+
+case "$1" in
+  pull) pull "$2" ;;
+  push) push ;;
+  *)
+    echo "Usage:"
+    echo "  obsync pull /path/to/vault   # copy vault settings → dotfiles"
+    echo "  obsync push                  # copy dotfiles → all vaults"
+    ;;
+esac

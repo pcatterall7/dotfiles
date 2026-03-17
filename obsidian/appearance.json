@@ -1,0 +1,16 @@
+{
+  "cssTheme": "Minimal",
+  "showRibbon": false,
+  "showViewHeader": false,
+  "translucency": true,
+  "textFontFamily": "Atlas Grotesk LC Web,SF Mono,CommitMono,iA Writer Mono V,JetBrains Mono NL",
+  "accentColor": "",
+  "baseFontSize": 16,
+  "monospaceFontFamily": "SF Mono,CommitMono,iA Writer Mono V",
+  "interfaceFontFamily": "SF Pro",
+  "enabledCssSnippets": [
+    "bullets",
+    "cursor",
+    "header-spacing"
+  ]
+}

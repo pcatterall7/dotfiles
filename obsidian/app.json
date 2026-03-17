@@ -1,0 +1,9 @@
+{
+  "showUnsupportedFiles": true,
+  "showIndentGuide": false,
+  "vimMode": true,
+  "showInlineTitle": false,
+  "foldIndent": false,
+  "openBehavior": "daily",
+  "promptDelete": false
+}

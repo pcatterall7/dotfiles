@@ -1,0 +1,22 @@
+/* Light mode bullet styling */
+body.theme-light {
+    --list-bullet-size: 0.4em;
+    --list-marker-color: black;
+}
+
+body.theme-dark {
+    --list-bullet-size: 0.4em;
+}
+
+.cm-formatting-list-ul {
+    padding-right: 0.5em;
+}
+/* Makes sure text after checkboxes is aligned with text after bullets */
+.task-list-label {
+    padding-right: 0.5em;
+}
+
+.cm-formatting-list-ol {
+    padding-right 0.25em;
+}
+
