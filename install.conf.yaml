@@ -41,6 +41,11 @@
       if: '[ `uname` = Darwin ]'
       path: zed
       force: true
+    ~/Library/Application Support/Sublime Text/Packages/User/:
+      if: '[ `uname` = Darwin ]'
+      glob: true
+      path: sublime-text/*
+      force: true
     ~/.config/claude/skills/:
       glob: true
       path: skills/*
