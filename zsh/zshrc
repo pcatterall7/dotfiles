@@ -15,7 +15,7 @@ case $host in
     "phil-macbook-air")
         # ====== Personal macbook scripts, aliases, etc. ======
         export ZSH="/Users/phil/.oh-my-zsh"
-	export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+        export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
         plugins=(
             git
