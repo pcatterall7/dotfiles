@@ -69,6 +69,23 @@ case $host in
         plugins=(
             git
         )
+        export NVM_DIR="$HOME/.nvm"
+        # Lazy load nvm - only initialize when actually needed
+        nvm() {
+            unset -f nvm
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm "$@"
+        }
+        node() {
+            unset -f node nvm
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            node "$@"
+        }
+        npm() {
+            unset -f npm nvm
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            npm "$@"
+        }
 	;;
     *)
         echo -n "computer $host not recognized"
@@ -109,6 +126,10 @@ tempe () {
 
 alias gs='git status'
 
+# soft serve git server
+alias sst='ssh -p 23231 git.tail75bb5.ts.net'
+ssr() { ssh -p 23231 git.tail75bb5.ts.net repo create "$1"; }
+
 # pnpm
 export PNPM_HOME="/Users/phil/Library/pnpm"
 case ":$PATH:" in
@@ -116,3 +137,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
