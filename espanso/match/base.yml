@@ -90,11 +90,8 @@ matches:
   - trigger: "@@"
     replace: philipcatterall@gmail.com
 
-  - trigger: ;sa
-    replace: phil.catterall@snowplowanalytics.com
-
-  - trigger: ;si
-    replace: phil.catterall@snowplow.io
+  - trigger: ;db
+    replace: phil.catterall@databricks.com
 
   - trigger: ;c
     replace: 301-367-7195
