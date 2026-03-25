@@ -4,28 +4,31 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("e4a702e262c3e3501dfe25091621fe12cd63c7845221687e36a79e17cf3a67e0"
-     "f1e8339b04aef8f145dd4782d03499d9d716fdc0361319411ac2efc603249326"
-     "0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
-     "b5fd9c7429d52190235f2383e47d340d7ff769f141cd8f9e7a4629a81abc6b19"
-     "6963de2ec3f8313bb95505f96bf0cf2025e7b07cefdb93e3d2e348720d401425"
-     "2f8af2a3a2fae6b6ea254e7aab6f3a8b5c936428b67869cef647c5f8e7985877"
-     "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-     "4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d"
-     "f4bef5a6d77ac9c9ab34382f380aba922dd91901d0d43886a5f99106041bb8e0"
-     default))
+   '("5c7720c63b729140ed88cf35413f36c728ab7c70f8cd8422d9ee1cedeb618de5"
+	 "e4a702e262c3e3501dfe25091621fe12cd63c7845221687e36a79e17cf3a67e0"
+	 "f1e8339b04aef8f145dd4782d03499d9d716fdc0361319411ac2efc603249326"
+	 "0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
+	 "b5fd9c7429d52190235f2383e47d340d7ff769f141cd8f9e7a4629a81abc6b19"
+	 "6963de2ec3f8313bb95505f96bf0cf2025e7b07cefdb93e3d2e348720d401425"
+	 "2f8af2a3a2fae6b6ea254e7aab6f3a8b5c936428b67869cef647c5f8e7985877"
+	 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+	 "4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d"
+	 "f4bef5a6d77ac9c9ab34382f380aba922dd91901d0d43886a5f99106041bb8e0"
+	 default))
  '(org-capture-templates
    '(("j" "journal entry" entry (file+olp+datetree "~/tmp/test.org")
-      "* %U\\n%?" :empty-lines-after 1)))
+	  "* %U\\n%?" :empty-lines-after 1)))
  '(package-selected-packages
    '(consult doom-modeline doom-themes evil evil-collection general gptel
-	     marginalia markdown-mode minions moody olivetti orderless
-	     org-appear vertico which-key)))
+			 marginalia markdown-mode minions moody olivetti orderless
+			 org-appear vertico which-key)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(doom-modeline-bar ((t (:background "#EDEFF1"))))
+ '(doom-modeline-buffer-file ((t (:weight normal))))
  '(doom-modeline-buffer-modified ((t (:foreground unspecified))))
  '(doom-modeline-evil-bold-state ((t (:weight bold))))
  '(doom-modeline-evil-emacs-state ((t (:weight bold))))
