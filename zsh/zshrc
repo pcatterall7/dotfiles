@@ -88,6 +88,9 @@ case $host in
             npm "$@"
         }
         ;;
+    "HQDTWHG4VP")
+        export ZSH="/Users/phil.catterall/.oh-my-zsh"
+        ;;
     *)
         echo -n "computer $host not recognized"
 esac
