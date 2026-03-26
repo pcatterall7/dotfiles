@@ -323,16 +323,23 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
 
 *** Tabs and Indentation
 
-Use real tabs with a width of 4 by default. Override text-mode's =indent-relative= which tries to align with the previous line and produces inconsistent indentation.
+Use spaces for indentation with a width of 2 by default. Python uses 4 spaces. Override text-mode's =indent-relative= which tries to align with the previous line and produces inconsistent indentation.
 
 #+begin_src emacs-lisp
-  (setq-default tab-width 4)
-  (setq-default indent-tabs-mode t)
+  (setq-default tab-width 2)
+  (setq-default indent-tabs-mode nil)
   (add-hook 'text-mode-hook
     (lambda ()
       (electric-indent-local-mode -1)
       (unless (derived-mode-p 'org-mode 'markdown-mode)
         (setq-local indent-line-function 'tab-to-tab-stop))))
+  (add-hook 'python-mode-hook
+    (lambda ()
+      (setq-local tab-width 4)
+      (setq-local python-indent-offset 4)))
+  (add-hook 'markdown-mode-hook
+    (lambda ()
+      (setq-local tab-width 4)))
 #+end_src
 
 *** Auto-revert
