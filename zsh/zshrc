@@ -70,23 +70,9 @@ case $host in
         plugins=(
             git
         )
-        export NVM_DIR="$HOME/.nvm"
-        # Lazy load nvm - only initialize when actually needed
-        nvm() {
-            unset -f nvm
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm "$@"
-        }
-        node() {
-            unset -f node nvm
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            node "$@"
-        }
-        npm() {
-            unset -f npm nvm
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            npm "$@"
-        }
+        # fnm (fast node manager) - replaces nvm
+        export PATH="$HOME/.local/share/fnm:$PATH"
+        eval "$(fnm env)"
         ;;
     "HQDTWHG4VP")
         export ZSH="/Users/phil.catterall/.oh-my-zsh"
