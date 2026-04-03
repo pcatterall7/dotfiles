@@ -44,7 +44,7 @@ a:hover {
     --article-date-color: rgba(0, 0, 0, 0.3);
     --table-cell-border-color: lightgray;
 
-    --font-article: "Georgia", -apple-system;
+    --font-article: "Merriweather", "Georgia", -apple-system;
     --font-mono:
         "JetBrains Mono", "SF Mono", Menlo, "Courier New", Courier, monospace;
     --code-background: rgb(241 245 249);
