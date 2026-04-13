@@ -90,6 +90,29 @@ case $host in
         ;;
     "HQDTWHG4VP")
         export ZSH="/Users/phil.catterall/.oh-my-zsh"
+        export NVM_DIR="$HOME/.nvm"
+        # Lazy load nvm - only initialize when actually needed
+        nvm() {
+            unset -f nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            nvm "$@"
+        }
+        node() {
+            unset -f node nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            node "$@"
+        }
+        npm() {
+            unset -f npm nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            npm "$@"
+        }
+        yarn() {
+            unset -f yarn nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            yarn "$@"
+        }
+        alias mdm='cd ~/src/universe/experimental/phil-catterall_data/mdm-prototype'
         ;;
     *)
         echo -n "computer $host not recognized"
