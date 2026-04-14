@@ -263,6 +263,7 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "fs" '(save-buffer :which-key "save file")
       "fS" '(write-file :which-key "save as")
       "fc" '(my/open-config :which-key "open emacs config file")
+      "fp" '(consult-fd :which-key "find file in project")
 
       ;; Buffer operations
       "b" '(:ignore t :which-key "buffers")
