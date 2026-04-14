@@ -31,10 +31,8 @@ case $host in
         # initiate https://github.com/tobi/try
         eval "$(ruby ~/.local/try.rb init ~/tries)"
         ;;
-    "phils-mbp")
-        export ZSH="/Users/edwardcatterall/.oh-my-zsh"
-        export GOOGLE_CLOUD_PROJECT="engineering-sandbox"
-        alias docs='cd ~/code/snowplow/documentation'
+    "HQDTWHG4VP")
+        export ZSH="/Users/phil.catterall/.oh-my-zsh"
         export NVM_DIR="$HOME/.nvm"
         # Lazy load nvm - only initialize when actually needed
         nvm() {
@@ -52,14 +50,13 @@ case $host in
             [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
             npm "$@"
         }
-        # initiate https://github.com/tobi/try
-        eval "$(ruby ~/.local/try.rb init ~/code/tries)"
-        # bun completions
-        [ -s "/Users/edwardcatterall/.bun/_bun" ] && source "/Users/edwardcatterall/.bun/_bun"
-
-        # bun
-        export BUN_INSTALL="$HOME/.bun"
-        export PATH="$BUN_INSTALL/bin:$PATH"
+        yarn() {
+            unset -f yarn nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            yarn "$@"
+        }
+        alias mdm='cd ~/src/universe/experimental/phil-catterall_data/mdm-prototype'
+        alias lg='lazygit'
         ;;
     "raspi")
         export COLORTERM=truecolor
@@ -87,32 +84,6 @@ case $host in
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             npm "$@"
         }
-        ;;
-    "HQDTWHG4VP")
-        export ZSH="/Users/phil.catterall/.oh-my-zsh"
-        export NVM_DIR="$HOME/.nvm"
-        # Lazy load nvm - only initialize when actually needed
-        nvm() {
-            unset -f nvm
-            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-            nvm "$@"
-        }
-        node() {
-            unset -f node nvm
-            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-            node "$@"
-        }
-        npm() {
-            unset -f npm nvm
-            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-            npm "$@"
-        }
-        yarn() {
-            unset -f yarn nvm
-            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-            yarn "$@"
-        }
-        alias mdm='cd ~/src/universe/experimental/phil-catterall_data/mdm-prototype'
         ;;
     *)
         echo -n "computer $host not recognized"
