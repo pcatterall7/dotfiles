@@ -24,6 +24,17 @@ cat > "$PLIST" <<EOF
         <string>$SCRIPT</string>
     </array>
 
+    <key>WorkingDirectory</key>
+    <string>$HOME</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>HOME</key>
+        <string>$HOME</string>
+    </dict>
+
     <!-- Run daily at 9:00 AM -->
     <key>StartCalendarInterval</key>
     <dict>
