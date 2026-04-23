@@ -19,10 +19,10 @@
    '(("j" "journal entry" entry (file+olp+datetree "~/tmp/test.org")
       "* %U\\n%?" :empty-lines-after 1)))
  '(package-selected-packages
-   '(consult doom-modeline doom-themes evil evil-collection general gptel
-             marginalia markdown-mode minions moody olivetti orderless
-             org-appear treemacs treemacs-evil treemacs-magit vertico
-             which-key)))
+   '(affe consult doom-modeline doom-themes evil evil-collection general
+          gptel marginalia markdown-mode minions moody olivetti
+          orderless org-appear treemacs treemacs-evil treemacs-magit
+          vertico which-key)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

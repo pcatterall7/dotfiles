@@ -155,6 +155,16 @@ Consult provides enhanced versions of common Emacs commands with better previews
          ("M-y" . consult-yank-pop)))   ; Better yank (paste) history
 #+end_src
 
+*** Affe
+
+Affe is an async fuzzy finder for files and grep, built on consult. It loads candidates once and filters in-memory via orderless, giving an fzf-like feel.
+
+#+begin_src emacs-lisp
+  (use-package affe
+    :after consult
+    :commands (affe-find affe-grep))
+#+end_src
+
 ** Leader Key Configuration
 
 *** Custom functions
@@ -224,6 +234,15 @@ Zoom out one level
       (org-narrow-to-subtree))))
 #+end_src
 
+Run =affe-find= with a directory prompt (searches outside the current project).
+#+begin_src emacs-lisp
+  (defun my/affe-find-any ()
+    "Run affe-find prompting for a starting directory."
+    (interactive)
+    (let ((current-prefix-arg '(4)))
+      (call-interactively #'affe-find)))
+#+end_src
+
 Auto-complete heading link (based on =custom_id= property)
 #+begin_src emacs-lisp
 (defun my/insert-org-custom-id-link ()
@@ -263,7 +282,8 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "fs" '(save-buffer :which-key "save file")
       "fS" '(write-file :which-key "save as")
       "fc" '(my/open-config :which-key "open emacs config file")
-      "fp" '(consult-fd :which-key "find file in project")
+      "fp" '(project-find-file :which-key "find file in project")
+      "fF" '(my/affe-find-any :which-key "find file (any dir)")
 
       ;; Buffer operations
       "b" '(:ignore t :which-key "buffers")
@@ -380,19 +400,37 @@ Load custom themes and set up automatic theme switching based on macOS appearanc
     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
     (add-to-list 'load-path "~/.emacs.d/themes/")
 
+    (defun my/system-dark-mode-p ()
+      "Best-effort detection of whether the environment prefers dark mode.
+  On TTY frames (e.g. headless Linux over SSH) uses the terminal's
+  reported background; on macOS GUI reads the system appearance."
+      (cond
+       ((eq (frame-parameter nil 'background-mode) 'dark) t)
+       ((eq (frame-parameter nil 'background-mode) 'light) nil)
+       ((eq system-type 'darwin)
+        (string-match-p
+         "Dark"
+         (shell-command-to-string "defaults read -g AppleInterfaceStyle 2>/dev/null")))
+       (t nil)))
+
     (defun toggle-light-dark-theme ()
-      "Toggle between light and dark themes based on current state."
+      "Toggle between light and dark themes.
+  If no theme is loaded yet, match the system appearance."
       (interactive)
-      (if (member 'doom-tokyo-night custom-enabled-themes)
-  	(progn
-  	  (mapc #'disable-theme custom-enabled-themes)
-  	  (load-theme 'alabaster-themes-light t)
-  	  (set-face-attribute 'line-number nil :background (face-background 'default))
-  	  (set-face-attribute 'line-number-current-line nil :background (face-background 'default)))
-  	(progn
-  	  (mapc #'disable-theme custom-enabled-themes)
-  	  (load-theme 'doom-tokyo-night t)
-  	  (add-to-list 'default-frame-alist '(ns-appearance . dark)))))
+      (let ((want-dark
+             (cond
+              ((member 'doom-tokyo-night custom-enabled-themes) nil)
+              ((member 'alabaster-themes-light custom-enabled-themes) t)
+              (t (my/system-dark-mode-p)))))
+        (mapc #'disable-theme custom-enabled-themes)
+        (if want-dark
+            (progn
+              (load-theme 'doom-tokyo-night t)
+              (when (eq system-type 'darwin)
+                (add-to-list 'default-frame-alist '(ns-appearance . dark))))
+          (load-theme 'alabaster-themes-light t)
+          (set-face-attribute 'line-number nil :background (face-background 'default))
+          (set-face-attribute 'line-number-current-line nil :background (face-background 'default)))))
 #+end_src
 
 
