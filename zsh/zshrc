@@ -89,6 +89,7 @@ case $host in
         echo -n "computer $host not recognized"
 esac
 
+DISABLE_AUTO_TITLE="true"
 source $ZSH/oh-my-zsh.sh
 
 # ====== ALIASES ======
@@ -125,6 +126,9 @@ tempe () {
   fi
 }
 
+# rename the current iTerm tab
+tab () { echo -ne "\033]0;$1\007" }
+
 alias gs='git status'
 
 # soft serve git server
@@ -139,3 +143,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# use fzf for shell command history
+source <(fzf --zsh)   # zsh
