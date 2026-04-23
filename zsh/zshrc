@@ -101,6 +101,9 @@ lfcd () {
 
 alias lf='lfcd'
 
+# fzf
+export FZF_DEFAULT_OPTS='--height 40% --reverse'
+
 # emacs
 alias e='emacsclient -t'           # Terminal emacs
 alias ec='emacsclient -c'          # GUI emacs
