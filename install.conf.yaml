@@ -37,6 +37,10 @@
     ~/.emacs.d:
       path: emacs
       force: true
+    ~/.hammerspoon:
+      if: '[ `uname` = Darwin ]'
+      path: hammerspoon
+      force: true
     ~/.config/zed:
       if: '[ `uname` = Darwin ]'
       path: zed
