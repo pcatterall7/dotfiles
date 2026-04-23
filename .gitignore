@@ -5,3 +5,5 @@
 /zed/embeddings/*
 emacs/org-persist
 emacs/org-persist/*
+emacs/.cache
+emacs/.cache/*
