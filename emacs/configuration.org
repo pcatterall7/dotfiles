@@ -323,7 +323,7 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
 
       ;; Themes
       "t" '(:ignore t :which-key "themes")
-      "tt" '(toggle-theme :which-key "toggle theme")
+      "tt" '(toggle-light-dark-theme :which-key "toggle theme")
 
       ;; Markdown
       "m" '(:ignore t :which-key "markdown")
@@ -613,14 +613,14 @@ Basic org-mode configuration for note-taking and writing.
     :config
     (require 'ox-md)
     (setq org-confirm-babel-evaluate nil)
-    (setq org-hide-emphasis-markers t)
-    (org-indent-mode 1))
+    (setq org-hide-emphasis-markers t))
 
   (use-package org-appear               ; Show hidden emphasis markers on hover
     :hook (org-mode . org-appear-mode))
 
   (add-hook 'org-mode-hook
     (lambda ()
+      (org-indent-mode 1)
       (setq-local indent-tabs-mode nil)  ; Org uses spaces, not tabs
       (setq-local tab-width 8)           ; org-indent-mode requires tab-width 8
       (setq-local evil-shift-width 2)))
