@@ -18,16 +18,6 @@ local buildModal = require("lib.modal").build
 -- Prompt for a customer name, then run the new-customer-note script with
 -- feedback so the user knows whether the doc was actually created.
 local function newCustomerNote()
-    local button, name = hs.dialog.textPrompt(
-        "New customer note",
-        "Customer name:",
-        "",
-        "OK",
-        "Cancel"
-    )
-    if button ~= "OK" then return end
-    name = (name or ""):gsub("^%s+", ""):gsub("%s+$", "")
-    if name == "" then return end
     runScript(HOME .. "/bin/databricks/new-customer-note.sh", { name },
         { feedback = true, label = "customer-note" })
 end
