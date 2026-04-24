@@ -41,6 +41,10 @@
       if: '[ `uname` = Darwin ]'
       path: hammerspoon
       force: true
+    ~/.config/karabiner/karabiner.json:
+      if: '[ `uname` = Darwin ]'
+      path: karabiner/karabiner.json
+      force: true
     ~/.config/zed:
       if: '[ `uname` = Darwin ]'
       path: zed
