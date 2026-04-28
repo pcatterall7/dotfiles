@@ -155,6 +155,16 @@ Consult provides enhanced versions of common Emacs commands with better previews
          ("M-y" . consult-yank-pop)))   ; Better yank (paste) history
 #+end_src
 
+*** Affe
+
+Affe is an async fuzzy finder for files and grep, built on consult. It loads candidates once and filters in-memory via orderless, giving an fzf-like feel.
+
+#+begin_src emacs-lisp
+  (use-package affe
+    :after consult
+    :commands (affe-find affe-grep))
+#+end_src
+
 ** Leader Key Configuration
 
 *** Custom functions
@@ -224,6 +234,15 @@ Zoom out one level
       (org-narrow-to-subtree))))
 #+end_src
 
+Run =affe-find= with a directory prompt (searches outside the current project).
+#+begin_src emacs-lisp
+  (defun my/affe-find-any ()
+    "Run affe-find prompting for a starting directory."
+    (interactive)
+    (let ((current-prefix-arg '(4)))
+      (call-interactively #'affe-find)))
+#+end_src
+
 Auto-complete heading link (based on =custom_id= property)
 #+begin_src emacs-lisp
 (defun my/insert-org-custom-id-link ()
@@ -251,7 +270,7 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
     :demand t
     :config
     (general-create-definer my-leader-def
-      :states '(normal visual emacs)
+      :states '(normal visual emacs motion treemacs)
       :keymaps 'override
       :prefix "SPC")
 
@@ -263,6 +282,8 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "fs" '(save-buffer :which-key "save file")
       "fS" '(write-file :which-key "save as")
       "fc" '(my/open-config :which-key "open emacs config file")
+      "fp" '(project-find-file :which-key "find file in project")
+      "fF" '(my/affe-find-any :which-key "find file (any dir)")
 
       ;; Buffer operations
       "b" '(:ignore t :which-key "buffers")
@@ -302,11 +323,18 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
 
       ;; Themes
       "t" '(:ignore t :which-key "themes")
-      "tt" '(toggle-theme :which-key "toggle theme")
+      "tt" '(toggle-light-dark-theme :which-key "toggle theme")
 
       ;; Markdown
       "m" '(:ignore t :which-key "markdown")
       "mp" '(my/preview-markdown-in-marked2 :which-key "preview in Marked 2")
+
+      ;; Explorer / file tree
+      "e" '(:ignore t :which-key "explorer")
+      "ee" '(treemacs :which-key "toggle tree")
+      "eo" '(treemacs-select-window :which-key "focus tree")
+      "ef" '(treemacs-find-file :which-key "find current file in tree")
+      "ed" '(treemacs-add-and-display-current-project :which-key "add project")
 
       ;; Utility
       "SPC" '(execute-extended-command :which-key "M-x")
@@ -350,14 +378,16 @@ Automatically refresh buffers if there are changes to the file on disk
   (global-auto-revert-mode 1)
 #+end_src
 
-Put all backup files in a single place. Copied from [[https://www.reddit.com/r/emacs/comments/azyrsr/what_are_the_files_emacs_creates_when_i_make/][this Reddit thread]].
+Put all backup and auto-save files in a single place. Copied from [[https://www.reddit.com/r/emacs/comments/azyrsr/what_are_the_files_emacs_creates_when_i_make/][this Reddit thread]].
 #+begin_src emacs-lisp
-  (setq backup-directory-alist `(("." . "~/.saves")))
+  (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
   (setq backup-by-copying t)
   (setq delete-old-versions t
 	kept-new-versions 6
 	kept-old-versions 2
-	version-control t) 
+	version-control t)
+  (setq auto-save-file-name-transforms
+        `((".*" "~/.emacs.d/backups/" t)))
 #+end_src
 
 * Appearance & UI
@@ -370,18 +400,37 @@ Load custom themes and set up automatic theme switching based on macOS appearanc
     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
     (add-to-list 'load-path "~/.emacs.d/themes/")
 
+    (defun my/system-dark-mode-p ()
+      "Best-effort detection of whether the environment prefers dark mode.
+  On TTY frames (e.g. headless Linux over SSH) uses the terminal's
+  reported background; on macOS GUI reads the system appearance."
+      (cond
+       ((eq (frame-parameter nil 'background-mode) 'dark) t)
+       ((eq (frame-parameter nil 'background-mode) 'light) nil)
+       ((eq system-type 'darwin)
+        (string-match-p
+         "Dark"
+         (shell-command-to-string "defaults read -g AppleInterfaceStyle 2>/dev/null")))
+       (t nil)))
+
     (defun toggle-light-dark-theme ()
-      "Automatically adjust theme based on macOS appearance."
+      "Toggle between light and dark themes.
+  If no theme is loaded yet, match the system appearance."
       (interactive)
-      (let ((appearance (shell-command-to-string "defaults read -g AppleInterfaceStyle")))
-        (if (string-match-p "Dark" appearance)
-  	(progn
-  	  (mapc #'disable-theme custom-enabled-themes)
-  	  (load-theme 'doom-tokyo-night t)
-  	  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
-  	(progn
-  	  (mapc #'disable-theme custom-enabled-themes)
-  	  (load-theme 'alabaster-themes-light t)))))
+      (let ((want-dark
+             (cond
+              ((member 'doom-tokyo-night custom-enabled-themes) nil)
+              ((member 'alabaster-themes-light custom-enabled-themes) t)
+              (t (my/system-dark-mode-p)))))
+        (mapc #'disable-theme custom-enabled-themes)
+        (if want-dark
+            (progn
+              (load-theme 'doom-tokyo-night t)
+              (when (eq system-type 'darwin)
+                (add-to-list 'default-frame-alist '(ns-appearance . dark))))
+          (load-theme 'alabaster-themes-light t)
+          (set-face-attribute 'line-number nil :background (face-background 'default))
+          (set-face-attribute 'line-number-current-line nil :background (face-background 'default)))))
 #+end_src
 
 
@@ -564,14 +613,14 @@ Basic org-mode configuration for note-taking and writing.
     :config
     (require 'ox-md)
     (setq org-confirm-babel-evaluate nil)
-    (setq org-hide-emphasis-markers t)
-    (org-indent-mode 1))
+    (setq org-hide-emphasis-markers t))
 
   (use-package org-appear               ; Show hidden emphasis markers on hover
     :hook (org-mode . org-appear-mode))
 
   (add-hook 'org-mode-hook
     (lambda ()
+      (org-indent-mode 1)
       (setq-local indent-tabs-mode nil)  ; Org uses spaces, not tabs
       (setq-local tab-width 8)           ; org-indent-mode requires tab-width 8
       (setq-local evil-shift-width 2)))
@@ -631,6 +680,33 @@ Open the current markdown file in Marked 2 for live preview.
   (if buffer-file-name
       (shell-command (concat "open -a \"Marked 2\" " (shell-quote-argument buffer-file-name)))
     (message "Buffer is not visiting a file")))
+#+end_src
+
+** Treemacs
+
+A file-tree sidebar. Visual styling is already configured via =doom-themes-treemacs-config= in the Doom Themes block.
+
+#+begin_src emacs-lisp
+  (use-package treemacs
+    :commands (treemacs
+               treemacs-select-window
+               treemacs-find-file
+               treemacs-add-and-display-current-project)
+    :config
+    (setq treemacs-width 30
+          treemacs-follow-after-init t
+          treemacs-is-never-most-recent-window t
+          treemacs-no-png-images nil
+          treemacs-show-hidden-files t)
+    (treemacs-follow-mode 1)
+    (treemacs-filewatch-mode 1)
+    (treemacs-git-mode 'deferred))
+
+  (use-package treemacs-evil
+    :after (treemacs evil))
+
+  (use-package treemacs-magit
+    :after (treemacs magit))
 #+end_src
 
 ** gptel

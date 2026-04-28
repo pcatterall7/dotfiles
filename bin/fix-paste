@@ -1,0 +1,3 @@
+#!/bin/bash
+# Removes hard line breaks from clipboard text, preserving intentional blank lines.
+pbpaste | awk 'BEGIN{RS=""; ORS="\n\n"} {gsub(/\n/, " "); print}' | pbcopy
