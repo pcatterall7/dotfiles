@@ -155,15 +155,9 @@ Consult provides enhanced versions of common Emacs commands with better previews
          ("M-y" . consult-yank-pop)))   ; Better yank (paste) history
 #+end_src
 
-*** Affe
+*** Consult-find
 
-Affe is an async fuzzy finder for files and grep, built on consult. It loads candidates once and filters in-memory via orderless, giving an fzf-like feel.
-
-#+begin_src emacs-lisp
-  (use-package affe
-    :after consult
-    :commands (affe-find affe-grep))
-#+end_src
+=consult-find= is bundled with consult. Passing a prefix arg prompts for a starting directory, giving an fzf-like feel across any directory.
 
 ** Leader Key Configuration
 
@@ -234,13 +228,13 @@ Zoom out one level
       (org-narrow-to-subtree))))
 #+end_src
 
-Run =affe-find= with a directory prompt (searches outside the current project).
+Run =consult-find= with a directory prompt (searches outside the current project).
 #+begin_src emacs-lisp
-  (defun my/affe-find-any ()
-    "Run affe-find prompting for a starting directory."
+  (defun my/find-file-any ()
+    "Run consult-find prompting for a starting directory."
     (interactive)
     (let ((current-prefix-arg '(4)))
-      (call-interactively #'affe-find)))
+      (call-interactively #'consult-find)))
 #+end_src
 
 Auto-complete heading link (based on =custom_id= property)
@@ -283,7 +277,7 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "fS" '(write-file :which-key "save as")
       "fc" '(my/open-config :which-key "open emacs config file")
       "fp" '(project-find-file :which-key "find file in project")
-      "fF" '(my/affe-find-any :which-key "find file (any dir)")
+      "fF" '(my/find-file-any :which-key "find file (any dir)")
 
       ;; Buffer operations
       "b" '(:ignore t :which-key "buffers")
@@ -329,12 +323,12 @@ General.el makes it easy to set up a Space leader key like in Vim or Doom Emacs.
       "m" '(:ignore t :which-key "markdown")
       "mp" '(my/preview-markdown-in-marked2 :which-key "preview in Marked 2")
 
-      ;; Explorer / file tree
+      ;; Explorer / file tree (macOS only)
       "e" '(:ignore t :which-key "explorer")
-      "ee" '(treemacs :which-key "toggle tree")
+      "ee" '(treemacs-add-and-display-current-project :which-key "open current project")
       "eo" '(treemacs-select-window :which-key "focus tree")
       "ef" '(treemacs-find-file :which-key "find current file in tree")
-      "ed" '(treemacs-add-and-display-current-project :which-key "add project")
+      "ed" '(treemacs :which-key "toggle tree")
 
       ;; Utility
       "SPC" '(execute-extended-command :which-key "M-x")
@@ -688,6 +682,7 @@ A file-tree sidebar. Visual styling is already configured via =doom-themes-treem
 
 #+begin_src emacs-lisp
   (use-package treemacs
+    :if (eq system-type 'darwin)
     :commands (treemacs
                treemacs-select-window
                treemacs-find-file
@@ -703,10 +698,9 @@ A file-tree sidebar. Visual styling is already configured via =doom-themes-treem
     (treemacs-git-mode 'deferred))
 
   (use-package treemacs-evil
+    :if (eq system-type 'darwin)
     :after (treemacs evil))
 
-  (use-package treemacs-magit
-    :after (treemacs magit))
 #+end_src
 
 ** gptel
