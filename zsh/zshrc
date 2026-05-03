@@ -55,7 +55,7 @@ case $host in
             [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
             yarn "$@"
         }
-        alias mdm='cd ~/src/universe/experimental/phil-catterall_data/mdm-prototype'
+        export MDM_DIR="$HOME/src/universe/experimental/phil-catterall_data/mdm-prototype-v2"
         alias lg='lazygit'
         ;;
     "raspi")

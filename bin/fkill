@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Interactively kill processes using fzf
+
+signal="${1:--15}"
+
+ps -eo pid,user,%cpu,%mem,comm \
+  | awk 'NR==1 { header=$0; next } { print }' \
+  | fzf --multi \
+        --header="$(ps -eo pid,user,%cpu,%mem,comm | head -1)" \
+        --preview='ps -p {1} -o pid,ppid,user,%cpu,%mem,etime,command 2>/dev/null | tail -1' \
+        --preview-window=down:2:wrap \
+        --prompt="kill ($signal) > " \
+  | awk '{print $1}' \
+  | xargs -r kill "$signal"
