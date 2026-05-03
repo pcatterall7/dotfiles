@@ -70,6 +70,8 @@ case $host in
         # fnm (fast node manager) - replaces nvm
         export PATH="$HOME/.local/share/fnm:$PATH"
         eval "$(fnm env)"
+        export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
         ;;
     *)
         echo -n "computer $host not recognized"
