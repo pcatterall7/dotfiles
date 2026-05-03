@@ -50,6 +50,11 @@ case $host in
             [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
             npm "$@"
         }
+        npx() {
+            unset -f npx nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            npx "$@"
+        }
         yarn() {
             unset -f yarn nvm
             [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
