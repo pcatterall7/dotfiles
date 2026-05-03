@@ -58,3 +58,5 @@
       glob: true
       path: skills/*
       create: true
+    ~/.claude/statusline.py:
+      path: skills/statusline.py
