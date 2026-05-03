@@ -55,7 +55,7 @@ case $host in
             [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
             yarn "$@"
         }
-        alias mdm='cd ~/src/universe/experimental/phil-catterall_data/mdm-prototype'
+        export MDM_DIR="$HOME/src/universe/experimental/phil-catterall_data/mdm-prototype-v2"
         alias lg='lazygit'
         ;;
     "raspi")
@@ -67,28 +67,17 @@ case $host in
         plugins=(
             git
         )
-        export NVM_DIR="$HOME/.nvm"
-        # Lazy load nvm - only initialize when actually needed
-        nvm() {
-            unset -f nvm
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm "$@"
-        }
-        node() {
-            unset -f node nvm
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            node "$@"
-        }
-        npm() {
-            unset -f npm nvm
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            npm "$@"
-        }
+        # fnm (fast node manager) - replaces nvm
+        export PATH="$HOME/.local/share/fnm:$PATH"
+        eval "$(fnm env)"
+        export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
         ;;
     *)
         echo -n "computer $host not recognized"
 esac
 
+DISABLE_AUTO_TITLE="true"
 source $ZSH/oh-my-zsh.sh
 
 # ====== ALIASES ======
@@ -125,6 +114,9 @@ tempe () {
   fi
 }
 
+# rename the current iTerm tab
+tab () { echo -ne "\033]0;$1\007" }
+
 alias gs='git status'
 
 # soft serve git server
@@ -139,3 +131,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# use fzf for shell command history
+source <(fzf --zsh)   # zsh

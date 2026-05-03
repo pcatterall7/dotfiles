@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# Sync emacs config from this machine to Arca devbox.
+# Usage: sync-emacs-to-arca [arca.ssh|arca_arm.ssh]
+
+set -euo pipefail
+
+REMOTE="${1:-arca.ssh}"
+DOTFILES_EMACS="$(cd "$(dirname "$0")/../.." && pwd)/emacs"
+REMOTE_EMACS_DIR="~/.emacs.d"
+
+echo "Syncing emacs config to $REMOTE..."
+
+# Ensure remote ~/.emacs.d/themes exists
+ssh "$REMOTE" "mkdir -p $REMOTE_EMACS_DIR/themes"
+
+# Copy core config files
+echo "  -> init.el"
+scp "$DOTFILES_EMACS/init.el" "$REMOTE:$REMOTE_EMACS_DIR/init.el"
+
+echo "  -> configuration.org"
+scp "$DOTFILES_EMACS/configuration.org" "$REMOTE:$REMOTE_EMACS_DIR/configuration.org"
+
+echo "  -> custom-vars.el"
+scp "$DOTFILES_EMACS/custom-vars.el" "$REMOTE:$REMOTE_EMACS_DIR/custom-vars.el"
+
+# Copy custom themes
+echo "  -> themes/"
+scp "$DOTFILES_EMACS/themes/"* "$REMOTE:$REMOTE_EMACS_DIR/themes/"
+
+# Install emacs on Arca if not already present.
+# Per go/arca: apt packages are wiped daily, so we add a self-healing check to ~/.zshrc.
+echo ""
+if ssh "$REMOTE" "command -v emacs &>/dev/null"; then
+  echo "emacs is already installed on $REMOTE."
+else
+  echo "emacs not found on $REMOTE — installing now..."
+  ssh "$REMOTE" "sudo DATABRICKS_ALLOW_INSTALL=1 apt install -y emacs-nox fd-find"
+  echo "  (tip: to reinstall automatically each day, add the block below to ~/.zshrc on Arca)"
+fi
+
+# Print the zshrc snippet regardless, so the user can add it if they want
+cat <<'ZSHRC_SNIPPET'
+
+# --- Add to ~/.zshrc on Arca to persist emacs across daily wipes ---
+for _pkg in emacs-nox fd-find; do
+  if ! command -v "${_pkg%%-*}" &>/dev/null; then
+    sudo DATABRICKS_ALLOW_INSTALL=1 apt install -y "$_pkg"
+  fi
+done
+# -------------------------------------------------------------------
+ZSHRC_SNIPPET
+
+echo ""
+echo "Done. Connect to Arca and run 'emacs' to trigger first-time package installation."

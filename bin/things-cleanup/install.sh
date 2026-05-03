@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-LABEL="com.user.claude-morning"
+LABEL="com.user.things-cleanup"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT="$SCRIPT_DIR/run.sh"
 PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
@@ -20,20 +20,9 @@ cat > "$PLIST" <<EOF
 
     <key>ProgramArguments</key>
     <array>
-        <string>/bin/bash</string>
-        <string>$SCRIPT</string>
+        <string>/usr/bin/osascript</string>
+        <string>$SCRIPT_DIR/things-cleanup.applescript</string>
     </array>
-
-    <key>WorkingDirectory</key>
-    <string>$HOME</string>
-
-    <key>EnvironmentVariables</key>
-    <dict>
-        <key>PATH</key>
-        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
-        <key>HOME</key>
-        <string>$HOME</string>
-    </dict>
 
     <!-- Run daily at 9:00 AM -->
     <key>StartCalendarInterval</key>
@@ -44,11 +33,17 @@ cat > "$PLIST" <<EOF
         <integer>0</integer>
     </dict>
 
+    <key>RunAtLoad</key>
+    <false/>
+
     <key>StandardOutPath</key>
-    <string>$LOG_DIR/claude-morning.log</string>
+    <string>$LOG_DIR/things-cleanup.log</string>
 
     <key>StandardErrorPath</key>
-    <string>$LOG_DIR/claude-morning-error.log</string>
+    <string>$LOG_DIR/things-cleanup-error.log</string>
+
+    <key>ProcessType</key>
+    <string>Background</string>
 </dict>
 </plist>
 EOF
@@ -58,7 +53,7 @@ launchctl unload "$PLIST" 2>/dev/null || true
 launchctl load "$PLIST"
 
 echo "Installed and loaded $LABEL"
-echo "Logs: $LOG_DIR/claude-morning.log"
+echo "Logs: $LOG_DIR/things-cleanup.log"
 echo ""
 echo "To uninstall:"
 echo "  launchctl unload $PLIST && rm $PLIST"
