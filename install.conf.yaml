@@ -18,11 +18,10 @@
       if: '[ `uname` = Darwin ]'
       path: espanso/
       force: true
-    ## NOT CURRENTLY USED
-    # ~/.config/nvim:
-    #   if: '[ `uname` = Darwin ]'
-    #   path: nvim
-    #   force: true
+    ~/.config/nvim:
+      if: '[ `uname` = Darwin ]'
+      path: nvim
+      force: true
     ~/.tmux.conf:
       path: tmux/tmux.conf
       force: true
