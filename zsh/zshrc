@@ -5,7 +5,7 @@
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 # some apps try to pass the entire $EDITOR string to env as a single argument.
 # this wrapper function works around that issue.
-export EDITOR="emacsclient-term"
+export EDITOR="nvim"
 ZSH_THEME="clean-custom" #"fwalch"
 
 # get the hostname. works on both macos and linux.
