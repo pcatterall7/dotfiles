@@ -19,7 +19,6 @@
       path: espanso/
       force: true
     ~/.config/nvim:
-      if: '[ `uname` = Darwin ]'
       path: nvim
       force: true
     ~/.tmux.conf:
