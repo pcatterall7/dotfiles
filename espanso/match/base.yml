@@ -22,7 +22,7 @@ matches:
       - name: short_date
         type: date
         params:
-          format: "%b %-e %Y"
+          format: "%b %-e, %Y"
   - trigger: dtS
     replace: "{{euro_date}}"
     force_clipboard: true

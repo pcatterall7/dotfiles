@@ -18,11 +18,9 @@
       if: '[ `uname` = Darwin ]'
       path: espanso/
       force: true
-    ## NOT CURRENTLY USED
-    # ~/.config/nvim:
-    #   if: '[ `uname` = Darwin ]'
-    #   path: nvim
-    #   force: true
+    ~/.config/nvim:
+      path: nvim
+      force: true
     ~/.tmux.conf:
       path: tmux/tmux.conf
       force: true
@@ -37,6 +35,14 @@
     ~/.emacs.d:
       path: emacs
       force: true
+    ~/.hammerspoon:
+      if: '[ `uname` = Darwin ]'
+      path: hammerspoon
+      force: true
+    ~/.config/karabiner/karabiner.json:
+      if: '[ `uname` = Darwin ]'
+      path: karabiner/karabiner.json
+      force: true
     ~/.config/zed:
       if: '[ `uname` = Darwin ]'
       path: zed
@@ -46,7 +52,9 @@
       glob: true
       path: sublime-text/*
       force: true
-    ~/.config/claude/skills/:
-      glob: true
-      path: skills/*
+    ~/.config/claude/skills:
+      path: skills
       create: true
+      force: true
+    ~/.claude/statusline.py:
+      path: skills/statusline.py

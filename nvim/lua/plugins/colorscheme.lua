@@ -1,31 +1,16 @@
 return {
   {
-    "deparr/tairiki.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      palette = "light",
-      terminal = true,
-    },
-  },
-
-  {
-    "projekt0n/github-nvim-theme",
-    name = "github-theme",
-    lazy = false,
-    priority = 1000,
-  },
-
-  {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
+    config = function()
+      require("tokyonight").setup({ style = "night" })
+      vim.cmd("colorscheme tokyonight-night")
+    end,
   },
   {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight-storm",
-    },
+    "projekt0n/github-nvim-theme",
+    lazy = true,
+    priority = 999,
   },
 }

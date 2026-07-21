@@ -7,6 +7,13 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "git": {
+    "git_gutter": "tracked_files"
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "cli_default_open_behavior": "new_window",
   "buffer_line_height": {
     "custom": 1.5,
   },
@@ -16,7 +23,7 @@
       "default": "allow",
     },
   },
-  "base_keymap": "VSCode",
+  "base_keymap": "Emacs",
   "ui_font_size": 14,
   "buffer_font_size": 14.0,
   "terminal": { "font_size": 13 },
@@ -24,8 +31,8 @@
   "buffer_font_family": "JetBrains Mono NL",
   "theme": {
     "mode": "system",
-    "light": "Alabaster BG",
-    "dark": "GitHub Dark",
+    "light": "One Light",
+    "dark": "Tokyo Night",
   },
   "vim_mode": true,
   // "jupyter": {

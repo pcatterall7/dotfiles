@@ -5,7 +5,7 @@
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 # some apps try to pass the entire $EDITOR string to env as a single argument.
 # this wrapper function works around that issue.
-export EDITOR="emacsclient-term"
+export EDITOR="nvim"
 ZSH_THEME="clean-custom" #"fwalch"
 
 # get the hostname. works on both macos and linux.
@@ -15,7 +15,7 @@ case $host in
     "phil-macbook-air")
         # ====== Personal macbook scripts, aliases, etc. ======
         export ZSH="/Users/phil/.oh-my-zsh"
-        export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+        export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:/Applications/Bear.app/Contents/MacOS:$PATH"
 
         plugins=(
             git
@@ -31,10 +31,8 @@ case $host in
         # initiate https://github.com/tobi/try
         eval "$(ruby ~/.local/try.rb init ~/tries)"
         ;;
-    "phils-mbp")
-        export ZSH="/Users/edwardcatterall/.oh-my-zsh"
-        export GOOGLE_CLOUD_PROJECT="engineering-sandbox"
-        alias docs='cd ~/code/snowplow/documentation'
+    "HQDTWHG4VP")
+        export ZSH="/Users/phil.catterall/.oh-my-zsh"
         export NVM_DIR="$HOME/.nvm"
         # Lazy load nvm - only initialize when actually needed
         nvm() {
@@ -52,14 +50,18 @@ case $host in
             [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
             npm "$@"
         }
-        # initiate https://github.com/tobi/try
-        eval "$(ruby ~/.local/try.rb init ~/code/tries)"
-        # bun completions
-        [ -s "/Users/edwardcatterall/.bun/_bun" ] && source "/Users/edwardcatterall/.bun/_bun"
-
-        # bun
-        export BUN_INSTALL="$HOME/.bun"
-        export PATH="$BUN_INSTALL/bin:$PATH"
+        npx() {
+            unset -f npx nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            npx "$@"
+        }
+        yarn() {
+            unset -f yarn nvm
+            [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+            yarn "$@"
+        }
+        export MDM_DIR="$HOME/src/universe/experimental/phil-catterall_data/mdm-prototype-v2"
+        alias lg='lazygit'
         ;;
     "raspi")
         export COLORTERM=truecolor
@@ -70,31 +72,17 @@ case $host in
         plugins=(
             git
         )
-        export NVM_DIR="$HOME/.nvm"
-        # Lazy load nvm - only initialize when actually needed
-        nvm() {
-            unset -f nvm
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm "$@"
-        }
-        node() {
-            unset -f node nvm
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            node "$@"
-        }
-        npm() {
-            unset -f npm nvm
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            npm "$@"
-        }
-        ;;
-    "HQDTWHG4VP")
-        export ZSH="/Users/phil.catterall/.oh-my-zsh"
+        # fnm (fast node manager) - replaces nvm
+        export PATH="$HOME/.local/share/fnm:$PATH"
+        eval "$(fnm env)"
+        export PATH="$PATH:/opt/nvim-linux-arm64/bin"
+
         ;;
     *)
         echo -n "computer $host not recognized"
 esac
 
+DISABLE_AUTO_TITLE="true"
 source $ZSH/oh-my-zsh.sh
 
 # ====== ALIASES ======
@@ -106,6 +94,9 @@ lfcd () {
 }
 
 alias lf='lfcd'
+
+# fzf
+export FZF_DEFAULT_OPTS='--height 40% --reverse'
 
 # emacs
 alias e='emacsclient -t'           # Terminal emacs
@@ -128,6 +119,9 @@ tempe () {
   fi
 }
 
+# rename the current iTerm tab
+tab () { echo -ne "\033]0;$1\007" }
+
 alias gs='git status'
 
 # soft serve git server
@@ -142,3 +136,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# use fzf for shell command history
+source <(fzf --zsh)   # zsh

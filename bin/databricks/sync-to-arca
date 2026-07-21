@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Sync dotfiles and tools to Arca devbox.
+# Usage: sync-to-arca [arca.ssh|arca_arm.ssh]
+#
+# Syncs:
+#   - ~/.zshrc          (from zsh/zshrc-arca)
+#   - ~/.claude/skills/ (all local Claude skills)
+#   - emacs config      (delegates to sync-emacs-to-arca)
+
+set -euo pipefail
+
+REMOTE="${1:-arca.ssh}"
+DOTFILES="$(cd "$(dirname "$0")/../.." && pwd)"
+
+echo "Syncing dotfiles to $REMOTE..."
+
+# ====== zshrc ======
+echo ""
+echo "  -> ~/.zshrc"
+scp "$DOTFILES/zsh/zshrc-arca" "$REMOTE:~/.zshrc"
+
+# ====== Claude skills ======
+echo ""
+echo "  -> ~/.claude/skills/"
+ssh "$REMOTE" "mkdir -p ~/.claude/skills"
+rsync -av --delete ~/.claude/skills/ "$REMOTE:~/.claude/skills/"
+
+# ====== Emacs ======
+echo ""
+"$(dirname "$0")/sync-emacs-to-arca" "$REMOTE"
+
+echo ""
+echo "Done. Reconnect to $REMOTE to pick up the new shell config."
