@@ -19,7 +19,6 @@
       path: espanso/
       force: true
     ~/.config/nvim:
-      if: '[ `uname` = Darwin ]'
       path: nvim
       force: true
     ~/.tmux.conf:
@@ -53,9 +52,9 @@
       glob: true
       path: sublime-text/*
       force: true
-    ~/.config/claude/skills/:
-      glob: true
-      path: skills/*
+    ~/.config/claude/skills:
+      path: skills
       create: true
+      force: true
     ~/.claude/statusline.py:
       path: skills/statusline.py
