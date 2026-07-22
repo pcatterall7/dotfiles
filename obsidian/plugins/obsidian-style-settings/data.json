@@ -3,11 +3,17 @@
   "minimal-style@@h1-weight": 600,
   "minimal-style@@h1-size": "1.25em",
   "minimal-style@@h2-size": "1em",
-  "minimal-style@@h2-weight": 600,
-  "minimal-style@@h3-weight": 600,
+  "minimal-style@@h2-weight": 700,
+  "minimal-style@@h3-weight": 700,
   "minimal-style@@h3-style": "italic",
-  "minimal-style@@list-indent": 2.5,
-  "minimal-style@@list-spacing": 0,
-  "minimal-style@@tx2@@light": "#000000C4",
-  "minimal-style@@text-formatting@@dark": "#D1D1D1"
+  "minimal-style@@list-indent": 2.4,
+  "minimal-style@@bold-modifier": 300,
+  "minimal-style@@sidebar-tabs-style": "sidebar-tabs-default",
+  "minimal-style@@tx2@@light": "#1D1D1DED",
+  "minimal-style@@vault-profile-display": "vault-profile-default",
+  "minimal-style@@sidebar-tabs-names": "tab-names-off",
+  "minimal-style@@tabs-style": "tabs-modern",
+  "minimal-style@@blockquote-border-thickness": 3,
+  "minimal-style@@minimal-strike-lists": true,
+  "minimal-style@@base@@dark": "#181818"
 }
