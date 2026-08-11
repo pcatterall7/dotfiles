@@ -60,6 +60,21 @@ case $host in
             [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
             yarn "$@"
         }
+        # Put nvm's default node on PATH for subprocesses (e.g. uv builds) without
+        # fully sourcing nvm.sh — reads alias files directly so it's near-instant.
+        () {
+            local ver alias_dir="$NVM_DIR/alias"
+            [[ -f "$alias_dir/default" ]] || return
+            ver=$(< "$alias_dir/default")
+            local i=0
+            while (( i++ < 5 )) && [[ -f "$alias_dir/$ver" ]]; do
+                ver=$(< "$alias_dir/$ver")
+            done
+            # nvm stores versions as v24.14.0 but alias files omit the leading v
+            [[ "$ver" != v* ]] && ver="v$ver"
+            local bin="$NVM_DIR/versions/node/$ver/bin"
+            [[ -d "$bin" ]] && export PATH="$bin:$PATH"
+        }
         export MDM_DIR="$HOME/src/universe/experimental/phil-catterall_data/mdm-prototype-v2"
         alias lg='lazygit'
         ;;
