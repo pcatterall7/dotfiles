@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+"""Add H1 headers to markdown files that don't have one.
+
+Usage: add-h1 <vault-dir>
+       add-h1 --dry-run <vault-dir>
+"""
+import os
+import re
+import sys
+
+FRONTMATTER_RE = re.compile(r'\A---\n.*?\n(?:---|\.\.\.)[ \t]*\n', re.DOTALL)
+H1_RE = re.compile(r'^#\s', re.MULTILINE)
+
+
+def split_frontmatter(content):
+    m = FRONTMATTER_RE.match(content)
+    if m:
+        return content[: m.end()], content[m.end() :]
+    return "", content
+
+
+def first_non_blank_line(text):
+    for line in text.splitlines():
+        if line.strip():
+            return line
+    return ""
+
+
+def needs_h1(body):
+    line = first_non_blank_line(body)
+    return not H1_RE.match(line)
+
+
+def process(vault_dir, dry_run):
+    changed = []
+    skipped = []
+
+    for fname in sorted(os.listdir(vault_dir)):
+        if not fname.endswith(".md"):
+            continue
+        fpath = os.path.join(vault_dir, fname)
+        if not os.path.isfile(fpath):
+            continue
+
+        with open(fpath, encoding="utf-8") as f:
+            content = f.read()
+
+        frontmatter, body = split_frontmatter(content)
+
+        if not needs_h1(body):
+            skipped.append(fname)
+            continue
+
+        title = os.path.splitext(fname)[0]
+        new_body = f"# {title}\n\n{body.lstrip()}"
+        new_content = frontmatter + new_body
+
+        if not dry_run:
+            with open(fpath, "w", encoding="utf-8") as f:
+                f.write(new_content)
+
+        changed.append(fname)
+
+    return changed, skipped
+
+
+def main():
+    args = sys.argv[1:]
+    dry_run = "--dry-run" in args
+    args = [a for a in args if not a.startswith("--")]
+
+    if not args:
+        print(__doc__)
+        sys.exit(1)
+
+    vault_dir = os.path.expanduser(args[0])
+    if not os.path.isdir(vault_dir):
+        print(f"Error: not a directory: {vault_dir}", file=sys.stderr)
+        sys.exit(1)
+
+    changed, skipped = process(vault_dir, dry_run)
+
+    prefix = "[dry-run] " if dry_run else ""
+    for fname in changed:
+        print(f"{prefix}added H1: {fname}")
+    print(f"\n{prefix}{len(changed)} file(s) updated, {len(skipped)} already had H1.")
+
+
+if __name__ == "__main__":
+    main()

@@ -8,6 +8,7 @@ VAULTS=(
   "$HOME/Documents/journal"
   "$HOME/Documents/work-notes/snowplow"
   "$HOME/Documents/work-notes/databricks"
+  "$HOME/Documents/personal"
 )
 
 pull() {
