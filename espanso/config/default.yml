@@ -39,4 +39,6 @@ auto_restart: true
 
 # For a list of all the available options, visit the official docs at: https://espanso.org/docs/
 
-search_shortcut: off
+search_shortcut: on
+search_trigger: ";es"
+
