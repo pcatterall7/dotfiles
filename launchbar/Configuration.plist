@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aliasNames</key>
+	<dict>
+		<key>ODLBPathItem:/</key>
+		<string>Root /</string>
+		<key>ODLBPathItem:/Volumes</key>
+		<string>Mounted Volumes</string>
+		<key>ODLBPathItem:/usr/bin</key>
+		<string>usr/bin</string>
+		<key>ODLBPathItem:/usr/local</key>
+		<string>usr/local</string>
+		<key>ODLBPathItem:/usr/local/bin</key>
+		<string>usr/local/bin</string>
+		<key>ODLBPathItem:/usr/sbin</key>
+		<string>usr/sbin</string>
+	</dict>
+	<key>disabledItems</key>
+	<array>
+		<string>ODLBShortcutItem:65CE65A2-F3E7-4952-A824-7407BB2FB4E7</string>
+		<string>ODLBShortcutItem:FFFB549A-9FC5-44B8-8578-B40DAAFA4A56</string>
+		<string>ODLBShortcutItem:D2666192-955E-4D68-90DD-9A791BE65F21</string>
+		<string>ODLBShortcutItem:AB762C6F-D766-4226-BE33-7AC32FAA8354</string>
+		<string>ODLBPathItem:~/Applications/Claude Code URL Handler.app</string>
+		<string>ODLBShortcutItem:75E5C5A1-6853-4051-864B-097065F5CAD3</string>
+		<string>ODLBShortcutItem:E2018720-9916-42E4-BAFE-737A2AB8603F</string>
+		<string>ODLBShortcutItem:A66BE2C0-8AF6-47F7-9F7B-D2168EBF2237</string>
+		<string>ODLBShortcutItem:7E9CC904-B66D-49FD-8D91-524370ECB7A5</string>
+		<string>ODLBPathItem:/System/Library/CoreServices/Certificate Assistant.app</string>
+		<string>ODLBShortcutItem:A03CD230-0609-489C-B088-0BB75DF9FAA7</string>
+		<string>ODLBShortcutItem:29C97606-5AEB-42A1-B3DE-243F7838A330</string>
+		<string>ODLBPathItem:/Applications/rcmd.app</string>
+		<string>ODLBCalendarItem:32637A11-7641-4402-A9C3-9ADC729A6A62</string>
+		<string>ODLBPathItem:/System/Library/CoreServices/Applications/Directory Utility.app</string>
+		<string>ODLBShortcutItem:F6508E00-3173-40DD-AC2B-D43E3641D81D</string>
+		<string>ODLBPathItem:/Applications/Soulver 3.app</string>
+		<string>ODLBShortcutItem:F8CEBFF3-63C2-4F45-BD8D-1C38EE65B3E5</string>
+		<string>ODLBShortcutItem:1EFB05D4-AC39-4BDD-9D6F-121837A258CA</string>
+		<string>ODLBShortcutItem:DA80CC8B-9B94-4060-9EA7-47D743D4AB3B</string>
+		<string>ODLBPathItem:/Applications/SuperCmd.app</string>
+		<string>ODLBPathItem:/Applications/CP210xVCPDriver.app</string>
+		<string>ODLBPathItem:/System/Applications/Utilities/Migration Assistant.app</string>
+		<string>ODLBShortcutItem:35241997-DD9D-4BCE-B419-12FDA3153D84</string>
+		<string>ODLBCategory:Bluetooth File Exchange Service</string>
+		<string>ODLBShortcutItem:4C3ED877-66EE-4396-B1F9-228E3B3D30AD</string>
+		<string>ODLBPathItem:~/Applications/Capture Thought.app</string>
+		<string>ODLBShortcutItem:D054BFA2-B09F-42E6-BA8D-E331B67E3AC9</string>
+		<string>ODLBPathItem:/Applications/Hammerspoon.app</string>
+		<string>ODLBShortcutItem:0A0F5E63-90BC-4C66-95C4-F1D4B7CEF3D4</string>
+		<string>ODLBPathItem:/System/Library/CoreServices/Applications/Ticket Viewer.app</string>
+		<string>ODLBShortcutItem:4A7AC6DA-0E0B-4784-B1D5-36D837BB9BE1</string>
+		<string>ODLBShortcutItem:7DE4BE8B-F02C-4CBB-8E1F-6CF7D1ACE1E1</string>
+		<string>ODLBCategory:BBEdit Service</string>
+		<string>ODLBShortcutItem:7BE4778C-F16F-499A-AFFD-B95B208EB6BD</string>
+		<string>ODLBPathItem:/System/Library/CoreServices/Applications/Feedback Assistant.app</string>
+		<string>ODLBCalendarItem:3294907C-8A7D-411B-BDA1-0D09A449233A</string>
+		<string>ODLBShortcutItem:790751AD-AC7C-46F7-9065-7B2AD4283445</string>
+		<string>ODLBShortcutItem:4BA2FD23-64D7-47A2-B876-20B125C8ECE8</string>
+		<string>ODLBShortcutItem:68906F68-0AD5-4C43-94F4-1AEC54AF09A8</string>
+		<string>ODLBShortcutItem:21207B9F-7287-45E5-ADA9-DD4B868A2051</string>
+		<string>ODLBPathItem:/Applications/Panda.app</string>
+		<string>ODLBPathItem:/System/Applications/Utilities/Bluetooth File Exchange.app</string>
+		<string>ODLBShortcutItem:83D92FE0-EAAE-4A66-B489-BB247C86D32C</string>
+		<string>ODLBShortcutItem:D779E8D6-135F-4719-9A53-9C533F652888</string>
+		<string>ODLBPathItem:/System/Applications/Chess.app</string>
+		<string>ODLBShortcutItem:0BDD0A48-AACA-4243-BD42-11D7868FD69A</string>
+		<string>ODLBPathItem:/System/Library/CoreServices/Installer.app</string>
+		<string>ODLBShortcutItem:A67F865F-2567-401E-AEC7-38805E261AA4</string>
+		<string>ODLBShortcutItem:2CBDB5BB-C066-4C6D-BAC6-D20FB7696452</string>
+		<string>ODLBShortcutItem:A02B0527-60B8-4285-983D-16E6A5FF5F8F</string>
+		<string>ODLBShortcutItem:773362B9-A349-4A77-8833-A374F65CB6A7</string>
+		<string>ODLBCalendarItem:7ED4C336-D2B0-45A2-B7A8-7C0F411CA911</string>
+		<string>ODLBPathItem:/Applications/AeroSpace.app</string>
+		<string>ODLBShortcutItem:150DCC6D-523B-468E-8F41-446860246B2C</string>
+		<string>ODLBServiceItem:net.shinyfrog.bear - Send to Bear</string>
+		<string>ODLBShortcutItem:1E508BD3-E5FF-4B96-ABB0-5BAFE22FF877</string>
+		<string>ODLBPathItem:/System/Library/CoreServices/Applications/Expansion Slot Utility.app</string>
+		<string>ODLBShortcutItem:16F865FA-3AE2-4C79-989D-849F15A7A904</string>
+		<string>ODLBPathItem:/Applications/Rectangle Pro.app</string>
+		<string>ODLBShortcutItem:DD007A03-4E1F-4CFC-87AB-F543B618A56F</string>
+		<string>ODLBShortcutItem:6D50AC5E-F600-45A8-BA5C-5D6F584CDA3E</string>
+		<string>ODLBShortcutItem:9D7D07E9-C490-40C3-B222-0BF3DF33E8A9</string>
+		<string>ODLBShortcutItem:5AF82946-6712-4E28-A258-73D18D15A482</string>
+		<string>ODLBPathItem:/System/Applications/Utilities/Audio MIDI Setup.app</string>
+		<string>ODLBPathItem:/System/Applications/Tips.app</string>
+		<string>ODLBShortcutItem:B16832CC-9314-401C-8CF6-7CC2CB17D118</string>
+		<string>ODLBShortcutItem:59383BEC-B8DA-4657-927C-A9FC138EE0C5</string>
+		<string>ODLBShortcutItem:6E6CF105-155D-471C-BA22-861460B28681</string>
+		<string>ODLBShortcutItem:33D8B743-44BC-4B11-B54F-ACD150707FE4</string>
+		<string>ODLBServiceItem:org.hammerspoon.Hammerspoon - Send to Hammerspoon</string>
+		<string>ODLBServiceItem:com.apple.BluetoothFileExchange - Send File To Bluetooth Device</string>
+		<string>ODLBShortcutItem:B023FDF2-3B44-4B9E-8B0F-4D95E770A218</string>
+		<string>ODLBCalendarItem:5904FBAB-AB1B-47B7-A5F7-CD186DD2B2FA</string>
+		<string>ODLBPathItem:/Applications/CH34xVCPDriver.app</string>
+		<string>ODLBShortcutItem:FAD8F748-67FE-4470-9479-4B2A3BA0E5CB</string>
+		<string>ODLBShortcutItem:B363445A-A634-419F-8A12-FF09AD644295</string>
+		<string>ODLBCalendarItem:0A428B75-BA46-4DD3-8FAA-AC7320FB22C9</string>
+		<string>ODLBPathItem:/System/Applications/Utilities/AirPort Utility.app</string>
+		<string>ODLBShortcutItem:C33BFAC1-7B62-42EF-8D80-427C849DF773</string>
+		<string>ODLBShortcutItem:08FA2064-DD3B-461C-888C-CB08A3167EC2</string>
+		<string>ODLBPathItem:/Applications/Muse.app</string>
+		<string>ODLBPathItem:/System/Applications/Utilities/ColorSync Utility.app</string>
+		<string>ODLBShortcutItem:D101C892-4FD0-4EF8-BC7A-F23449714052</string>
+		<string>ODLBPathItem:/System/Applications/Utilities/Boot Camp Assistant.app</string>
+		<string>ODLBShortcutItem:40F9C9D8-E59D-4DC3-8DAD-E1809D448AB2</string>
+		<string>ODLBShortcutItem:458061F8-0C0C-41EA-839F-344592CC495E</string>
+		<string>ODLBShortcutItem:064A1BD8-3B3B-43FB-81A6-609D242E4756</string>
+		<string>ODLBShortcutItem:EA13C18E-9315-4550-BB56-1DFC5CD00E7E</string>
+		<string>ODLBPathItem:/System/Library/CoreServices/Applications/iOS App Installer.app</string>
+	</array>
+	<key>itemIdentifierVersion</key>
+	<integer>4294967303</integer>
+	<key>rules</key>
+	<array>
+		<dict>
+			<key>abbreviatedPath</key>
+			<string>_chromeBookmarksPath</string>
+			<key>className</key>
+			<string>ODLBBookmarksRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBActionsRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBSafariTopSitesRule</string>
+			<key>enabled</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBWorkflowsRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBReminderListsRule</string>
+		</dict>
+		<dict>
+			<key>aliasName</key>
+			<string>System Directories</string>
+			<key>className</key>
+			<string>ODLBListRule</string>
+			<key>list</key>
+			<array>
+				<string>/bin</string>
+				<string>/private/etc</string>
+				<string>~/Library</string>
+				<string>/sbin</string>
+				<string>/System</string>
+				<string>/private/tmp</string>
+				<string>/usr</string>
+				<string>/usr/bin</string>
+				<string>/usr/local</string>
+				<string>/usr/local/bin</string>
+				<string>/usr/sbin</string>
+				<string>/private/var</string>
+			</array>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBListRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBPrefPanesRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBTagsRule</string>
+			<key>enabled</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBThemesRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBSafariCloudTabsRule</string>
+			<key>enabled</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>aliasName</key>
+			<string>Command Line Tools</string>
+			<key>className</key>
+			<string>ODLBListRule</string>
+			<key>list</key>
+			<array>
+				<string>/usr/bin/cal</string>
+				<string>/bin/date</string>
+				<string>/usr/bin/dig</string>
+				<string>/usr/bin/host</string>
+				<string>/usr/bin/hostinfo</string>
+				<string>/usr/bin/man</string>
+				<string>/usr/sbin/netstat</string>
+				<string>/sbin/ping</string>
+				<string>/usr/bin/sftp</string>
+				<string>/usr/bin/ssh</string>
+				<string>/usr/bin/su</string>
+				<string>/usr/bin/top</string>
+				<string>/usr/sbin/traceroute</string>
+				<string>/usr/bin/uptime</string>
+			</array>
+		</dict>
+		<dict>
+			<key>abbreviatedPath</key>
+			<string>~/Documents</string>
+			<key>className</key>
+			<string>ODLBFolderContentsRule</string>
+			<key>enabled</key>
+			<false/>
+			<key>skipQualifiers</key>
+			<array>
+				<string>iTunes Music</string>
+			</array>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBSafariReadingListRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBCalendarsRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBMountedVolumesRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBContactsRule</string>
+			<key>subsearchOnly</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBCategoriesRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBMusicRule</string>
+			<key>enabled</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>abbreviatedPath</key>
+			<string>~/Desktop</string>
+			<key>className</key>
+			<string>ODLBFolderContentsRule</string>
+		</dict>
+		<dict>
+			<key>abbreviatedSpecificPlaces</key>
+			<array>
+				<string>/Applications</string>
+				<string>/System/Library/CoreServices</string>
+				<string>~/Applications</string>
+				<string>~/Library/Printers</string>
+			</array>
+			<key>className</key>
+			<string>ODLBApplicationsRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBServicesRule</string>
+		</dict>
+		<dict>
+			<key>aliasName</key>
+			<string>My Search Templates</string>
+			<key>className</key>
+			<string>ODLBCustomSearchTemplatesRule</string>
+		</dict>
+		<dict>
+			<key>abbreviatedPath</key>
+			<string>_chromeHistoryPath</string>
+			<key>className</key>
+			<string>ODLBHistoryRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBNetworkLocationsRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBShortcutsRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBEmojiRule</string>
+			<key>subsearchOnly</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBUserAccountsRule</string>
+			<key>enabled</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>abbreviatedPath</key>
+			<string>~</string>
+			<key>className</key>
+			<string>ODLBFolderContentsRule</string>
+			<key>subfolderLevels</key>
+			<integer>0</integer>
+			<key>typeCollectionIdentifier</key>
+			<string>@folder</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBSnippetsRule</string>
+			<key>subsearchOnly</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBManagedSearchTemplatesRule</string>
+		</dict>
+		<dict>
+			<key>className</key>
+			<string>ODLBDockRule</string>
+		</dict>
+	</array>
+	<key>typeCollections</key>
+	<array>
+		<dict>
+			<key>definition</key>
+			<string>c, cpp, h, java, js, m, php, pl, py, rb, rs, swift, xib</string>
+			<key>identifier</key>
+			<string>2</string>
+			<key>name</key>
+			<string>Source Files</string>
+		</dict>
+		<dict>
+			<key>definition</key>
+			<string>doc, docx, pps, ppsx, ppt, pptx, rtf, txt, xls, xlsx</string>
+			<key>identifier</key>
+			<string>3</string>
+			<key>name</key>
+			<string>MS Office Documents</string>
+		</dict>
+		<dict>
+			<key>definition</key>
+			<string>htm, html, htmld</string>
+			<key>identifier</key>
+			<string>1</string>
+			<key>name</key>
+			<string>HTML Files</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<integer>20</integer>
+</dict>
+</plist>

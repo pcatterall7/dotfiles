@@ -52,6 +52,18 @@
       glob: true
       path: sublime-text/*
       force: true
+    ~/Library/Application Support/LaunchBar/Configuration.plist:
+      if: '[ `uname` = Darwin ]'
+      path: launchbar/Configuration.plist
+      force: true
+    ~/Library/Application Support/LaunchBar/CustomShortcuts.plist:
+      if: '[ `uname` = Darwin ]'
+      path: launchbar/CustomShortcuts.plist
+      force: true
+    ~/Library/Application Support/LaunchBar/Habits.plist:
+      if: '[ `uname` = Darwin ]'
+      path: launchbar/Habits.plist
+      force: true
     ~/.config/claude/skills:
       path: skills
       create: true

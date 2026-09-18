@@ -26,7 +26,7 @@ brew analytics off
 
 ## Formulae
 echo "\n==> Installing Homebrew Formulae..."
-formulae=(jq gh mosh pandoc tmux duckdb bat lf emacs tlrc thaw mas nvm ruby lazygit fd)
+formulae=(jq gh mosh pandoc tmux duckdb bat lf mas nvm ruby lazygit fd)
 for formula in "${formulae[@]}"; do
     echo "    → Installing $formula..."
     if brew install "$formula" 2>&1 | grep -q "already installed"; then
@@ -38,7 +38,7 @@ done
 
 ## Casks
 echo "\n==> Installing Homebrew Casks..."
-casks=(bettermouse betterdisplay raycast spotify espanso iterm2 rectangle obsidian sublime-text)
+casks=(bettermouse betterdisplay spotify espanso amethyst rectangle obsidian sublime-text launchbar maccy)
 for cask in "${casks[@]}"; do
     echo "    → Installing $cask..."
     if brew install --cask "$cask" 2>&1 | grep -q "already installed"; then
@@ -53,13 +53,6 @@ echo "\n==> Mac App Store Apps"
 echo "    ⚠️  Please log into the Mac App Store before continuing."
 echo "    Press Enter once you're logged in..."
 read
-
-echo "    → Installing rcmd..."
-if mas install 1596283165; then
-    echo "      ✓ rcmd installed"
-else
-    echo "      ✗ Failed to install rcmd"
-fi
 
 # Oh My Zsh
 echo "\n==> Installing Oh My Zsh..."
