@@ -47,6 +47,9 @@
       if: '[ `uname` = Darwin ]'
       path: zed
       force: true
+    ~/.config/ghostty:
+      path: ghostty
+      force: true
     ~/Library/Application Support/Sublime Text/Packages/User/:
       if: '[ `uname` = Darwin ]'
       glob: true

@@ -1,0 +1,12 @@
+# A few px of margin around the outside of the window
+window-padding-x = 4
+window-padding-y = 4
+
+# Make sure keys/escape sequences work correctly when sshing into other
+# machines: fall back to a TERM the remote host will recognize, and
+# propagate it and other terminal env vars over the SSH connection.
+shell-integration-features = ssh-env
+
+# Wider cursor than the default thin line
+adjust-cursor-thickness = 2
+cursor-style-blink = true
