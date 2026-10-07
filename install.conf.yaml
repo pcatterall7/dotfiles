@@ -24,6 +24,14 @@
     ~/.tmux.conf:
       path: tmux/tmux.conf
       force: true
+    ~/.tmux/tmux-dark.conf:
+      path: tmux/tmux-dark.conf
+      create: true
+      force: true
+    ~/.tmux/tmux-light.conf:
+      path: tmux/tmux-light.conf
+      create: true
+      force: true
     ~/.oh-my-zsh/custom/themes/clean-custom.zsh-theme:
       path: zsh/clean-custom.zsh-theme
       force: true

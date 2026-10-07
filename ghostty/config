@@ -10,3 +10,9 @@ shell-integration-features = ssh-env
 # Wider cursor than the default thin line
 adjust-cursor-thickness = 2
 cursor-style-blink = true
+
+# Follow the system light/dark appearance
+theme = light:Alabaster,dark:TokyoNight
+
+font-thicken
+font-thicken-strength = 120

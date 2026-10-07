@@ -14,15 +14,9 @@ map({ "n", "v" }, "L", "g$", { noremap = true, silent = true })
 -- clear search highlight
 map("n", "<esc><esc>", ":nohlsearch<CR>", { noremap = true, silent = true })
 
--- toggle light/dark theme
+-- toggle light/dark theme (until the next system appearance change)
 map("n", "<leader>th", function()
-  if vim.o.background == "dark" then
-    vim.o.background = "light"
-    vim.cmd("colorscheme github_light")
-  else
-    vim.o.background = "dark"
-    vim.cmd("colorscheme tokyonight-night")
-  end
+  vim.o.background = vim.o.background == "dark" and "light" or "dark"
 end, { desc = "Toggle light/dark theme" })
 
 -- window navigation
