@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""Add the tmux attention-indicator hooks to this machine's Claude Code settings.
+
+The hooks call ~/.claude/tmux-attention.sh (linked from dotfiles/skills by
+dotbot), which flags the tmux window so tmux.conf can show a ● next to it.
+Safe to re-run: hooks that are already present are left alone.
+"""
+import json
+import os
+import sys
+
+SETTINGS = os.path.expanduser("~/.claude/settings.json")
+SCRIPT = "~/.claude/tmux-attention.sh"
+
+HOOKS = {
+    "Notification": "set",
+    "Stop": "set",
+    "UserPromptSubmit": "clear",
+}
+
+try:
+    with open(SETTINGS) as f:
+        settings = json.load(f)
+except FileNotFoundError:
+    settings = {}
+except json.JSONDecodeError as e:
+    sys.exit(f"{SETTINGS} isn't valid JSON ({e}); not touching it")
+
+hooks = settings.setdefault("hooks", {})
+added = []
+for event, action in HOOKS.items():
+    groups = hooks.setdefault(event, [])
+    if any(SCRIPT in h.get("command", "") for g in groups for h in g.get("hooks", [])):
+        continue
+    groups.append({"hooks": [{"type": "command", "command": f"sh {SCRIPT} {action}"}]})
+    added.append(event)
+
+if not added:
+    print("Hooks already present; nothing to do")
+    sys.exit(0)
+
+os.makedirs(os.path.dirname(SETTINGS), exist_ok=True)
+tmp = SETTINGS + ".tmp"
+with open(tmp, "w") as f:
+    json.dump(settings, f, indent=2)
+    f.write("\n")
+os.replace(tmp, SETTINGS)
+print(f"Added hooks to {SETTINGS}: {', '.join(added)}")
