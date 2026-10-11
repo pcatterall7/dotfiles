@@ -1,6 +1,6 @@
 # A few px of margin around the outside of the window
-window-padding-x = 4
-window-padding-y = 4
+window-padding-x = 6
+window-padding-y = 6
 
 # Make sure keys/escape sequences work correctly when sshing into other
 # machines: fall back to a TERM the remote host will recognize, and
@@ -8,7 +8,7 @@ window-padding-y = 4
 shell-integration-features = ssh-env
 
 # Wider cursor than the default thin line
-adjust-cursor-thickness = 2
+adjust-cursor-thickness = 4
 cursor-style-blink = true
 
 # Follow the system light/dark appearance
@@ -16,3 +16,4 @@ theme = light:Alabaster,dark:TokyoNight
 
 font-thicken
 font-thicken-strength = 120
+macos-titlebar-style = transparent
