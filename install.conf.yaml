@@ -81,3 +81,5 @@
       force: true
     ~/.claude/statusline.py:
       path: skills/statusline.py
+    ~/.claude/tmux-attention.sh:
+      path: skills/tmux-attention.sh
