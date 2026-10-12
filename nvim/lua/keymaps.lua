@@ -19,6 +19,9 @@ map("n", "<leader>th", function()
   vim.o.background = vim.o.background == "dark" and "light" or "dark"
 end, { desc = "Toggle light/dark theme" })
 
+-- close current buffer
+map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Close buffer" })
+
 -- window navigation
 map("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
 map("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
