@@ -3,7 +3,10 @@ return {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("fzf-lua").setup({ "telescope" }) -- telescope-style layout
+      require("fzf-lua").setup({
+        "telescope", -- telescope-style layout
+        fzf_opts = { ["--layout"] = "reverse" }, -- prompt at top, results top-down
+      })
 
       local map = vim.keymap.set
       map("n", "<leader>ff", "<cmd>FzfLua files<CR>",       { desc = "Find files" })
