@@ -4,6 +4,7 @@ vim.g.maplocalleader = " "
 
 require("options")
 require("keymaps")
+require("lsp")
 
 -- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
